@@ -92,8 +92,8 @@ export default function Login() {
             <Button
               className={`login-form__btn ${
                 formState.isFormValid
-                  ? "login-form__btn-success"
-                  : "login-form__btn-error"
+                  ? "login-form__btn_success" 
+                  : "login-form__btn_error"
               }`}
               type="submit"
               onClick={userLogin}
