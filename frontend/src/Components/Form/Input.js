@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer } from "react";
-import validaitor from "../../Validaitors/Validator";
+import validator from "../../Validaitors/Validator";
+
 
 import "./Input.css";
 
@@ -9,7 +10,7 @@ const inputReducer = (state, action) => {
       return {
         ...state,
         value: action.value,
-        isValid: validaitor(action.value, action.validations),
+        isValid: validator(action.value, action.validations),
       };
     }
     default: {

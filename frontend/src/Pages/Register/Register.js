@@ -7,14 +7,10 @@ import Input from "../../Components/Form/Input";
 import Button from "../../Components/Form/Button";
 import { useForm } from "../../Hooks/useForm";
 import {
-  requierdValidaitor,
-  minValidaitor,
-  maxValidaitor,
-  emailValidaitor,
-} from "../../Validaitors/rules";
+  requiredValidator, minValidator, maxValidator, emailValidator
+} from '../../Validaitors/rules'
 
 import "./Register.css";
-
 export default function Register() {
 
   const registerNewUser = (event) => {

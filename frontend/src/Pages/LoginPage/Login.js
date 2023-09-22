@@ -6,35 +6,37 @@ import { Link } from "react-router-dom";
 import Input from "../../Components/Form/Input";
 import Button from "../../Components/Form/Button";
 import { useForm } from "../../Hooks/useForm";
-import {
-  requierdValidaitor,
-  minValidaitor,
-  maxValidaitor,
-  emailValidaitor,
-} from "../../Validaitors/rules";
+import {requiredValidator, minValidator, maxValidator, emailValidator} from '../../Validaitors/rules'
 import "./Login.css";
 
 
 
 
 
+import "./Login.css";
 
 export default function Login() {
-  const [formState, onInputHandeler] = useForm(
+  const [formState, onInputHandler] = useForm(
     {
-      username: { value: "", isValid: false },
-      password: { value: "", isValid: false },
+      username: {
+        value: "",
+        isValid: false,
+      },
+      password: {
+        value: "",
+        isValid: false,
+      },
     },
     false
   );
 
-
-
-
+  console.log(formState);
 
   const userLogin = (event) => {
     event.preventDefault();
+    console.log("User Login");
   };
+
   return (
     <>
       <TopBar />
@@ -61,30 +63,28 @@ export default function Login() {
                 placeholder="نام کاربری یا آدرس ایمیل"
                 element="input"
                 validations={[
-                  requierdValidaitor(),
-                  minValidaitor(8),
-                  maxValidaitor(20),
-
+                  requiredValidator(),
+                  minValidator(8),
+                  maxValidator(20),
+                  emailValidator()
                 ]}
-                onInputHandeler={onInputHandeler}
+                onInputHandler={onInputHandler}
               />
-
               <i className="login-form__username-icon fa fa-user"></i>
             </div>
             <div className="login-form__password">
               <Input
-                id="password"
                 element="input"
-                className="login-form__password-input"
+                id="password"
                 type="password"
+                className="login-form__password-input"
                 placeholder="رمز عبور"
                 validations={[
-                  requierdValidaitor(),
-                  minValidaitor(8),
-                  maxValidaitor(10),
-
+                  requiredValidator(),
+                  minValidator(8),
+                  maxValidator(18),
                 ]}
-                onInputHandeler={onInputHandeler}
+                onInputHandler={onInputHandler}
               />
 
               <i className="login-form__password-icon fa fa-lock-open"></i>
@@ -92,8 +92,8 @@ export default function Login() {
             <Button
               className={`login-form__btn ${
                 formState.isFormValid
-                  ? "login-form__btn_success"
-                  : "login-form__btn_error"
+                  ? "login-form__btn-success"
+                  : "login-form__btn-error"
               }`}
               type="submit"
               onClick={userLogin}
@@ -102,7 +102,6 @@ export default function Login() {
               <i className="login-form__btn-icon fas fa-sign-out-alt"></i>
               <span className="login-form__btn-text">ورود</span>
             </Button>
-
             <div className="login-form__password-setting">
               <label className="login-form__password-remember">
                 <input
