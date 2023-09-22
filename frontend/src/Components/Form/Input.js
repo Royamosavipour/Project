@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from "react";
-import validaitor from "../../Validaitors/Validaitor";
+import validaitor from "../../Validaitors/Validator";
 
 import "./Input.css";
 
@@ -9,10 +9,9 @@ const inputReducer = (state, action) => {
       return {
         ...state,
         value: action.value,
-        isValid:action.isValid
+        isValid: validaitor(action.value, action.validations),
       };
     }
-
     default: {
       return state;
     }
@@ -26,18 +25,19 @@ export default function Input(props) {
   });
 
   const { value, isValid } = mainInput;
-  const { id, onInputHandeler } = props;
+  const { id, onInputHandler } = props;
 
   useEffect(() => {
-    onInputHandeler(id, value, isValid);
+    onInputHandler(id, value, isValid);
   }, [value]);
 
-  const onChangeHadeler = (event) => {
+  const onChangeHandler = (event) => {
+    console.log(event.target.value);
     dispatch({
       type: "CHANGE",
       value: event.target.value,
-      isValid: true,
       validations: props.validations,
+      isValid: true,
     });
   };
 
@@ -49,8 +49,8 @@ export default function Input(props) {
         className={`${props.className} ${
           mainInput.isValid ? "success" : "error"
         }`}
-        onChange={onChangeHadeler}
         value={mainInput.value}
+        onChange={onChangeHandler}
       />
     ) : (
       <textarea
@@ -58,7 +58,7 @@ export default function Input(props) {
         className={`${props.className} ${
           mainInput.isValid ? "success" : "error"
         }`}
-        onChange={onChangeHadeler}
+        onChange={onChangeHandler}
         value={mainInput.value}
       />
     );

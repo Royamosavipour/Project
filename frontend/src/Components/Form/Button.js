@@ -26,6 +26,4 @@ export default function Button(props) {
       </button>
     );
   }
-
-  return <div>Button</div>;
 }

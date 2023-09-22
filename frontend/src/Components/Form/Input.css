@@ -1,7 +1,7 @@
-.success{
-    border: 1px solid var(--primary-color) !important;
+.success {
+  border: 2px solid var(--primary-color) !important;
 }
 
-.error{
-    border: 1px solid red !important;
+.error {
+  border: 2px solid red !important;
 }

@@ -5,15 +5,19 @@ import Navbar from "../../Components/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import Input from "../../Components/Form/Input";
 import Button from "../../Components/Form/Button";
+import { useForm } from "../../Hooks/useForm";
 import {
   requierdValidaitor,
   minValidaitor,
   maxValidaitor,
   emailValidaitor,
 } from "../../Validaitors/rules";
-
-import { useForm } from "../../Hooks/useForm";
 import "./Login.css";
+
+
+
+
+
 
 export default function Login() {
   const [formState, onInputHandeler] = useForm(
@@ -23,7 +27,11 @@ export default function Login() {
     },
     false
   );
-  console.log(formState);
+
+
+
+
+
   const userLogin = (event) => {
     event.preventDefault();
   };
@@ -56,7 +64,7 @@ export default function Login() {
                   requierdValidaitor(),
                   minValidaitor(8),
                   maxValidaitor(20),
-                  emailValidaitor()
+
                 ]}
                 onInputHandeler={onInputHandeler}
               />
@@ -74,7 +82,7 @@ export default function Login() {
                   requierdValidaitor(),
                   minValidaitor(8),
                   maxValidaitor(10),
-                  emailValidaitor()
+
                 ]}
                 onInputHandeler={onInputHandeler}
               />
