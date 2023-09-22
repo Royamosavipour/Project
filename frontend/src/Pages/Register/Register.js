@@ -38,8 +38,18 @@ export default function Register() {
     false
   );
 
+  console.log(formState)
+
   const regesterNewUser = (event) => {
     event.preventDefault();
+    const newUserInfo = {
+      name: "{{$randomFullName}}",
+      username: "{{$randomUserName}}",
+      email: "{{$randomEmail}}",
+      password: "123456",
+      confirmPassword: "123456",
+    };
+
     console.log("user regester");
   };
   return (
@@ -74,7 +84,6 @@ export default function Register() {
                   requierdValidaitor(),
                   minValidaitor(6),
                   maxValidaitor(20),
-                  
                 ]}
               />
 
@@ -92,7 +101,6 @@ export default function Register() {
                   requierdValidaitor(),
                   minValidaitor(6),
                   maxValidaitor(20),
-                  
                 ]}
               />
 
@@ -109,8 +117,7 @@ export default function Register() {
                 validations={[
                   requierdValidaitor(),
                   maxValidaitor(20),
-                  emailValidaitor()
-                  
+                  emailValidaitor(),
                 ]}
               />
               <i className="login-form__password-icon fa fa-envelope"></i>
@@ -127,7 +134,6 @@ export default function Register() {
                   requierdValidaitor(),
                   minValidaitor(6),
                   maxValidaitor(20),
-                  
                 ]}
               />
               <i className="login-form__password-icon fa fa-lock-open"></i>
@@ -140,7 +146,7 @@ export default function Register() {
               }`}
               type="submit"
               onClick={regesterNewUser}
-              disabled={false}
+              disabled={!formState.isFormValid}
             >
               <i className="login-form__btn-icon fa fa-user-plus"></i>
               <span className="login-form__btn-text">عضویت</span>

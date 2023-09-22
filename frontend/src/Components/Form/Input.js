@@ -9,7 +9,7 @@ const inputReducer = (state, action) => {
       return {
         ...state,
         value: action.value,
-        isValid: validaitor(action.value,action.validations)
+        isValid:action.isValid
       };
     }
 
@@ -25,23 +25,19 @@ export default function Input(props) {
     isValid: false,
   });
 
-  const {value,isValid}=mainInput
-  const {id,onInputHandeler}=props
+  const { value, isValid } = mainInput;
+  const { id, onInputHandeler } = props;
 
-useEffect(()=>{
-  onInputHandeler(id,value,isValid)
-},[value])
-
-
-
-
+  useEffect(() => {
+    onInputHandeler(id, value, isValid);
+  }, [value]);
 
   const onChangeHadeler = (event) => {
     dispatch({
       type: "CHANGE",
-      value:event.target.value,
-      isValid:true,
-      validations:props.validations,
+      value: event.target.value,
+      isValid: true,
+      validations: props.validations,
     });
   };
 
@@ -50,14 +46,18 @@ useEffect(()=>{
       <input
         type={props.type}
         placeholder={props.placeholder}
-        className={`${props.className} ${mainInput.isValid?'success':'error'}`}
+        className={`${props.className} ${
+          mainInput.isValid ? "success" : "error"
+        }`}
         onChange={onChangeHadeler}
         value={mainInput.value}
       />
     ) : (
       <textarea
         placeholder={props.placeholder}
-        className={`${props.className} ${mainInput.isValid?'success':'error'}`}
+        className={`${props.className} ${
+          mainInput.isValid ? "success" : "error"
+        }`}
         onChange={onChangeHadeler}
         value={mainInput.value}
       />
