@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقاله های سبزلرن</title>
+
+
+    <link rel="stylesheet" href="vendor/BootStrap/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/SwiperSlider/swiper.css">
+    <link rel="stylesheet" href="vendor/FontAwesome5/all.min.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/blog.css" />
+</head>
+<body>
+
+     <!-- Start Header -->
+     <header className="header">
+        <div className="top-bar">
+          <div className="container-fluid">
+            <div className="top-bar__content">
+              <div className="top-bar__right">
+                <ul className="top-bar__menu">
+                  <li className="top-bar__item">
+                    <a href="#" className="top-bar__link">آموزش Html</a>
+                  </li>
+                  <li className="top-bar__item">
+                    <a href="#" className="top-bar__link">آموزش Css</a>
+                  </li>
+                  <li className="top-bar__item">
+                    <a href="#" className="top-bar__link">آموزش جاوا اسکریپت</a>
+                  </li>
+                  <li className="top-bar__item">
+                    <a href="#" className="top-bar__link">آموزش بوت استرپ</a>
+                  </li>
+                  <li className="top-bar__item">
+                    <a href="#" className="top-bar__link">آموزش پایتون</a>
+                  </li>
+                  <li className="top-bar__item">
+                    <a href="#" className="top-bar__link">آموزش ری‌اکت</a>
+                  </li>
+                  <li className="top-bar__item">
+                    <a href="#" className="top-bar__link">20,000 تومان</a>
+                  </li>
+                </ul>
+              </div>
+              <div className="top-bar__left">
+                <div className="top-bar__email">
+                  <a href="#" className="top-bar__email-text top-bar__link">
+                    sabzlearn@gmail.com
+                  </a>
+                  <i className="fas fa-envelope top-bar__email-icon"></i>
+                </div>
+                <div className="top-bar__phone">
+                  <a href="#" className="top-bar__phone-text top-bar__link">
+                    09921558293
+                  </a>
+                  <i className="fas fa-phone top-bar__phone-icon"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div className="main-header">
+          <div className="container-fluid">
+            <div className="main-header__content">
+              <div className="main-header__right">
+                <img src="images/logo/Logo.png" className="main-header__logo" alt="لوگوی سبزلرن" />
+  
+                <ul className="main-header__menu">
+                  <li className="main-header__item">
+                    <a href="#" className="main-header__link">صفحه اصلی</a>
+                  </li>
+  
+                  <li className="main-header__item">
+                    <a href="#" className="main-header__link">فرانت اند
+                      <i className="fas fa-angle-down main-header__link-icon"></i>
+                      <ul className="main-header__dropdown">
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">آموزش Html</a>
+                        </li>
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">آموزش Css</a>
+                        </li>
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">آموزش جاوا اسکریپت</a>
+                        </li>
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">آموزش FlexBox</a>
+                        </li>
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">آموزش جامع ری‌اکت</a>
+                        </li>
+                      </ul>
+                    </a>
+                  </li>
+                  <li className="main-header__item">
+                    <a href="#" className="main-header__link">امنیت
+                      <i className="fas fa-angle-down main-header__link-icon"></i>
+                      <ul className="main-header__dropdown">
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">آموزش کالی لینوکس</a>
+                        </li>
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">آموزش پایتون سیاه</a>
+                        </li>
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">آموزش جاوا اسکریپت سیاه</a>
+                        </li>
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">آموزش شبکه</a>
+                        </li>
+                      </ul>
+                    </a>
+                  </li>
+                  <li className="main-header__item">
+                    <a href="#" className="main-header__link">مقالات
+                      <i className="fas fa-angle-down main-header__link-icon"></i>
+                      <ul className="main-header__dropdown">
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">توسعه وب</a>
+                        </li>
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">جاوا اسکریپت</a>
+                        </li>
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">فرانت اند</a>
+                        </li>
+                      </ul>
+                    </a>
+                  </li>
+                  <li className="main-header__item">
+                    <a href="#" className="main-header__link">پایتون
+                      <i className="fas fa-angle-down main-header__link-icon"></i>
+                      <ul className="main-header__dropdown">
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">دوره متخصص پایتون</a>
+                        </li>
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">دوره هوش مصنوعی با پایتون</a>
+                        </li>
+                        <li className="main-header__dropdown-item">
+                          <a href="#" className="main-header__dropdown-link">دوره متخصص جنگو</a>
+                        </li>
+                      </ul>
+                    </a>
+                  </li>
+                  <li className="main-header__item">
+                    <a href="#" className="main-header__link">مهارت های نرم</a>
+                  </li>
+                </ul>
+              </div>
+  
+              <div className="main-header__left">
+                <a href="#" className="main-header__search-btn">
+                  <i className="fas fa-search main-header__search-icon"></i>
+                </a>
+                <a href="#" className="main-header__cart-btn">
+                  <i className="fas fa-shopping-cart main-header__cart-icon"></i>
+                </a>
+                <a href="#" className="main-header__profile">
+                  <span className="main-header__profile-text">محمدامین سعیدی راد</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Finish Header -->
+
+
+    <!-- Start Breadcrumb -->
+
+    <section className="breadcrumb">
+        <div className="container">
+          <div className="breadcrumb__content">
+            <div className="breadcrumb__home-content-icon">
+              <i className="fas fa-home breadcrumb__home-icon"></i>
+            </div>
+            <ul className="breadcrumb__list">
+              <li className="breadcrumb__item">
+                <a href="#" className="breadcrumb__link">
+                  خانه
+                  <i className="fas fa-angle-left breadcrumb__icon"></i>
+                </a>
+              </li>
+              <li className="breadcrumb__item">
+                <a href="#" className="breadcrumb__link">
+                  آموزش برنامه نویسی فرانت اند
+                  <i className="fas fa-angle-left breadcrumb__icon"></i>
+                </a>
+              </li>
+              <li className="breadcrumb__item">
+                <a href="#" className="breadcrumb__link">
+                  دوره متخصص جاوا اسکریپت
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+  
+      <!-- Finish Breadcrumb -->
+
+      <main className="main">
+        <div className="container">
+          <div className="row">
+            <div className="col-8">
+              <div className="article">
+                <h1 className="article__title">
+                  معرفی بهترین سایت آموزش جاوا اسکریپت [ تجربه محور ] + آموزش رایگان
+                </h1>
+                <div className="article__header">
+                  <div className="article-header__category article-header__item">
+                    <i className="far fa-folder article-header__icon"></i>
+                    <a href="#" className="article-header__text">جاوا اسکریپت</a>
+                  </div>
+                  <div className="article-header__category article-header__item">
+                    <i className="far fa-user article-header__icon"></i>
+                    <span className="article-header__text"> ارسال شده توسط قدیر</span>
+                  </div>
+                  <div className="article-header__category article-header__item">
+                    <i className="far fa-clock article-header__icon"></i>
+                    <span className="article-header__text"> ارسال شده توسط قدیر</span>
+                  </div>
+                  <div className="article-header__category article-header__item">
+                    <i className="far fa-eye article-header__icon"></i>
+                    <span className="article-header__text">  2.14k بازدید</span>
+                  </div>
+                </div>
+                <img src="images/blog/1.jpg" alt="Article Cover" className="article__banner" />
+
+                <div className="article__score">
+                  <div className="article__score-icons">
+                    <img src="images/svgs/star_fill.svg" className="article__score-icon" />
+                    <img src="images/svgs/star_fill.svg" className="article__score-icon" />
+                    <img src="images/svgs/star_fill.svg" className="article__score-icon" />
+                    <img src="images/svgs/star_fill.svg" className="article__score-icon" />
+                    <img src="images/svgs/star.svg" className="article__score-icon" />
+                  </div>
+                  <span className="article__score-text">4.2/5 - (5 امتیاز)</span>
+                </div>
+
+                <p className="article__paragraph paragraph">
+                  جاوا اسکریپت یکی از زبان‌های برنامه‌نویسی اصلی حوزه فرانت‌اند است که به واسطه فریم ورک‌های آن می‌توان انواع وب سایت‌ها، اپلیکیشن‌ها و وب اپلیکیشن‌ها را طراحی کرد. به طور کلی بعد از یادگیری html و css معمولاً باید آموزش جاوا اسکریپت را نیز فرا بگیرید. . چرا که این زبان تکمیل‌کننده html و css بوده و در چنین شرایطی موقعیت‌های شغلی بیشتر را در اختیار خواهید داشت و همچنین می‌توانید پروژه‌های گسترده‌تری را انجام دهید. در حال حاضر با وجود منابع رایگان موجود در وب شما به راحتی می‌توانید زبان جاوا اسکریپت را به صورت حرفه‌ای فرا بگیرید. به همین واسطه در ادامه مطلب قصد داریم سایت‌های شاخص آموزش این زبان برنامه‌نویسی در جهان را به شما معرفی کنیم و در آخر بگوییم که بهترین سایت آموزش جاوا اسکریپت کدام است.
+                </p>
+
+                <div className="article-read">
+                  <span className="article-read__title">آنچه در این مقاله خواهید خواند</span>
+                  <ul className="article-read__list">
+                    <li className="article-read__item">
+                      <a href="#" className="article-read__link">معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:</a>
+                    </li>
+                    <li className="article-read__item">
+                      <a href="#" className="article-read__link">یک راه آسان‌تر، دوره‌ های جاوا اسکریپت آکادمی سبزلرن!</a>
+                    </li>
+                    <li className="article-read__item">
+                      <a href="#" className="article-read__link">ثبت نام در دوره‌ های جاوا اسکریپت سبزلرن:</a>
+                    </li>
+                  </ul>
+                </div>
+
+                <img src="images/blog/2.jpg" alt="Article Image" className="article__seconadary-banner" />
+                <div className="article-section">
+                  <h2 className="article-section__title">
+                    معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:
+                  </h2>
+                  <p className="paragraph article-section__text">
+                    توجه داشته باشید که تمام وب سایت‌هایی که به عنوان بهترین سایت آموزش جاوا اسکریپت در ادامه معرفی می‌کنیم، بین‌المللی هستند و منابع موجود در آن‌ها به زبان انگلیسی است. در نتیجه شما باید یا تسلط متوسط و حداقلی به زبان انگلیسی داشته باشید و یا اینکه با استفاده از گوگل ترنسلیت منابع موجود را ترجمه کرده و از آن‌ها استفاده کنید. به همین دلیل در انتهای محتوا به شما خواهیم گفت که راه آسان دیگری برای یادگیری زبان جاوا اسکریپت وجود دارد که شما بتوانید به واسطه آن به صورت رایگان و به زبان فارسی این زبان را یاد بگیرید.
+                  </p>
+                  <img src="images/blog/4.png" alt="article body img" className="article-section__img" />
+                </div>
+                <div className="article-section">
+                  <h2 className="article-section__title">
+                    معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:
+                  </h2>
+                  <p className="paragraph article-section__text">
+                    توجه داشته باشید که تمام وب سایت‌هایی که به عنوان بهترین سایت آموزش جاوا اسکریپت در ادامه معرفی می‌کنیم، بین‌المللی هستند و منابع موجود در آن‌ها به زبان انگلیسی است. در نتیجه شما باید یا تسلط متوسط و حداقلی به زبان انگلیسی داشته باشید و یا اینکه با استفاده از گوگل ترنسلیت منابع موجود را ترجمه کرده و از آن‌ها استفاده کنید. به همین دلیل در انتهای محتوا به شما خواهیم گفت که راه آسان دیگری برای یادگیری زبان جاوا اسکریپت وجود دارد که شما بتوانید به واسطه آن به صورت رایگان و به زبان فارسی این زبان را یاد بگیرید.
+                  </p>
+                </div>
+                <div className="article-section">
+                  <h2 className="article-section__title">
+                    معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:
+                  </h2>
+                  <p className="paragraph article-section__text">
+                    توجه داشته باشید که تمام وب سایت‌هایی که به عنوان بهترین سایت آموزش جاوا اسکریپت در ادامه معرفی می‌کنیم، بین‌المللی هستند و منابع موجود در آن‌ها به زبان انگلیسی است. در نتیجه شما باید یا تسلط متوسط و حداقلی به زبان انگلیسی داشته باشید و یا اینکه با استفاده از گوگل ترنسلیت منابع موجود را ترجمه کرده و از آن‌ها استفاده کنید. به همین دلیل در انتهای محتوا به شما خواهیم گفت که راه آسان دیگری برای یادگیری زبان جاوا اسکریپت وجود دارد که شما بتوانید به واسطه آن به صورت رایگان و به زبان فارسی این زبان را یاد بگیرید.
+                  </p>
+                  <img src="images/blog/3.jpg" alt="article body img" className="article-section__img" />
+                </div>
+
+                <div className="article-social-media">
+                  <span className="article-social-media__text">اشتراک گذاری :</span>
+                  <a href="#" className="article-social-media__link">
+                    <i className="fab fa-telegram-plane article-social-media__icon"></i>
+                  </a>
+                  <a href="#" className="article-social-media__link">
+                    <i className="fab fa-twitter article-social-media__icon"></i>
+                  </a>
+                  <a href="#" className="article-social-media__link">
+                    <i className="fab fa-facebook-f article-social-media__icon"></i>
+                  </a>
+                </div>
+
+              </div>
+
+              <div className="suggestion-articles">
+                <div className="row">
+                  <div className="col-6">
+                    <div className="suggestion-articles__right suggestion-articles__content">
+                      <a href="#" className="suggestion-articles__icon-link">
+                        <i className="fas fa-arrow-right suggestion-articles__icon"></i>
+                      </a>
+                      <a href="#" className="suggestion-articles__link">
+                        سریع ترین و بهترین راه یادگیری جاوا اسکریپت چیست؟ | تجربه برنامه نویسان
+                      </a>
+                    </div>
+                  </div>
+                  <div className="col-6">
+                    <div className="suggestion-articles__left suggestion-articles__content">
+                      <a href="#" className="suggestion-articles__icon-link">
+                        <i className="fas fa-arrow-left suggestion-articles__icon"></i>
+                      </a>
+                      <a href="#" className="suggestion-articles__link">
+                        سریع ترین و بهترین راه یادگیری جاوا اسکریپت چیست؟ | تجربه برنامه نویسان
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="comments">
+                <span className="comments__title">
+                  دیدگاهتان را بنویسید
+                </span>
+                <span className="comments__text">
+                  <a href="#">
+                    با عنوان محمدامین سعیدی راد 
+                  وارد شده اید.
+                  </a>
+                   <a href="#">خارج میشوید? </a>
+                  بخش های موردنیاز علامت گذاری شده اند *
+                </span>
+                <div className="comments_content">
+                  <span className="comments__content-title">دیدگاه *</span>
+                  <textarea className="comments__content-textarea"></textarea>
+                </div>
+                <button type="submit" className="comments__button">فرستادن دیدگاه</button>
+              </div>
+
+            </div>
+  
+            <div className="col-4">
+              <div className="courses-info">
+
+                <div className="course-info">
+                  <span className="course-info__courses-title">پر امتیازترین دوره ها</span>
+                  <ul className="course-info__courses-list">
+                    <li className="course-info__courses-list-item">
+                      <a href="#" className="course-info__courses-link">
+                        <img src="images/courses/js_project.png" alt="Course Cover" className="course-info__courses-img" />
+                        <span className="course-info__courses-text">
+                          پروژه های تخصصی با جاوا اسکریپت
+                        </span>
+                      </a>
+                    </li>
+                    <li className="course-info__courses-list-item">
+                      <a href="#" className="course-info__courses-link">
+                        <img src="images/courses/fareelancer.png" alt="Course Cover" className="course-info__courses-img" />
+                        <span className="course-info__courses-text">
+                          تعیین قیمت پروژه های فریلنسری
+                        </span>
+                      </a>
+                    </li>
+                    <li className="course-info__courses-list-item">
+                      <a href="#" className="course-info__courses-link">
+                        <img src="images/courses/nodejs.png" alt="Course Cover" className="course-info__courses-img" />
+                        <span className="course-info__courses-text">
+                          دوره Api نویسی
+                        </span>
+                      </a>
+                    </li>
+                    <li className="course-info__courses-list-item">
+                      <a href="#" className="course-info__courses-link">
+                        <img src="images/courses/jango.png" alt="Course Cover" className="course-info__courses-img" />
+                        <span className="course-info__courses-text">
+                          متخصص جنگو
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+
+                <div className="course-info">
+                  <span className="course-info__courses-title">دسترسی سریع</span>
+                  <ul className="sidebar-articles__list">
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">صفحه اصلی</a>
+                    </li>
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">فرانت اند</a>
+                    </li>
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">امنیت</a>
+                    </li>
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">پایتون</a>
+                    </li>
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">مهارت های نرم</a>
+                    </li>
+                  </ul>
+                </div>
+
+
+                <div className="course-info">
+                  <span className="course-info__courses-title">مقاله های جدید</span>
+                  <ul className="last-articles__list">
+                    <li className="last-articles__item">
+                      <a href="#" className="last-articles__link">
+                        نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون
+                      </a>
+                    </li>
+                    <li className="last-articles__item">
+                      <a href="#" className="last-articles__link">
+                        نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون
+                      </a>
+                    </li>
+                    <li className="last-articles__item">
+                      <a href="#" className="last-articles__link">
+                        نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون
+                      </a>
+                    </li>
+                    <li className="last-articles__item">
+                      <a href="#" className="last-articles__link">
+                        نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون
+                      </a>
+                    </li>
+                    <li className="last-articles__item">
+                      <a href="#" className="last-articles__link">
+                        نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون
+                      </a>
+                    </li>
+                    <li className="last-articles__item">
+                      <a href="#" className="last-articles__link">
+                        نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="course-info">
+                  <span className="course-info__courses-title">دسته بندی مقالات</span>
+                  <ul className="sidebar-articles__list">
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">صفحه اصلی</a>
+                    </li>
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">فرانت اند</a>
+                    </li>
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">امنیت</a>
+                    </li>
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">پایتون</a>
+                    </li>
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">مهارت های نرم</a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="course-info">
+                  <span className="course-info__courses-title">دوره های جدید</span>
+                  <ul className="sidebar-articles__list">
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">صفحه اصلی</a>
+                    </li>
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">فرانت اند</a>
+                    </li>
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">امنیت</a>
+                    </li>
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">پایتون</a>
+                    </li>
+                    <li className="sidebar-articles__item">
+                      <i className="fas fa-angle-left sidebar-articles__icon"></i>
+                      <a href="#" className="sidebar-articles__link">مهارت های نرم</a>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+       <!-- Start Footer -->
+
+    <footer className="footer">
+        <div className="container">
+          <div className="footer-widgets">
+            <div className="row">
+              <div className="col-4">
+                <div className="footer-widgets__item">
+                  <span className="footer-widgets__title">
+                    درباره ما
+                  </span>
+                  <p className="footer-widgets__text">
+                    وقتی تازه شروع به یادگیری برنامه نویسی کردم. یکی از مشکلاتی که در فرآیند یادگیری داشتم، کمبود آموزش های خوب با پشتیبانی قابل قبول بود که باعث شد اون موقع تصمیم بگیرم اگر روزی توانایی مالی و فنی قابل قبولی داشتم یک وب سایت برای حل این مشکل راه اندازی کنم! و خب امروز آکادمی آموزش برنامه نویسی سبزلرن به عنوان یک آکادمی خصوصی فعالیت میکنه و این به این معنی هست که هر مدرسی اجازه تدریس در اون رو نداره و باید از فیلترینگ های خاص آکادمی سبزلرن رد شه! این به این معنی هست که ما برامون فن بیان و نحوه تعامل مدرس با دانشجو بسیار مهمه! ما در آکادمی سبزلرن تضمین پشتیبانی خوب و با کیفیت رو به شما میدیم . چرا که مدرسین وب سایت سبزلرن حتی برای پشتیبانی دوره های رایگان شون هم هزینه دریافت میکنند و متعهد هستند که هوای کاربر های عزیز رو داشته باشند !
+                  </p>
+                </div>
+              </div>
+              <div className="col-4">
+                <div className="footer-widgets__item">
+                  <span className="footer-widgets__title">
+                    آخرین مطالب
+                  </span>
+                  <div className="footer-widgets__links">
+                    <a href="#" className="footer-widgets__link">
+                      نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون
+                    </a>
+                    <a href="#" className="footer-widgets__link">
+                      چگونه پایتون را آپدیت کنیم؟ | آموزش صفر تا صد آپدیت کردن پایتون      
+                    </a>
+                    <a href="#" className="footer-widgets__link">
+                      آموزش نصب پایتون ( Python ) در در مک، ویندوز و لینوکس | گام به گام و تصویری
+                    </a>
+                    <a href="#" className="footer-widgets__link">
+                      بهترین فریم ورک های فرانت اند | 16 فریم ورک Front end بررسی معایب و مزایا
+                    </a>
+                    <a href="#" className="footer-widgets__link">
+                      معرفی بهترین سایت آموزش جاوا اسکریپت [ تجربه محور ] + آموزش رایگان
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="col-4">
+                <div className="footer-widgets__item">
+                  <span className="footer-widgets__title">
+                    دسترسی سریع
+                  </span>
+                  <div className="row">
+                    <div className="col-6">
+                      <a href="#" className="footer-widgets__link">
+                        آموزش HTML
+                      </a>
+                      </div>
+  
+                    <div className="col-6">
+                      <a href="#" className="footer-widgets__link">
+                        آموزش CSS
+                      </a>
+                    </div>
+                      
+                    <div className="col-6">
+  
+                      <a href="#" className="footer-widgets__link">
+                        آموزش جاوا اسکریپت
+                      </a>
+                    </div>
+                    <div className="col-6">
+  
+                      <a href="#" className="footer-widgets__link">
+                        آموزش بوت استرپ
+                      </a>
+                    </div>
+                    <div className="col-6">
+  
+                      <a href="#" className="footer-widgets__link">
+                        آموزش ریکت
+                      </a>
+                    </div>
+  
+                    <div className="col-6">
+  
+                      <a href="#" className="footer-widgets__link">
+                        آموزش پایتون
+                      </a>
+                    </div>
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+        <div className="footer__copyright">
+          <span className="footer__copyright-text">
+            کلیه حقوق برای آکادمی آموزش برنامه نویسی سبز لرن محفوظ است.
+          </span>
+        </div>
+      </footer>
+  
+      <!-- Finish Footer -->
+    
+
+
+    <script src="vendor/FontAwesome5/all.min.js"></script>
+    <script src="vendor/SwiperSlider/swiper.js"></script>
+    <script src="vendor/Bootstrap/bootstrap.bundle.min.js"></script>
+</body>
+</html>
