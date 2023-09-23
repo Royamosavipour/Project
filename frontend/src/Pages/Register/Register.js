@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import TopBar from "../../Components/TopBar/TopBar";
 import Footer from "../../Components/Footer/Footer";
@@ -37,7 +37,6 @@ export default function Register() {
     },
     false
   );
-  console.log(formState);
 
   const registerNewUser = (event) => {
     event.preventDefault();
@@ -47,7 +46,24 @@ export default function Register() {
       email: formState.inputs.email.value,
       password: formState.inputs.password.value,
       confirmPassword: formState.inputs.password.value,
+    phone:0,
     };
+
+fetch(`http://localhost:4000/v1/auth/register`,{ 
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body:JSON.stringify(newUserInfo)
+}).then(res=>res.json())
+.then(result=>console.log(result))
+
+
+
+// .then(res=>{if(res.ok){return res.json()}
+// return res.text()})
+// .then(res=>{console.log(res)})
+
+console.log('register is ok')
+
   };
 
   return (
