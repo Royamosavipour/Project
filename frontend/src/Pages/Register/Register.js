@@ -37,10 +37,17 @@ export default function Register() {
     },
     false
   );
+  console.log(formState);
 
   const registerNewUser = (event) => {
     event.preventDefault();
-    console.log("User Register");
+    const newUserInfo = {
+      name: formState.inputs.name.value,
+      username: formState.inputs.username.value,
+      email: formState.inputs.email.value,
+      password: formState.inputs.password.value,
+      confirmPassword: formState.inputs.password.value,
+    };
   };
 
   return (
