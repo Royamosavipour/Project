@@ -7,22 +7,26 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
   const [userInfos, setUserInfos] = useState({});
-  const login = (token) => {
+
+  const login = (token,userInfos) => {
     setToken(token);
+    setIsLoggedIn(true);
+    setUserInfos(userInfos)
     localStorage.setItem("user", JSON.stringify({ token }));
   };
-  const logout=()=>{
-    setToken(null)
-    userInfos({})
-    localStorage.removeItem('user')
-  }
+
+  const logout = () => {
+    setToken(null);
+    userInfos({});
+    localStorage.removeItem("user");
+  };
 
   const router = useRoutes(routes);
 
   return (
     <AuthContext.Provider
       value={{
-        isLoggedIn,  // isloggedIn:isloggedIn
+        isLoggedIn, // isloggedIn:isloggedIn
         token,
         userInfos,
         login,

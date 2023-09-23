@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, json } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import TopBar from "../../Components/TopBar/TopBar";
@@ -12,10 +12,15 @@ import {
   maxValidator,
   emailValidator,
 } from "../../Validaitors/rules";
+import AuthContext from "../../Context/authContext";
 
 import "./Register.css";
 
 export default function Register() {
+  const authContext=useContext(AuthContext)
+  console.log(authContext)
+
+  
   const [formState, onInputHandler] = useForm(
     {
       name: {
@@ -54,7 +59,9 @@ fetch(`http://localhost:4000/v1/auth/register`,{
   headers:{'Content-Type':'application/json'},
   body:JSON.stringify(newUserInfo)
 }).then(res=>res.json())
-.then(result=>console.log(result.accessToken))
+.then(result=>{
+authContext.login(result.accessToken,result.user)
+})
 
 
 
