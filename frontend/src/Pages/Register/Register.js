@@ -54,7 +54,7 @@ fetch(`http://localhost:4000/v1/auth/register`,{
   headers:{'Content-Type':'application/json'},
   body:JSON.stringify(newUserInfo)
 }).then(res=>res.json())
-.then(result=>console.log(result))
+.then(result=>console.log(result.accessToken))
 
 
 
