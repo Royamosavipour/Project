@@ -16,9 +16,13 @@ import AuthContext from "../../Context/authContext";
 
 import "./Register.css";
 
+
+
+
+
 export default function Register() {
   const authContext = useContext(AuthContext);
-  console.log(authContext);
+
 
   const [formState, onInputHandler] = useForm(
     {
@@ -53,6 +57,7 @@ export default function Register() {
       phone: 0,
     };
 
+
     fetch(`http://localhost:4000/v1/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -60,7 +65,8 @@ export default function Register() {
     })
       .then((res) => res.json())
       .then((result) => {
-        authContext.login(result.accessToken, result.user);
+        console.log(result)
+        authContext.login(result.user,result.accessToken);
       });
 
     // .then(res=>{if(res.ok){return res.json()}

@@ -9,7 +9,7 @@ export default function App() {
   const [token, setToken] = useState(null);
   const [userInfos, setUserInfos] = useState({});
 
-  const login = useCallback((token, userInfos) => {
+  const login = useCallback((userInfos,token) => {
     setToken(token);
     setIsLoggedIn(true);
     setUserInfos(userInfos);
@@ -26,8 +26,8 @@ export default function App() {
     const localStorgeData = JSON.parse(localStorage.getItem("user"));
     if (localStorgeData) {
       fetch(`http://localhost:4000/v1/auth/me`,{
-        headers:{'Authorization':`bearer ${localStorgeData.token}`}
-      }).then(res=>json.res)
+        headers:{'Authorization':`Bearer ${localStorgeData.token}`}
+      }).then(res=>res.json())
       .then(data=>{
         setIsLoggedIn(true)
         setUserInfos(data)
