@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { json, useRoutes } from "react-router-dom";
 import routes from "./routes";
 import AuthContext from "./Context/authContext";
@@ -9,18 +9,18 @@ export default function App() {
   const [token, setToken] = useState(null);
   const [userInfos, setUserInfos] = useState({});
 
-  const login = (token, userInfos) => {
+  const login = useCallback((token, userInfos) => {
     setToken(token);
     setIsLoggedIn(true);
     setUserInfos(userInfos);
     localStorage.setItem("user", JSON.stringify({ token }));
-  };
+  },[])
 
-  const logout = () => {
+  const logout =useCallback( () => {
     setToken(null);
     userInfos({});
     localStorage.removeItem("user");
-  };
+  },[])
 
   useEffect(() => {
     const localStorgeData = JSON.parse(localStorage.getItem("user"));
