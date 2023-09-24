@@ -17,10 +17,9 @@ import AuthContext from "../../Context/authContext";
 import "./Register.css";
 
 export default function Register() {
-  const authContext=useContext(AuthContext)
-  console.log(authContext)
+  const authContext = useContext(AuthContext);
+  console.log(authContext);
 
-  
   const [formState, onInputHandler] = useForm(
     {
       name: {
@@ -51,26 +50,24 @@ export default function Register() {
       email: formState.inputs.email.value,
       password: formState.inputs.password.value,
       confirmPassword: formState.inputs.password.value,
-    phone:0,
+      phone: 0,
     };
 
-fetch(`http://localhost:4000/v1/auth/register`,{ 
-  method:'POST',
-  headers:{'Content-Type':'application/json'},
-  body:JSON.stringify(newUserInfo)
-}).then(res=>res.json())
-.then(result=>{
-authContext.login(result.accessToken,result.user)
-})
+    fetch(`http://localhost:4000/v1/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newUserInfo),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        authContext.login(result.accessToken, result.user);
+      });
 
+    // .then(res=>{if(res.ok){return res.json()}
+    // return res.text()})
+    // .then(res=>{console.log(res)})
 
-
-// .then(res=>{if(res.ok){return res.json()}
-// return res.text()})
-// .then(res=>{console.log(res)})
-
-console.log('register is ok')
-
+    console.log("register is ok");
   };
 
   return (
