@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 import Input from "../../Components/Form/Input";
 import Button from "../../Components/Form/Button";
 import { useForm } from "../../Hooks/useForm";
-import {requiredValidator, minValidator, maxValidator, emailValidator} from '../../Validaitors/rules'
+import {
+  requiredValidator,
+  minValidator,
+  maxValidator,
+  emailValidator,
+} from "../../Validaitors/rules";
 import "./Login.css";
-
-
-
-
 
 import "./Login.css";
 
@@ -30,11 +31,33 @@ export default function Login() {
     false
   );
 
-  console.log(formState);
-
   const userLogin = (event) => {
     event.preventDefault();
     console.log("User Login");
+    const userData = {
+      identifier: formState.inputs.username.value,
+      password: formState.inputs.password.value,
+    };
+
+
+    fetch(`http://localhost:4000/v1/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userData),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        } else {
+          return res.json();
+        }
+      })
+      .then((data) => console.log(data))
+      .catch((err) => {
+        alert("کاربر وجود ندارد");
+      });
   };
 
   return (
@@ -66,7 +89,6 @@ export default function Login() {
                   requiredValidator(),
                   minValidator(8),
                   maxValidator(20),
-                  emailValidator()
                 ]}
                 onInputHandler={onInputHandler}
               />
@@ -92,7 +114,7 @@ export default function Login() {
             <Button
               className={`login-form__btn ${
                 formState.isFormValid
-                  ? "login-form__btn_success" 
+                  ? "login-form__btn_success"
                   : "login-form__btn_error"
               }`}
               type="submit"
