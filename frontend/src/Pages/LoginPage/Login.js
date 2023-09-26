@@ -2,11 +2,14 @@ import React, { useContext } from "react";
 import TopBar from "../../Components/TopBar/TopBar";
 import Footer from "../../Components/Footer/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../Components/Form/Input";
 import Button from "../../Components/Form/Button";
 import { useForm } from "../../Hooks/useForm";
 import AuthContext from "../../Context/authContext";
+import swal from "sweetalert";
+import { Navigate } from "react-router-dom";
+
 import {
   requiredValidator,
   minValidator,
@@ -16,6 +19,7 @@ import {
 import "./Login.css";
 
 export default function Login() {
+  const navigait=useNavigate()
   const authContext = useContext(AuthContext);
   const [formState, onInputHandler] = useForm(
     {
@@ -30,7 +34,7 @@ export default function Login() {
     },
     false
   );
-
+ 
   const userLogin = (event) => {
     event.preventDefault();
     console.log("User Login");
@@ -54,10 +58,20 @@ export default function Login() {
         }
       })
       .then((result) => {
-        authContext.login({},result.accessToken)
+        authContext.login({}, result.accessToken);
+        swal({
+          title:'لاگین با موفقیت انجام شد',
+          icon:'success',
+          buttons:'ورود به صفحه'
+
+        }).then(value=>navigait('/'))
       })
       .catch((err) => {
-        alert("کاربر وجود ندارد");
+        swal({
+          title:'اطلاعات صحیح نمی باشد',
+          icon:'error',
+          buttons:'تلاش دوباره'
+        })
       });
   };
 
