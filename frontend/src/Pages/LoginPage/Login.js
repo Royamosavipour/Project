@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import TopBar from "../../Components/TopBar/TopBar";
 import Footer from "../../Components/Footer/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
@@ -8,8 +8,6 @@ import Button from "../../Components/Form/Button";
 import { useForm } from "../../Hooks/useForm";
 import AuthContext from "../../Context/authContext";
 import swal from "sweetalert";
-import { useNavigate } from "react-router-dom";
-
 import ReCAPTCHA from "react-google-recaptcha";
 
 import {
@@ -21,6 +19,7 @@ import {
 import "./Login.css";
 
 export default function Login() {
+  const [isGoogleRecaptchaVerify,setIsGoogleRecaptchaVerify]=useState(false)
   const navigat = useNavigate();
   const authContext = useContext(AuthContext);
   const [formState, onInputHandler] = useForm(
@@ -78,6 +77,11 @@ export default function Login() {
       });
   };
 
+  const onChangeHandeler = () => {
+    console.log("first");
+    setIsGoogleRecaptchaVerify(true)
+  };
+
   return (
     <>
       <TopBar />
@@ -129,15 +133,21 @@ export default function Login() {
 
               <i className="login-form__password-icon fa fa-lock-open"></i>
             </div>
+            <div className="login-form__password reCaptcha">
+              <ReCAPTCHA
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                onChange={onChangeHandeler}
+              />
+            </div>
             <Button
               className={`login-form__btn ${
-                formState.isFormValid
+                formState.isFormValid && isGoogleRecaptchaVerify
                   ? "login-form__btn_success"
                   : "login-form__btn_error"
               }`}
               type="submit"
               onClick={userLogin}
-              disabled={!formState.isFormValid}
+              disabled={!formState.isFormValid && isGoogleRecaptchaVerify}
             >
               <i className="login-form__btn-icon fas fa-sign-out-alt"></i>
               <span className="login-form__btn-text">ورود</span>
