@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import TopBar from "../../Components/TopBar/TopBar";
 import Footer from "../../Components/Footer/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Input from "../../Components/Form/Input";
 import Button from "../../Components/Form/Button";
 import { useForm } from "../../Hooks/useForm";
+import AuthContext from "../../Context/authContext";
 import {
   requiredValidator,
   minValidator,
@@ -14,9 +15,8 @@ import {
 } from "../../Validaitors/rules";
 import "./Login.css";
 
-import "./Login.css";
-
 export default function Login() {
+  const authContext = useContext(AuthContext);
   const [formState, onInputHandler] = useForm(
     {
       username: {
@@ -53,11 +53,13 @@ export default function Login() {
           return res.json();
         }
       })
-      .then((data) => console.log(data))
+      .then((result) => {
+        authContext.login({},result.accessToken)
+      })
       .catch((err) => {
         alert("کاربر وجود ندارد");
       });
-  }
+  };
 
   return (
     <>
