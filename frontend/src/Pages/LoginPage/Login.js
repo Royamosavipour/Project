@@ -8,7 +8,9 @@ import Button from "../../Components/Form/Button";
 import { useForm } from "../../Hooks/useForm";
 import AuthContext from "../../Context/authContext";
 import swal from "sweetalert";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import ReCAPTCHA from "react-google-recaptcha";
 
 import {
   requiredValidator,
@@ -19,7 +21,7 @@ import {
 import "./Login.css";
 
 export default function Login() {
-  const navigait=useNavigate()
+  const navigat = useNavigate();
   const authContext = useContext(AuthContext);
   const [formState, onInputHandler] = useForm(
     {
@@ -34,7 +36,7 @@ export default function Login() {
     },
     false
   );
- 
+
   const userLogin = (event) => {
     event.preventDefault();
     console.log("User Login");
@@ -58,20 +60,21 @@ export default function Login() {
         }
       })
       .then((result) => {
-        authContext.login({}, result.accessToken);
         swal({
-          title:'لاگین با موفقیت انجام شد',
-          icon:'success',
-          buttons:'ورود به صفحه'
-
-        }).then(value=>navigait('/'))
+          title: "لاگین با موفقیت انجام شد",
+          icon: "success",
+          buttons: "ورود به صفحه",
+        }).then((value) => {
+          navigat("/");
+        });
+        authContext.login({}, result.accessToken);
       })
       .catch((err) => {
         swal({
-          title:'اطلاعات صحیح نمی باشد',
-          icon:'error',
-          buttons:'تلاش دوباره'
-        })
+          title: "اطلاعات صحیح نمی باشد",
+          icon: "error",
+          buttons: "تلاش دوباره",
+        });
       });
   };
 
