@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../Context/authContext";
 import { Link } from "react-router-dom";
 
@@ -6,7 +6,7 @@ import "./Navbar.css";
 
 export default function Navbar() {
   const authContext = useContext(AuthContext);
-
+ 
 
   return (
     <div className="main-header">
