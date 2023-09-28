@@ -11,22 +11,21 @@ import { useParams } from "react-router-dom";
 import "./CourseInfo.css";
 
 export default function CourseInfo() {
-const {courseName}=useParams()
+  const { courseName } = useParams();
 
-useEffect(()=>{
-
-fetch(`http://localhost:4000/v1/courses/${courseName}`,{
-  method:'POST',
-  headers:{'Authorization':`bearer ${JSON.parse(localStorage.getItem('user')).token}`}
-}).then(res=>{
-  console.log(res)
-  res.json()
-})
-
-
-},[])
-
-
+  useEffect(() => {
+    fetch(`http://localhost:4000/v1/courses/${courseName}`, {
+      // method:'POST',
+      // headers:{'Authorization':`bearer ${JSON.parse(localStorage.getItem('user')).token}`}
+    })
+      .then((res) => {
+        console.log(res);
+        res.json();
+      })
+      .then((courseInfo) => {
+        console.log(courseInfo);
+      });
+  }, []);
 
   return (
     <>

@@ -43,7 +43,7 @@ export default function Navbar() {
                     <ul className="main-header__dropdown">
                     {menu.submenus.map(submenu=>(
                       <li className="main-header__dropdown-item">
-                        <Link to={submenu.href} className="main-header__dropdown-link">
+                        <Link to={`/course-info/${submenu.href}`} className="main-header__dropdown-link">
                           {submenu.title}
                         </Link>
                       </li>
