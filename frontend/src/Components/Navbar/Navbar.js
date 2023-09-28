@@ -37,40 +37,22 @@ export default function Navbar() {
 
               {allMenus.map((menu) => (
                 <li className="main-header__item">
-                  <a href="#" className="main-header__link">
+                  <Link to={menu.href} className="main-header__link">
                     {menu.title}
                     {menu.submenus.length!==0 && (<>
                       <i className="fas fa-angle-down main-header__link-icon"></i>
                     <ul className="main-header__dropdown">
+                    {menu.submenus.map(submenu=>(
                       <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">
-                          آموزش Html
-                        </a>
+                        <Link to={submenu.href} className="main-header__dropdown-link">
+                          {submenu.title}
+                        </Link>
                       </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">
-                          آموزش Css
-                        </a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">
-                          آموزش جاوا اسکریپت
-                        </a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">
-                          آموزش FlexBox
-                        </a>
-                      </li>
-                      <li className="main-header__dropdown-item">
-                        <a href="#" className="main-header__dropdown-link">
-                          آموزش جامع ری‌اکت
-                        </a>
-                      </li>
+                    ))}
                     </ul>
                     </>)}
                     
-                  </a>
+                  </Link>
                 </li>
               ))}
               
