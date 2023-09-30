@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import AuthContext from "../../Context/authContext";
+import { Link } from "react-router-dom";
 
 import "./CommentsTextArea.css";
 
-export default function CommentsTextArea({ comments }) {
+export default function CommentsTextArea({ comments, submitcomment }) {
+  const authContext = useContext(AuthContext);
+  const [newCommentBody, setNewCommentBody] = useState("");
+  const onchangeHandeler = (event) => {
+    setNewCommentBody(event.target.value);
+  };
+
   return (
     <div class="comments">
       <div class="comments__header">
@@ -12,7 +20,6 @@ export default function CommentsTextArea({ comments }) {
         <span class="comments__header-title">نظرات</span>
       </div>
       <div class="comments__content">
-      
         {comments.length === 0 ? (
           <div className="alert alert-warning">
             هنوز کامنتی برای این دوره ثبت نشده
@@ -84,44 +91,62 @@ export default function CommentsTextArea({ comments }) {
         )}
       </div>
 
-      <div class="comments__rules">
-        <span class="comments__rules-title">قوانین ثبت دیدگاه</span>
-        <span class="comments__rules-item">
-          <i class="fas fa-check comments__rules-icon"></i>
-          اگر نیاز به پشتیبانی دوره دارید از قسمت پرسش سوال در قسمت نمایش انلاین
-          استفاده نمایید و سوالات مربوط به رفع اشکال تایید نخواهند شد
-        </span>
-        <span class="comments__rules-item">
-          <i class="fas fa-check comments__rules-icon"></i>
-          دیدگاه های نامرتبط به دوره تایید نخواهد شد.
-        </span>
-        <span class="comments__rules-item">
-          <i class="fas fa-check comments__rules-icon"></i>
-          سوالات مرتبط با رفع اشکال در این بخش تایید نخواهد شد.
-        </span>
-        <span class="comments__rules-item">
-          <i class="fas fa-check comments__rules-icon"></i>
-          از درج دیدگاه های تکراری پرهیز نمایید.
-        </span>
-      </div>
-      <div class="comments__respond">
-        <div class="comments__score">
-          <span class="comments__score-title">امتیاز شما</span>
-          <div class="comments__score-input">
-            <span class="comments__score-input-text">
-              امتیاز خود را انتخاب کنید
+      {authContext.isLoggedIn === true ? (
+        <>
+          <div class="comments__rules">
+            <span class="comments__rules-title">قوانین ثبت دیدگاه</span>
+            <span class="comments__rules-item">
+              <i class="fas fa-check comments__rules-icon"></i>
+              اگر نیاز به پشتیبانی دوره دارید از قسمت پرسش سوال در قسمت نمایش
+              انلاین استفاده نمایید و سوالات مربوط به رفع اشکال تایید نخواهند شد
             </span>
-            <i class="fas fa-angle-down	 comments__input-icon"></i>
+            <span class="comments__rules-item">
+              <i class="fas fa-check comments__rules-icon"></i>
+              دیدگاه های نامرتبط به دوره تایید نخواهد شد.
+            </span>
+            <span class="comments__rules-item">
+              <i class="fas fa-check comments__rules-icon"></i>
+              سوالات مرتبط با رفع اشکال در این بخش تایید نخواهد شد.
+            </span>
+            <span class="comments__rules-item">
+              <i class="fas fa-check comments__rules-icon"></i>
+              از درج دیدگاه های تکراری پرهیز نمایید.
+            </span>
           </div>
+          <div class="comments__respond">
+            <div class="comments__score">
+              <span class="comments__score-title">امتیاز شما</span>
+              <div class="comments__score-input">
+                <span class="comments__score-input-text">
+                  امتیاز خود را انتخاب کنید
+                </span>
+                <i class="fas fa-angle-down	 comments__input-icon"></i>
+              </div>
+            </div>
+            <div class="comments__respond-content">
+              <div class="comments__respond-title">دیدگاه شما *</div>
+              <textarea
+                class="comments__score-input-respond"
+                onChange={onchangeHandeler}
+              >
+                {newCommentBody}
+              </textarea>
+            </div>
+            <button
+              type="submit"
+              class="comments__respond-btn"
+              onClick={() => submitcomment(newCommentBody)} 
+            >
+              ارسال
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="alert alert-danger mt-5">
+          برای ثبت کامنت
+          <Link to={"/login"}> لاگین کنید </Link>
         </div>
-        <div class="comments__respond-content">
-          <div class="comments__respond-title">دیدگاه شما *</div>
-          <textarea class="comments__score-input-respond"></textarea>
-        </div>
-        <button type="submit" class="comments__respond-btn">
-          ارسال
-        </button>
-      </div>
+      )}
     </div>
   );
 }

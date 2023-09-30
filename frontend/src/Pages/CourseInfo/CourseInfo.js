@@ -7,6 +7,7 @@ import CourseDetaileBox from "../../Components/CourseDetale/CourseDetaileBox";
 import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea";
 import Accordion from "react-bootstrap/Accordion";
 import { useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 import "./CourseInfo.css";
 
@@ -33,6 +34,37 @@ export default function CourseInfo() {
         setCreatedAt(courseInfo.createdAt);
       });
   }, []);
+
+  const submitcomment = (newCommentBody) => {
+    const localStorgeData = JSON.parse(localStorage.getItem("user"));
+
+    fetch(`http://localhost:4000/v1/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorgeData.token}`,
+      },
+      body: JSON.stringify({
+        body: newCommentBody,
+        courseShortName: courseName,
+        score:2,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return res.text();
+      })
+      .then((data) => {
+        console.log(data)
+        swal({
+          title:'کامنت با موفقیت ثبت گردید',
+          icon:'success',
+          buttons:'تایید'
+        })
+      });
+  };
 
   return (
     <>
@@ -218,11 +250,11 @@ export default function CourseInfo() {
                         <Accordion.Item eventKey="0" className="accordion">
                           <Accordion.Header>معرفی دوره</Accordion.Header>
 
-                          {sessions.map((session,index) => (
+                          {sessions.map((session, index) => (
                             <Accordion.Body className="introduction__accordion-body">
                               <div className="introduction__accordion-right">
                                 <span className="introduction__accordion-count">
-                                  {index+1}
+                                  {index + 1}
                                 </span>
                                 <i className="fab fa-youtube introduction__accordion-icon"></i>
                                 <a
@@ -276,7 +308,10 @@ export default function CourseInfo() {
                       زمینه وب فعالیت داشته باشم.و..
                     </p>
                   </div>
-                  <CommentsTextArea comments={comments} />
+                  <CommentsTextArea
+                    comments={comments}
+                    submitcomment={submitcomment}
+                  />
 
                   {/* Finish Teacher Details  */}
                 </div>
