@@ -90,7 +90,7 @@ export default function Category() {
                     {courses.map((cours) => (
                       <CourseBox {...cours} />
                     ))}
-                    <Pagination />
+                    <Pagination  />
                   </>
                 )}
               </div>
