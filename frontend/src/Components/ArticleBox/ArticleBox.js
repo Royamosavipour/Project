@@ -3,10 +3,10 @@ import CircleSpinner from "../CircleSpinner/CircleSpinner";
 
 import "./ArticleBox.css";
 
-export default function ArticleBox({ title, desc, cover }) {
+export default function ArticleBox({ title, description, cover }) {
   const [isShowImg, setIsShowImg] = useState(false);
   const onloadImg = () => setIsShowImg(true);
-
+console.log(cover)
   return (
     <>
       <div className="col-4">
@@ -14,6 +14,7 @@ export default function ArticleBox({ title, desc, cover }) {
           <div className="article-card__header">
             <a href="#" className="article-card__link-img">
               <img
+              
                 src={cover}
                 className="article-card__img"
                 alt="Article Cover"
@@ -24,7 +25,7 @@ export default function ArticleBox({ title, desc, cover }) {
           </div>
           <div className="article-card__content">
             <a href="#" className="article-card__link">
-              {desc}
+              {description}
             </a>
             <p className="article-card__text">{title}</p>
             <a href="#" className="article-card__btn">

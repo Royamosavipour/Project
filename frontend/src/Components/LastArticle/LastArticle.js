@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SectionHeaders from "../SectionHeaders/SectionHeaders";
 import ArticleBox from "../ArticleBox/ArticleBox";
 
 export default function LastArticle() {
+  const [articels, setArticels] = useState({});
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/v1/articles`)
+      .then((res) => res.json())
+      .then((allArticles) => {
+        setArticels(allArticles);
+      });
+  }, []);
+
   return (
     <>
       <section className="articles">
@@ -15,13 +25,14 @@ export default function LastArticle() {
 
           <div className="articles__content">
             <div className="row">
-              <ArticleBox
-                cover={"images/blog/1.jpg"}
-                desc={"نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون"}
-                title={
-                  "زبان پایتون هم مانند دیگر زبان­های برنامه نویسی رایج، دارای کتابخانه های مختلفی برای تسریع..."
-                }
-              />
+              {articels.length ? console.log("") : ""}
+
+              {articels.length
+                ? articels.map((item , id) => {
+                    console.log("");
+                    return <ArticleBox key={id} cover={item.cover} />
+                  })
+                : ""}
             </div>
           </div>
         </div>
