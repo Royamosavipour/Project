@@ -44,7 +44,7 @@ export default function Courses() {
 
           <Pagination
             items={courses}
-            itemCount={3}
+            itemCount={5}
             pathname={"/courses"}
             setshowncourses={setShownCourses}
           />
