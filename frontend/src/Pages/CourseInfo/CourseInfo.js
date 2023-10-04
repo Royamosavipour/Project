@@ -18,6 +18,7 @@ export default function CourseInfo() {
   const [coursDetails, setCoursDetails] = useState({});
   const [createdAt, setCreatedAt] = useState("");
   const [updatedAt, setUpdatedAt] = useState("");
+  const [courseTeacher,setCourseTeacher]=useState({})
 
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {
@@ -32,6 +33,8 @@ export default function CourseInfo() {
         setCoursDetails(courseInfo);
         setUpdatedAt(courseInfo.updatedAt);
         setCreatedAt(courseInfo.createdAt);
+        setCourseTeacher(courseInfo.creator)
+        
       });
   }, []);
 
@@ -288,17 +291,18 @@ export default function CourseInfo() {
                         />
                         <div className="techer-details__header-titles">
                           <a href="#" className="techer-details__header-link">
-                            محمدامین سعیدی راد
+                            {courseTeacher.name}
                           </a>
                           <span className="techer-details__header-skill">
                             Front End & Back End Developer
+
                           </span>
                         </div>
                       </div>
                       <div className="techer-details__header-left">
                         <i className="fas fa-chalkboard-teacher techer-details__header-icon"></i>
                         <span className="techer-details__header-name">
-                          مدرس
+                          {courseTeacher.role}
                         </span>
                       </div>
                     </div>
