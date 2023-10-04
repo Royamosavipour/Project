@@ -11,6 +11,7 @@ export default function Pagination({
 }) {
   const [pagesCount, setPageCount] = useState(null);
   const { page } = useParams();
+  
 
   useEffect(() => {
     console.log(items);
