@@ -30,7 +30,7 @@ export default function LastArticle() {
               {articels.length
                 ? articels.map((item , id) => {
                     console.log("");
-                    return <ArticleBox key={id} cover={item.cover} />
+                    return <ArticleBox key={id} {...item} />
                   })
                 : ""}
             </div>

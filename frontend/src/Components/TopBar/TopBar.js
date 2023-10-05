@@ -26,10 +26,10 @@ export default function TopBar() {
           <div className="top-bar__content">
             <div className="top-bar__right">
               <ul className="top-bar__menu">
-                {getRandomItemFromArry(allTopbarLinks, 5).map((link) => (
+                {getRandomItemFromArry(allTopbarLinks, 5).map((link,id) => (
                   <li className="top-bar__item">
                     <Link to={link.href} className="top-bar__link">
-                      {link.title}
+                      {link.title} key={id}
                     </Link>
                   </li>
                 ))}

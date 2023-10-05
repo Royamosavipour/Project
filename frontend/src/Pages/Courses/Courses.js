@@ -35,8 +35,8 @@ export default function Courses() {
           <div className="courses-content">
             <div className="container">
               <div className="row">
-                {shownCourses.map((course) => (
-                  <CourseBox {...course} />
+                {shownCourses.map((course,id) => (
+                  <CourseBox key={id} {...course} />
                 ))}
               </div>
             </div>

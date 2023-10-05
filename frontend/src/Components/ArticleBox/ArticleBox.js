@@ -6,7 +6,6 @@ import "./ArticleBox.css";
 export default function ArticleBox({ title, description, cover }) {
   const [isShowImg, setIsShowImg] = useState(false);
   const onloadImg = () => setIsShowImg(true);
-console.log(cover)
   return (
     <>
       <div className="col-4">
@@ -15,7 +14,7 @@ console.log(cover)
             <a href="#" className="article-card__link-img">
               <img
               
-                src={cover}
+                src={`http://localhost:4000/courses/covers/${cover}`}
                 className="article-card__img"
                 alt="Article Cover"
                 onLoad={onloadImg}
