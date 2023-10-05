@@ -29,7 +29,7 @@ export default function LastArticle() {
               {articels.length ? console.log("") : ""}
 
               {articels.length
-                ? articels.map((item , id) => {
+                ? articels.slice(0,3).map((item , id) => {
                     return <ArticleBox key={id} {...item} />
                   })
                 : ""}
