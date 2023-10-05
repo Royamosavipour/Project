@@ -9,6 +9,7 @@ export default function LastArticle() {
     fetch(`http://localhost:4000/v1/articles`)
       .then((res) => res.json())
       .then((allArticles) => {
+        console.log(allArticles)
         setArticels(allArticles);
       });
   }, []);
@@ -29,7 +30,6 @@ export default function LastArticle() {
 
               {articels.length
                 ? articels.map((item , id) => {
-                    console.log("");
                     return <ArticleBox key={id} {...item} />
                   })
                 : ""}
