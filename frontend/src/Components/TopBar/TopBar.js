@@ -29,7 +29,7 @@ export default function TopBar() {
                 {getRandomItemFromArry(allTopbarLinks, 5).map((link,id) => (
                   <li className="top-bar__item">
                     <Link to={link.href} className="top-bar__link">
-                      {link.title} key={id}
+                      {link.title}
                     </Link>
                   </li>
                 ))}

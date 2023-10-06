@@ -22,6 +22,8 @@ export default function LastArticle() {
             title={"آخرین مقالات"}
             desc={"آخرین مقالات برنامه نویسی"}
             btnTitle={"مشاهده مقالات"}
+            bthref={'articels/1'}
+
           />
 
           <div className="articles__content">
