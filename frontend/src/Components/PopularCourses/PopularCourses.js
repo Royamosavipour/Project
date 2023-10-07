@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SectionHeaders from "../SectionHeaders/SectionHeaders";
 import { Swiper, SwiperSlide } from "swiper/react";
+import CourseBox from "../CourseBox/CourseBox";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -13,6 +14,7 @@ export default function PopularCourses() {
       .then((res) => res.json())
       .then((popularCourses) => {
         console.log(popularCourses);
+        setCourses(popularCourses)
       });
   }, []);
 
@@ -26,14 +28,20 @@ export default function PopularCourses() {
             <div className="container">
               <div className="row">
                 <Swiper
-                  slidesPerView={3}
+                loop={true}
+                  slidesPerView={4}
                   spaceBetween={30}
                   pagination={{
                     clickable: true,
                   }}
                   className="mySwiper"
                 >
-                  <SwiperSlide>Slide 1</SwiperSlide>
+                  {courses.map(cours=>(
+                  <SwiperSlide>
+                    <CourseBox {...cours} isSlider={true} />
+                  </SwiperSlide>
+
+                  ))}
                 </Swiper>
               </div>
             </div>
