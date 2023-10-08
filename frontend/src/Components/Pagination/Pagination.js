@@ -14,7 +14,6 @@ export default function Pagination({
   
 
   useEffect(() => {
-    console.log(items);
     let endIndex = itemCount * page;
     let startEndex = endIndex - itemCount;
     let paginationItem = items.slice(startEndex, endIndex);
