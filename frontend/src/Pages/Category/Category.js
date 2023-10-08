@@ -93,7 +93,7 @@ export default function Category() {
                     ))}
                     <Pagination
                       items={courses}
-                      itemCount={2}
+                      itemCount={10}
                       pathname={`/category-info/${categoryName}`}
                       setshowncourses={setShownCourses}
                     />
