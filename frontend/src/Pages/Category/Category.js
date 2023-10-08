@@ -164,17 +164,29 @@ export default function Category() {
                         </form>
                       </div>
                     </div>
-                    {shownCourses.map((cours) => (
-                      <CourseBox {...cours} />
-                    ))}
+                    {
+                      shownCourses.length===0?(
+                        <div className="alert alert-danger">
+                          هیچ دوره ایی برای {statusTitle} وجود ندارد
+                        </div>
+                      ):(
+                        <>
+                        {shownCourses.map((cours) => (
+                          <CourseBox {...cours} />
+                        ))}
+                      </>
+                    )}
+                    </>
+                      )
+                    }
                     <Pagination
-                      items={orderCourses}
-                      itemCount={10}
-                      pathname={`/category-info/${categoryName}`}
-                      setshowncourses={setShownCourses}
-                    />
-                  </>
-                )}
+                          items={orderCourses}
+                          itemCount={10}
+                          pathname={`/category-info/${categoryName}`}
+                          setshowncourses={setShownCourses}
+                        />
+
+                    
               </div>
             </div>
           </div>
