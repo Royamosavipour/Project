@@ -4,9 +4,9 @@ import TopBar from "../../Components/TopBar/TopBar";
 import Footer from "../../Components/Footer/Footer";
 import CourseBox from "../../Components/CourseBox/CourseBox";
 import Pagination from "../../Components/Pagination/Pagination";
+import { useParams } from "react-router-dom";
 
 import "./Category.css";
-import { useParams } from "react-router-dom";
 
 export default function Category() {
   const { categoryName } = useParams();
@@ -15,6 +15,7 @@ export default function Category() {
   const [status, setStatus] = useState("default");
   const [orderCourses, setOrderCourses] = useState([]);
   const [statusTitle, setStatusTitle] = useState("مرتب سازی پیش فرض");
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/category/${categoryName}`)
@@ -55,7 +56,15 @@ export default function Category() {
   }, [status]);
 
   const statusChangeHandeler = (event) => {
-    setStatusTitle(event.target.textContent)
+    setStatusTitle(event.target.textContent);
+  };
+
+  const searchValueChangeHandeler = (event) => {
+    setSearchValue(event.target.value);
+    const filterserach = courses.filter((cours) =>
+      cours.name.includes(event.target.value));
+
+    setOrderCourses(filterserach);
   };
 
   return (
@@ -99,7 +108,6 @@ export default function Category() {
                               onClick={(event) => {
                                 setStatus("free");
                                 statusChangeHandeler(event);
-
                               }}
                             >
                               مرتب سازی براساس دوره های رایگان
@@ -159,34 +167,32 @@ export default function Category() {
                             type="text"
                             className="courses-top-bar__input"
                             placeholder="جستجوی دوره ..."
+                            value={searchValue}
+                            onChange={searchValueChangeHandeler}
                           />
                           <i className="fas fa-search courses-top-bar__search-icon"></i>
                         </form>
                       </div>
                     </div>
-                    {
-                      shownCourses.length===0?(
-                        <div className="alert alert-danger">
-                          هیچ دوره ایی برای {statusTitle} وجود ندارد
-                        </div>
-                      ):(
-                        <>
+                    {shownCourses.length === 0 ? (
+                      <div className="alert alert-danger">
+                        هیچ دوره ایی برای {statusTitle} وجود ندارد
+                      </div>
+                    ) : (
+                      <>
                         {shownCourses.map((cours) => (
                           <CourseBox {...cours} />
                         ))}
                       </>
                     )}
-                    </>
-                      )
-                    }
-                    <Pagination
-                          items={orderCourses}
-                          itemCount={10}
-                          pathname={`/category-info/${categoryName}`}
-                          setshowncourses={setShownCourses}
-                        />
-
-                    
+                  </>
+                )}
+                <Pagination
+                  items={orderCourses}
+                  itemCount={10}
+                  pathname={`/category-info/${categoryName}`}
+                  setshowncourses={setShownCourses}
+                />
               </div>
             </div>
           </div>
