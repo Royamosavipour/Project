@@ -5,6 +5,7 @@ import Footer from "../../Components/Footer/Footer";
 import Input from "../../Components/Form/Input";
 import Button from "../../Components/Form/Button";
 import { useForm } from "../../Hooks/useForm";
+import swal from "sweetalert";
 import {
   requiredValidator,
   minValidator,
@@ -13,7 +14,10 @@ import {
 } from "../../Validaitors/rules";
 
 import "./Contact.css";
+import { Navigate, useNavigate } from "react-router-dom";
+
 export default function Contact() {
+  const navigate = useNavigate();
   const [formState, onInputHandler] = useForm(
     {
       name: {
@@ -36,8 +40,28 @@ export default function Contact() {
     false
   );
 
-  const addNewContact = () => {
-    console.log("درخواست شما برای مدیران سایت ارسال شد");
+  const addNewContact = (event) => {
+    event.preventDefault();
+    let addnewConcatInfo = {
+      name: formState.inputs.name.value,
+      email: formState.inputs.email.value,
+      phone: formState.inputs.phone.value,
+      body: formState.inputs.body.value,
+    };
+
+    fetch(`http://localhost:4000/v1/contact`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(addnewConcatInfo),
+    }).then((res) => {
+      if (res.ok) {
+        swal({
+          title: "ثبت با موفقیت ثبت گردید",
+          icon: "success",
+          buttons: "اوکی",
+        }).then((vale) => navigate("/"));
+      }
+    });
   };
 
   return (
