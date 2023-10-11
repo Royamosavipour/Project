@@ -1,9 +1,31 @@
 import React from "react";
 import FooterItem from "../FooterItem/FooterItem";
+import Input from "../Form/Input";
+
+import {emailValidator} from '../../Validaitors/rules'
 
 import "./Footer.css";
+import { Link } from "react-router-dom";
+import { useForm } from "../../Hooks/useForm";
 
 export default function Footer() {
+
+
+  const [formState,onInputHandler]=useForm({
+    username:{value:'',isValid:false},
+    password:{value:'',isValid:false}
+  },false)
+
+
+  const addNewEmail=event=>{
+    event.prevenDefault()
+  }
+
+
+
+
+
+
   return (
     <>
       <footer className="footer">
@@ -85,6 +107,35 @@ export default function Footer() {
                       آموزش پایتون
                     </a>
                   </div>
+                  <div className="col-6">
+                    <Link to={'/contact'} className="footer-widgets__link">
+                      ارتباط با ما
+                    </Link>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <span class="footer-widgets__title">اشتراک در خبرنامه</span>
+                  <span class="footer-widgets__text text-center d-block">
+                    جهت اطلاع از آخرین اخبار و تخفیف های سایت مشترک شوید!
+                  </span>
+                  <form action="#" class="footer-widgets__form">
+                    <Input
+                      element="input"
+                      id="email"
+                      type="text"
+                      className="footer-widgets__input"
+                      placeholder="ایمیل خود را وارد کنید."
+                      onInputHandler={onInputHandler}
+                      validations={[emailValidator()]}
+                    />
+                    <button
+                      type="submit"
+                      class="footer-widgets__btn"
+                      onClick={addNewEmail}
+                    >
+                      عضویت
+                    </button>
+                  </form>
                 </div>
               </FooterItem>
             </div>
