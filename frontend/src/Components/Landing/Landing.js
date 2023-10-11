@@ -2,8 +2,18 @@ import React, { useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
 import LandingCounter from "../LandingCounter/LandingCounter";
 import "./Landing.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Landing() {
+  const [searchValue, setsearchValue] = useState("");
+  const navigat=useNavigate()
+
+
+  const goToSearchPage=()=>{
+    navigat(`/search/${searchValue}`)
+
+  }
+
   return (
     <section className="landing">
       <div className="container">
@@ -30,8 +40,10 @@ export default function Landing() {
             type="text"
             className="landing__searchbar-input"
             placeholder="چه چیزی دوست داری یاد بگیری ..."
+            value={searchValue}
+            onChange={(event)=>{setsearchValue(event.target.value)}}
           />
-          <button className="landing__searchbar-btn" type="submit">
+          <button className="landing__searchbar-btn" type="submit" onClick={goToSearchPage}>
             <i className="fas fa-search landing__searchbar-icon"></i>
           </button>
         </div>

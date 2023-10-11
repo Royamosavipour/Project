@@ -1,30 +1,40 @@
 import React from "react";
 import FooterItem from "../FooterItem/FooterItem";
 import Input from "../Form/Input";
+import swal from "sweetalert";
 
-import {emailValidator} from '../../Validaitors/rules'
+import { emailValidator } from "../../Validaitors/rules";
 
 import "./Footer.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../Hooks/useForm";
 
 export default function Footer() {
+  const navigate=useNavigate()
+  const [formState, onInputHandler] = useForm(
+    { email: { value: "", isValid: false } },
+    false
+  );
 
+  const addNewEmail = (event) => {
+    event.preventDefault();
+    const newEmail = { email: formState.inputs.email.value };
 
-  const [formState,onInputHandler]=useForm({
-    username:{value:'',isValid:false},
-    password:{value:'',isValid:false}
-  },false)
-
-
-  const addNewEmail=event=>{
-    event.prevenDefault()
-  }
-
-
-
-
-
+    fetch(`http://localhost:4000/v1/newsletters`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newEmail),
+    }).then((res) => {
+      if (res.ok) {
+        swal({
+          title: "پیام شما با موفقیت ثبت گردید",
+          icon: "success",
+          buttons: "اوکی",
+        }).then((vale) => navigate("/"));
+      }
+      console.log(res);
+    });
+  };
 
   return (
     <>
@@ -108,7 +118,7 @@ export default function Footer() {
                     </a>
                   </div>
                   <div className="col-6">
-                    <Link to={'/contact'} className="footer-widgets__link">
+                    <Link to={"/contact"} className="footer-widgets__link">
                       ارتباط با ما
                     </Link>
                   </div>
