@@ -8,6 +8,10 @@ import Register from "./Pages/Register/Register";
 import Articels from "./Pages/Articels/Articels";
 import Contact from "./Pages/Contact/Contact";
 import Search from "./Pages/Search/Search";
+import AdminPanel from "./Pages/AdminPanel/index";
+import Users from "./Pages/AdminPanel/Users/Users";
+import AdminCourses from "./Pages/AdminPanel/AdminCourses/AdminCourses";
+import Menus from "./Pages/AdminPanel/Menus/Menus";
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -20,7 +24,15 @@ const routes = [
   { path: "/register", element: <Register /> },
   { path: "/contact", element: <Contact /> },
   { path: "/search/:value", element: <Search /> },
-  {path:'/p-admin',element:<AdminPanel/>}
+  {
+    path: "/p-admin/*",
+    element: <AdminPanel />,
+    children: [
+      { path: "users", element: <Users /> },
+      { path: "courses", element: <AdminCourses /> },
+      { path: "menus", element: <Menus /> },
+    ],
+  },
 ];
 
 export default routes;
