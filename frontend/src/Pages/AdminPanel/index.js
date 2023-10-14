@@ -1,11 +1,11 @@
 import React from "react";
-import Users from "./Users/Users";
 import { Outlet } from "react-router-dom";
+import Sidebar from "../../Components/AdminPanel/SideBar/SideBar";
 
 export default function index() {
   return (
     <>
-      <div>index</div>
+      <Sidebar />
       <Outlet />
     </>
   );
