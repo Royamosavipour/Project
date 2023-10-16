@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 export default function Topbar() {
   const [adminInfo, setAdminInfo] = useState({});
+  const [adminNotification, setAdminNotification] = useState([]);
+  const [isShowNotificationBox, setIsShowNotificationBox] = useState(false);
 
   useEffect(() => {
     const localStorageData = JSON.parse(localStorage.getItem("user"));
@@ -12,51 +14,47 @@ export default function Topbar() {
       .then((data) => {
         console.log(data);
         setAdminInfo(data);
+        setAdminNotification(data.notifications);
       });
   }, []);
   return (
     <div class="container-fluid">
       <div class="container">
-        <div class="home-header active-modal-notfication">
+        <div
+          class={`home-header ${
+            isShowNotificationBox &&
+            adminNotification.length &&
+            "active-modal-notfication"
+          }`}
+        >
           <div class="home-right">
             <div class="home-searchbar">
               <input type="text" class="search-bar" placeholder="جستجو..." />
             </div>
             <div class="home-notification">
-              <button type="button">
+              <button
+                type="button"
+                onMouseEnter={() => setIsShowNotificationBox(true)}
+              >
                 <i class="far fa-bell"></i>
               </button>
             </div>
-            <div class="home-notification-modal">
+            <div
+              class="home-notification-modal"
+              onMouseEnter={() => setIsShowNotificationBox(true)}
+              onMouseLeave={() => setIsShowNotificationBox(false)}
+            >
               <ul class="home-notification-modal-list">
-                <li class="home-notification-modal-item">
-                  <span class="home-notification-modal-text">پیغام ها</span>
-                  <label class="switch">
-                    <input type="checkbox" checked />
-                    <span class="slider round"></span>
-                  </label>
-                </li>
-                <li class="home-notification-modal-item">
-                  <span class="home-notification-modal-text">پیغام ها</span>
-                  <label class="switch">
-                    <input type="checkbox" checked />
-                    <span class="slider round"></span>
-                  </label>
-                </li>
-                <li class="home-notification-modal-item">
-                  <span class="home-notification-modal-text">پیغام ها</span>
-                  <label class="switch">
-                    <input type="checkbox" checked />
-                    <span class="slider round"></span>
-                  </label>
-                </li>
-                <li class="home-notification-modal-item">
-                  <span class="home-notification-modal-text">پیغام ها</span>
-                  <label class="switch">
-                    <input type="checkbox" checked />
-                    <span class="slider round"></span>
-                  </label>
-                </li>
+                {adminNotification.map((notificat) => (
+                  <li class="home-notification-modal-item">
+                    <span class="home-notification-modal-text">
+                      {notificat}{" "}
+                    </span>
+                    <label class="switch">
+                      <a href="javascript:void(0)">دیدم</a>
+                    </label>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
