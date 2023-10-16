@@ -1,22 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Topbar() {
+  const [adminInfo, setAdminInfo] = useState({});
 
-
-
-
-  useEffect(()=>{
-    const localStorageData=JSON.parse(localStorage.getItem('user'))
-    fetch(`http://localhost:4000/v1/uth/me`,{
-      headers:{'Authorization':`Bearer ${localStorageData}`}
-    }).then(res=>res.json)
-    .then(data=>{console.log(data)})
-
-  },[])
+  useEffect(() => {
+    const localStorageData = JSON.parse(localStorage.getItem("user"));
+    fetch(`http://localhost:4000/v1/auth/me`, {
+      headers: { Authorization: `Bearer ${localStorageData.token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setAdminInfo(data);
+      });
+  }, []);
   return (
     <div class="container-fluid">
       <div class="container">
-        <div class="home-header">
+        <div class="home-header active-modal-notfication">
           <div class="home-right">
             <div class="home-searchbar">
               <input type="text" class="search-bar" placeholder="جستجو..." />
@@ -63,11 +64,11 @@ export default function Topbar() {
             <div class="home-profile">
               <div class="home-profile-image">
                 <a href="#">
-                  <img src="/images/porofile.jpeg" alt="" />
+                  <img src={adminInfo.profile} alt="" />
                 </a>
               </div>
               <div class="home-profile-name">
-                <a href="#">محمدامین سعیدی راد</a>
+                <a href="#">{adminInfo.name}</a>
               </div>
               <div class="home-profile-icon">
                 <i class="fas fa-angle-down"></i>
