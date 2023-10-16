@@ -2,29 +2,31 @@ import React, { useEffect, useState } from "react";
 
 export default function Topbar() {
   const [adminInfo, setAdminInfo] = useState({});
-  const [adminNotification, setAdminNotification] = useState([]);
-  const [isShowNotificationBox, setIsShowNotificationBox] = useState(false);
+  const [adminNotifications, setAdminNotifications] = useState([]);
+  const [isShowNotificationsBox, setIsShowNotificationsBox] = useState(false);
 
   useEffect(() => {
     const localStorageData = JSON.parse(localStorage.getItem("user"));
     fetch(`http://localhost:4000/v1/auth/me`, {
-      headers: { Authorization: `Bearer ${localStorageData.token}` },
+      headers: {
+        Authorization: `Bearer ${localStorageData.token}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         setAdminInfo(data);
-        setAdminNotification(data.notifications);
+        setAdminNotifications(data.notifications);
+        // console.log(data.notifications)
       });
   }, []);
+
   return (
     <div class="container-fluid">
       <div class="container">
         <div
           class={`home-header ${
-            isShowNotificationBox &&
-            adminNotification.length &&
-            "active-modal-notfication"
+            isShowNotificationsBox && "active-modal-notfication"
           }`}
         >
           <div class="home-right">
@@ -34,21 +36,21 @@ export default function Topbar() {
             <div class="home-notification">
               <button
                 type="button"
-                onMouseEnter={() => setIsShowNotificationBox(true)}
+                onMouseEnter={() => setIsShowNotificationsBox(true)}
               >
                 <i class="far fa-bell"></i>
               </button>
             </div>
             <div
               class="home-notification-modal"
-              onMouseEnter={() => setIsShowNotificationBox(true)}
-              onMouseLeave={() => setIsShowNotificationBox(false)}
+              onMouseEnter={() => setIsShowNotificationsBox(true)}
+              onMouseLeave={() => setIsShowNotificationsBox(false)}
             >
               <ul class="home-notification-modal-list">
-                {adminNotification.map((notificat) => (
+                {adminNotifications.map((notification) => (
                   <li class="home-notification-modal-item">
                     <span class="home-notification-modal-text">
-                      {notificat}{" "}
+                      {notification.msg}
                     </span>
                     <label class="switch">
                       <a href="javascript:void(0)">دیدم</a>
