@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function Topbar() {
+
+
+
+
+  useEffect(()=>{
+    const localStorageData=JSON.parse(localStorage.getItem('user'))
+    fetch(`http://localhost:4000/v1/uth/me`,{
+      headers:{'Authorization':`Bearer ${localStorageData}`}
+    }).then(res=>res.json)
+    .then(data=>{console.log(data)})
+
+  },[])
   return (
     <div class="container-fluid">
       <div class="container">
