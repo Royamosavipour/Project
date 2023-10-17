@@ -5,7 +5,6 @@ export default function Topbar() {
   const [adminNotifications, setAdminNotifications] = useState([]);
   const [isShowNotificationsBox, setIsShowNotificationsBox] = useState(false);
 
-
   useEffect(() => {
     const localStorageData = JSON.parse(localStorage.getItem("user"));
     fetch(`http://localhost:4000/v1/auth/me`, {
@@ -20,11 +19,18 @@ export default function Topbar() {
         setAdminNotifications(data.notifications);
         // console.log(data.notifications)
       });
-  }, []);
+  }, [seeNotification]);
 
-
-  const seeNotification=(notificationId)=>{
-console.log(notificationId)
+  function seeNotification(notificationID) {
+    const localStorageData = JSON.parse(localStorage.getItem("user"));
+    fetch(`http://localhost:4000/v1/notifications/see/${notificationID}`, {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${localStorageData.token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   }
 
   return (
@@ -53,16 +59,29 @@ console.log(notificationId)
               onMouseLeave={() => setIsShowNotificationsBox(false)}
             >
               <ul class="home-notification-modal-list">
-                {adminNotifications.map((notification) => (
+                {adminNotifications.length === 0 ? (
                   <li class="home-notification-modal-item">
-                    <span class="home-notification-modal-text">
-                      {notification.msg}
-                    </span>
-                    <label class="switch">
-                      <a href="javascript:void(0)" onClick={()=>seeNotification(notification._id)}>دیدم</a>
-                    </label>
+                      پیامی برای خواندن وجود ندارد
                   </li>
-                ))}
+                ) : (
+                  <>
+                    {adminNotifications.map((notification) => (
+                      <li class="home-notification-modal-item">
+                        <span class="home-notification-modal-text">
+                          {notification.msg}
+                        </span>
+                        <label class="switch">
+                          <a
+                            href="javascript:void(0)"
+                            onClick={() => seeNotification(notification._id)}
+                          >
+                            دیدم
+                          </a>
+                        </label>
+                      </li>
+                    ))}
+                  </>
+                )}
               </ul>
             </div>
           </div>

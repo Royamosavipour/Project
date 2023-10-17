@@ -288,6 +288,14 @@ ul {
   color: #313131;
   font-size: 13px;
 }
+
+#home .home-notification-modal-text-reding{
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+
+}
 #home .home-header .home-right .home-notification-modal .switch {
   position: relative;
   display: inline-block;
