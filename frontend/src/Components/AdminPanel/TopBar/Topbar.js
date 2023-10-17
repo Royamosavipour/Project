@@ -5,6 +5,7 @@ export default function Topbar() {
   const [adminNotifications, setAdminNotifications] = useState([]);
   const [isShowNotificationsBox, setIsShowNotificationsBox] = useState(false);
 
+
   useEffect(() => {
     const localStorageData = JSON.parse(localStorage.getItem("user"));
     fetch(`http://localhost:4000/v1/auth/me`, {
@@ -20,6 +21,11 @@ export default function Topbar() {
         // console.log(data.notifications)
       });
   }, []);
+
+
+  const seeNotification=(notificationId)=>{
+console.log(notificationId)
+  }
 
   return (
     <div class="container-fluid">
@@ -53,7 +59,7 @@ export default function Topbar() {
                       {notification.msg}
                     </span>
                     <label class="switch">
-                      <a href="javascript:void(0)">دیدم</a>
+                      <a href="javascript:void(0)" onClick={()=>seeNotification(notification._id)}>دیدم</a>
                     </label>
                   </li>
                 ))}
