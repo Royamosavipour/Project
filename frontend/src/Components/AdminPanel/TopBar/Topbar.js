@@ -14,7 +14,6 @@ export default function Topbar() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setAdminInfo(data);
         setAdminNotifications(data.notifications);
         // console.log(data.notifications)
