@@ -18,7 +18,7 @@ export default function App() {
 
   const logout =useCallback( () => {
     setToken(null);
-    userInfos({});
+    setUserInfos({});
     localStorage.removeItem("user");
   },[])
 
