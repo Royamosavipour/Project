@@ -26,7 +26,7 @@ const routes = [
   { path: "/contact", element: <Contact /> },
   { path: "/search/:value", element: <Search /> },
   {
-    path: " /*",
+    path: "/p-admin/*",
     element: <AdminPanel />,
     children: [
       { path: "users", element: <Users /> },

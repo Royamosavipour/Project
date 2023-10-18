@@ -4,8 +4,8 @@ import DataTable from "../../../Components/AdminPanel/DataTable/DataTable";
 export default function Users() {
   return (
     <>
-      <DataTable title={'کاربران'}>
-      <table class="table">
+      <DataTable title={"کاربران"}>
+        <table class="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -39,8 +39,6 @@ export default function Users() {
             </tr>
           </tbody>
         </table>
-
-
       </DataTable>
     </>
   );
