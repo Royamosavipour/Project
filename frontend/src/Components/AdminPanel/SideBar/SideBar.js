@@ -18,7 +18,7 @@ const navigate=useNavigate()
     event.preventDefault()
 
     swal({
-      title:'خروج با موفقیت ثبت گردید',
+      title:'خروج با موفقیت انجام گردید',
       icon:'success',
       buttons:'اوکی',
       
