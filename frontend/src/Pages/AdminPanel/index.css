@@ -412,14 +412,14 @@ text-align: center;
   font-size: 18px;
   font-family: "lalezar";
 }
-#home
+/* #home
   #home-content
   .home-content-latset-users
   .home-content-users-title
   span
   .signup {
   color: #1943da;
-}
+} */
 #home #home-content .home-content-latset-users .home-content-users-table {
   padding: 0 10px;
 }
@@ -443,6 +443,7 @@ text-align: center;
   border: none;
   color: #67747e;
   text-align: center;
+
 }
 #home
   #home-content
@@ -485,17 +486,11 @@ text-align: center;
   .edit-btn {
   font-size: 13px;
 }
-#home
-  #home-content
-  .home-content-latset-users
-  .home-content-users-table
-  table
-  tbody
-  tr
-  td
-  .delete-btn {
-  font-size: 13px;
-}
+.show:hover{
+  box-shadow: 1px 3px 8px black;
+  
+      
+  }
 #home #home-content .home-content-edit {
   -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
@@ -673,6 +668,9 @@ text-align: center;
   color: #fff;
   padding: 5px 20px;
 }
+
+
+
 #content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -749,3 +747,5 @@ text-align: center;
   display: block !important;
 }
 /*# sourceMappingURL=main.css.map */
+
+

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import DataTable from "../../../Components/AdminPanel/DataTable/DataTable";
 import swal from "sweetalert";
 
+import './Users.css'
+
 export default function Users() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
@@ -68,7 +70,7 @@ export default function Users() {
           </thead>
           <tbody>
             {users.map((user, index) => (
-              <tr>
+              <tr className="show">
                 <td>{index + 1} </td>
                 <td>{user.name} </td>
                 <td>{user.email} </td>
