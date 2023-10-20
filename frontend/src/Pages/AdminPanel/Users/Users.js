@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "../../../Components/AdminPanel/DataTable/DataTable";
+import swal from "sweetalert";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
+    getAllUsers();
+  }, []);
+
+  function getAllUsers() {
     const localStoragData = JSON.parse(localStorage.getItem("user"));
     fetch(`http://localhost:4000/v1/users`, {
       headers: { Authorization: `Bearer ${localStoragData.token}` },
@@ -11,9 +16,42 @@ export default function Users() {
       .then((res) => res.json())
       .then((allUsers) => {
         console.log(allUsers);
-        setUsers(allUsers)
+        setUsers(allUsers);
       });
-  }, []);
+  }
+
+  const removeUser = (userID) => {
+    const localStoragData = JSON.parse(localStorage.getItem("user"));
+    swal({
+      title: "آیا از حذف مطمین هستید?",
+      buttons: ["نه", "بله"],
+      icon: "warning",
+    }).then((res) => {
+      console.log(res);
+      if (res) {
+        fetch(`http://localhost:4000/v1/users/${userID}`, {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${localStoragData.token}` },
+        }).then((res) => {
+          if (res.ok) {
+            swal({
+              title: "حذف با موفقیت انجام گردید",
+              buttons: "ok",
+              icon: "success",
+            }).then(() => {
+              getAllUsers();
+            });
+          }else{
+            swal({
+              title:'خطا',
+              icon:'getAllUsers'
+            })
+          }
+        });
+      }
+    });
+  };
+
   return (
     <>
       <DataTable title={"کاربران"}>
@@ -40,7 +78,11 @@ export default function Users() {
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger delete-btn">
+                  <button
+                    type="button"
+                    class="btn btn-danger delete-btn"
+                    onClick={() => removeUser(user._id)}
+                  >
                     حذف
                   </button>
                 </td>
