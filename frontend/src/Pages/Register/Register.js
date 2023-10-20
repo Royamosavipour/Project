@@ -34,6 +34,10 @@ export default function Register() {
         value: "",
         isValid: false,
       },
+      phone: {
+        value: "",
+        isValid: false,
+      },
       email: {
         value: "",
         isValid: false,
@@ -48,13 +52,14 @@ export default function Register() {
 
   const registerNewUser = (event) => {
     event.preventDefault();
+    console.log(formState)
     const newUserInfo = {
       name: formState.inputs.name.value,
       username: formState.inputs.username.value,
       email: formState.inputs.email.value,
       password: formState.inputs.password.value,
       confirmPassword: formState.inputs.password.value,
-      phone: 0,
+      phone:formState.inputs.phone.value,
     };
 
 
@@ -122,6 +127,21 @@ export default function Register() {
                 onInputHandler={onInputHandler}
                 validations={[
                   requiredValidator(),
+                  minValidator(8),
+                  maxValidator(20),
+                ]}
+              />
+              <i className="login-form__username-icon fa fa-user"></i>
+            </div>
+            <div className="login-form__username">
+              <Input
+                type="text"
+                placeholder="شماره تماس "
+                className="login-form__username-input"
+                element="input"
+                id="phone"
+                onInputHandler={onInputHandler}
+                validations={[
                   minValidator(8),
                   maxValidator(20),
                 ]}
