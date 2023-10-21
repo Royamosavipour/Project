@@ -55,38 +55,29 @@ export default function Users() {
   };
 
   const banHandeler = (userID) => {
-const localStorageData=JSON.parse(localStorage.getItem('user'))
-swal({
-  title:'آیا از بن مطمینید?',
-  icon:'warning',
-  buttons:['No','Yes'],
-}).then(res=>{
-  console.log(res)
-  if (res) {
-    fetch(`http://localhost:4000/v1/users/ban/${userID}`,{
-      method:'PUT',
-      headers:{'Authorization':`Bearer ${localStorageData.token}`}
-    }).then(res=>{
-      console.log(res)
-      if (res.ok) {
-        swal({
-          title:'شماره تماس مسدود می باشد',
-          icon:'success',
-          buttons:'اوکی'
-          
-        })
-        
+    const localStorageData = JSON.parse(localStorage.getItem("user"));
+    swal({
+      title: "آیا از بن مطمینید?",
+      icon: "warning",
+      buttons: ["No", "Yes"],
+    }).then((res) => {
+      console.log(res);
+      if (res) {
+        fetch(`http://localhost:4000/v1/users/ban/${userID}`, {
+          method: "PUT",
+          headers: { Authorization: `Bearer ${localStorageData.token}` },
+        }).then((res) => {
+          console.log(res);
+          if (res.ok) {
+            swal({
+              title: "شماره تماس مسدود می باشد",
+              icon: "success",
+              buttons: "اوکی",
+            });
+          }
+        });
       }
-    })
-
-    
-  }
-})
-
-
-
-
-
+    });
   };
 
   return (
