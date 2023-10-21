@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DataTable from "../../../Components/AdminPanel/DataTable/DataTable";
 import swal from "sweetalert";
 
-import './Users.css'
+import "./Users.css";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -43,15 +43,50 @@ export default function Users() {
             }).then(() => {
               getAllUsers();
             });
-          }else{
+          } else {
             swal({
-              title:'خطا',
-              icon:'getAllUsers'
-            })
+              title: "خطا",
+              icon: "getAllUsers",
+            });
           }
         });
       }
     });
+  };
+
+  const banHandeler = (userID) => {
+const localStorageData=JSON.parse(localStorage.getItem('user'))
+swal({
+  title:'آیا از بن مطمینید?',
+  icon:'warning',
+  buttons:['No','Yes'],
+}).then(res=>{
+  console.log(res)
+  if (res) {
+    fetch(`http://localhost:4000/v1/users/ban/${userID}`,{
+      method:'PUT',
+      headers:{'Authorization':`Bearer ${localStorageData.token}`}
+    }).then(res=>{
+      console.log(res)
+      if (res.ok) {
+        swal({
+          title:'شماره تماس مسدود می باشد',
+          icon:'success',
+          buttons:'اوکی'
+          
+        })
+        
+      }
+    })
+
+    
+  }
+})
+
+
+
+
+
   };
 
   return (
@@ -89,7 +124,11 @@ export default function Users() {
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger delete-btn">
+                  <button
+                    type="button"
+                    class="btn btn-danger delete-btn"
+                    onClick={() => banHandeler(user._id)}
+                  >
                     بن
                   </button>
                 </td>
