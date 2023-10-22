@@ -15,15 +15,10 @@ import {
 import AuthContext from "../../Context/authContext";
 
 import "./Register.css";
-
-
-
-
+import swal from "sweetalert";
 
 export default function Register() {
   const authContext = useContext(AuthContext);
-
-
   const [formState, onInputHandler] = useForm(
     {
       name: {
@@ -52,33 +47,46 @@ export default function Register() {
 
   const registerNewUser = (event) => {
     event.preventDefault();
-    console.log(formState)
     const newUserInfo = {
       name: formState.inputs.name.value,
       username: formState.inputs.username.value,
       email: formState.inputs.email.value,
       password: formState.inputs.password.value,
       confirmPassword: formState.inputs.password.value,
-      phone:formState.inputs.phone.value,
+      phone: formState.inputs.phone.value,
     };
-
 
     fetch(`http://localhost:4000/v1/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newUserInfo),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        // res.json();
+        console.log(res);
+        if (res.ok) {
+          return res.json();
+        } else {
+          if (res.status === 403) {
+            swal({
+              title:'شماره مسدود می باشد',
+              icon:'error',
+              buttons:'ای بابا'
+              
+            });
+          }
+        }
+      })
       .then((result) => {
-        console.log(result)
-        authContext.login(result.user,result.accessToken);
+        console.log(result);
+        // authContext.login(result.user, result.accessToken);
       });
 
     // .then(res=>{if(res.ok){return res.json()}
     // return res.text()})
     // .then(res=>{console.log(res)})
 
-    console.log("register is ok");
+    // console.log("register is ok");
   };
 
   return (
@@ -141,10 +149,7 @@ export default function Register() {
                 element="input"
                 id="phone"
                 onInputHandler={onInputHandler}
-                validations={[
-                  minValidator(8),
-                  maxValidator(20),
-                ]}
+                validations={[minValidator(8), maxValidator(20)]}
               />
               <i className="login-form__username-icon fa fa-user"></i>
             </div>
