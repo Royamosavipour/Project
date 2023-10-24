@@ -82,7 +82,7 @@ export default function Category() {
                 {courses.length === 0 ? (
                   <>
                     <div className="alert alert-danger">
-                      هنوز دوره ایی ثبت نگردیده است
+                          هنوز دوره ایی ثبت نگردیده است
                     </div>
                   </>
                 ) : (
