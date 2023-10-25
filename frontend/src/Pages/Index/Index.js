@@ -16,7 +16,7 @@ export default function Index() {
     <div>
     <Header />
       <LastCourses />
-          <AboutUs />
+      <AboutUs />
       <PopularCourses/>
       <PreSellCourses/>
       <LastArticle/>
