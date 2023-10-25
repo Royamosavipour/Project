@@ -45,7 +45,6 @@ export default function Category() {
   const createNewCategory = (event) => {
     event.preventDefault();
     const localStorageData = JSON.parse(localStorage.getItem("user"));
-
     const newCategoryInfo = {
       title: formState.inputs.title.value,
       name: formState.inputs.shortname.value,
@@ -61,7 +60,6 @@ export default function Category() {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
         swal({
           title: "دسته بندی مورد نظر با موفقیت اضافه شد",
           icon: "success",
@@ -71,6 +69,32 @@ export default function Category() {
         });
       });
   };
+
+  function removeCategory(categoryID) {
+    const localHostData = JSON.parse(localStorage.getItem("user"));
+    swal({
+      title: "آیا از حذف مطمینی",
+      icon: "warning",
+      buttons: ["خیر", "بله"],
+    }).then((result) => {
+      if (result) {
+        fetch(`http://localhost:4000/v1/category/${categoryID}`, {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${localHostData.token}` },
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            swal({
+              title: "حذف انجام گردید",
+              icon: "success",
+              buttons: "OK",
+            }).then((res) => {
+              getallCategories();
+            });
+          });
+      }
+    });
+  }
 
   return (
     <>
@@ -129,7 +153,6 @@ export default function Category() {
             <tr>
               <th>شناسه</th>
               <th>عنوان</th>
-
               <th>ویرایش</th>
               <th>حذف</th>
             </tr>
@@ -145,7 +168,11 @@ export default function Category() {
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger delete-btn">
+                  <button
+                    type="button"
+                    class="btn btn-danger delete-btn"
+                    onClick={() => removeCategory(category._id)}
+                  >
                     حذف
                   </button>
                 </td>
