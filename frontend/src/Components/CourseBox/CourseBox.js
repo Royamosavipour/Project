@@ -5,6 +5,8 @@ import "./CourseBox.css";
 import { Link } from "react-router-dom";
 
 export default function CourseBox(props) {
+
+  console.log(props)
   const [isImageShow, setIsImageShow] = useState(false);
   const onImageLoder = () => setIsImageShow(true);
   const onImageError = () => {
