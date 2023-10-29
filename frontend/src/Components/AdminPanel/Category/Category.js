@@ -50,6 +50,8 @@ export default function Category() {
       name: formState.inputs.shortname.value,
     };
 
+   
+
     fetch("http://localhost:4000/v1/category", {
       method: "POST",
       headers: {
@@ -66,6 +68,7 @@ export default function Category() {
           buttons: "اوکی",
         }).then(() => {
           getallCategories();
+
         });
       });
   };
