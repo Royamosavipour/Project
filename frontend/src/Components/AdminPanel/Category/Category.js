@@ -37,7 +37,6 @@ export default function Category() {
     fetch(`http://localhost:4000/v1/category`)
       .then((res) => res.json())
       .then((allCategories) => {
-        console.log(allCategories);
         setCategories(allCategories);
       });
   }
@@ -49,8 +48,6 @@ export default function Category() {
       title: formState.inputs.title.value,
       name: formState.inputs.shortname.value,
     };
-
-   
 
     fetch("http://localhost:4000/v1/category", {
       method: "POST",
@@ -68,7 +65,6 @@ export default function Category() {
           buttons: "اوکی",
         }).then(() => {
           getallCategories();
-
         });
       });
   };
@@ -97,6 +93,20 @@ export default function Category() {
           });
       }
     });
+  }
+
+  const updateCategory = (gategoryID) => {
+    swal({
+      title: 'دسته بندی جدید را وارد کنید',
+      content: 'input',
+      buttons:'ثبت عنوان جدید',
+      
+    }).then(result => {
+      if (result.trim().length) {
+fetch(`http://localhost:4000/v1/category.`)
+        
+      }
+    })
   }
 
   return (
@@ -166,7 +176,7 @@ export default function Category() {
                 <td>{index + 1} </td>
                 <td>{category.title} </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button type="button" class="btn btn-primary edit-btn" onClick={()=>updateCategory(category._id)}>
                     ویرایش
                   </button>
                 </td>
