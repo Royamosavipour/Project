@@ -95,7 +95,10 @@ export default function Category() {
     });
   }
 
-  const updateCategory = (gategoryID) => {
+
+
+  const updateCategory = (categoryID) => {
+    const logalStorageData=JSON.parse(localStorage.getItem('user'))
     swal({
       title: 'دسته بندی جدید را وارد کنید',
       content: 'input',
@@ -103,7 +106,27 @@ export default function Category() {
       
     }).then(result => {
       if (result.trim().length) {
-fetch(`http://localhost:4000/v1/category.`)
+        fetch(`http://localhost:4000/v1/category/${categoryID}`, {
+          method: 'PUT',
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization":`Bearer ${logalStorageData.token}`
+          },
+          body: JSON.stringify({
+            title: result,
+
+          })
+
+        }).then(res => res.json())
+          .then(result => {
+            console.log(result)
+            swal({
+              title: 'دسته بندی مورد نظر ثبت گردید',
+              buttons: 'ok',
+              icon:'success'
+              
+            }).then(()=>getallCategories())
+        })
         
       }
     })
