@@ -95,42 +95,39 @@ export default function Category() {
     });
   }
 
-
-
   const updateCategory = (categoryID) => {
-    const logalStorageData=JSON.parse(localStorage.getItem('user'))
+    const logalStorageData = JSON.parse(localStorage.getItem("user"));
     swal({
-      title: 'دسته بندی جدید را وارد کنید',
-      content: 'input',
-      buttons:'ثبت عنوان جدید',
-      
-    }).then(result => {
+      title: "دسته بندی جدید را وارد کنید",
+      content: "input",
+      buttons: "ثبت عنوان جدید",
+    }).then((result) => {
       if (result.trim().length) {
         fetch(`http://localhost:4000/v1/category/${categoryID}`, {
-          method: 'PUT',
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            "Authorization":`Bearer ${logalStorageData.token}`
+            Authorization: `Bearer ${logalStorageData.token}`,
           },
           body: JSON.stringify({
             title: result,
-
+            name: result,
+          }),
+        })
+          .then((res) => {
+            res.json();
           })
 
-        }).then(res => res.json())
-          .then(result => {
-            console.log(result)
+          .then((result) => {
             swal({
-              title: 'دسته بندی مورد نظر ثبت گردید',
-              buttons: 'ok',
-              icon:'success'
-              
-            }).then(()=>getallCategories())
-        })
-        
+              title: "دسته بندی مورد نظر ثبت گردید",
+              buttons: "ok",
+              icon: "success",
+            }).then(() => getallCategories());
+          });
       }
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -199,7 +196,11 @@ export default function Category() {
                 <td>{index + 1} </td>
                 <td>{category.title} </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn" onClick={()=>updateCategory(category._id)}>
+                  <button
+                    type="button"
+                    class="btn btn-primary edit-btn"
+                    onClick={() => updateCategory(category._id)}
+                  >
                     ویرایش
                   </button>
                 </td>
