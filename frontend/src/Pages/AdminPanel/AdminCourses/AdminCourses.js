@@ -28,7 +28,7 @@ export default function AdminCourses() {
       buttons: ["نه", "آره"],
     }).then((result) => {
       if (result) {
-        fetch(`http//localhost:4000/v1/courses/${coursID}`, {
+        fetch(`http://localhost:4000/v1/courses/${coursID}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${localstorageData.token}`,
