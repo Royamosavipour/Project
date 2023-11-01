@@ -19,21 +19,22 @@ export default function CourseInfo() {
   const [createdAt, setCreatedAt] = useState("");
   const [updatedAt, setUpdatedAt] = useState("");
   const [courseTeacher, setCourseTeacher] = useState({});
-
-
+  const [courseCategory, setCourseCategory] = useState({});
 
 
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {})
       .then((res) => res.json())
       .then((courseInfo) => {
-        console.log(courseInfo)
+        console.log(courseInfo);
         setComments(courseInfo.comments);
         setSessions(courseInfo.sessions);
         setCoursDetails(courseInfo);
         setUpdatedAt(courseInfo.updatedAt);
         setCreatedAt(courseInfo.createdAt);
         setCourseTeacher(courseInfo.creator);
+        setCourseCategory(courseInfo.categoryID)
+        
       });
   }, []);
 
@@ -89,7 +90,7 @@ export default function CourseInfo() {
           <div className="row">
             <div className="col-6">
               <a href="#" className="course-info__link">
-                آموزش برنامه نویسی فرانت اند
+                {courseCategory.title}
               </a>
               <h1 className="course-info__title">{coursDetails.name}</h1>
               <p className="course-info__text">{coursDetails.description}</p>
