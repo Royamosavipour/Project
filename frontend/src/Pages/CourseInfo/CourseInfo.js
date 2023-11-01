@@ -18,23 +18,22 @@ export default function CourseInfo() {
   const [coursDetails, setCoursDetails] = useState({});
   const [createdAt, setCreatedAt] = useState("");
   const [updatedAt, setUpdatedAt] = useState("");
-  const [courseTeacher,setCourseTeacher]=useState({})
+  const [courseTeacher, setCourseTeacher] = useState({});
+
+
+
 
   useEffect(() => {
-    fetch(`http://localhost:4000/v1/courses/${courseName}`, {
-      // method:'POST',
-      // headers:{'Authorization':`bearer ${JSON.parse(localStorage.getItem('user')).token}`}
-    })
+    fetch(`http://localhost:4000/v1/courses/${courseName}`, {})
       .then((res) => res.json())
       .then((courseInfo) => {
-        console.log(courseInfo);
+        console.log(courseInfo)
         setComments(courseInfo.comments);
         setSessions(courseInfo.sessions);
         setCoursDetails(courseInfo);
         setUpdatedAt(courseInfo.updatedAt);
         setCreatedAt(courseInfo.createdAt);
-        setCourseTeacher(courseInfo.creator)
-        
+        setCourseTeacher(courseInfo.creator);
       });
   }, []);
 
@@ -50,7 +49,7 @@ export default function CourseInfo() {
       body: JSON.stringify({
         body: newCommentBody,
         courseShortName: courseName,
-        score:2,
+        score: 2,
       }),
     })
       .then((res) => {
@@ -60,12 +59,12 @@ export default function CourseInfo() {
         return res.text();
       })
       .then((data) => {
-        console.log(data)
+        console.log(data);
         swal({
-          title:'کامنت با موفقیت ثبت گردید',
-          icon:'success',
-          buttons:'تایید'
-        })
+          title: "کامنت با موفقیت ثبت گردید",
+          icon: "success",
+          buttons: "تایید",
+        });
       });
   };
 
@@ -295,7 +294,6 @@ export default function CourseInfo() {
                           </a>
                           <span className="techer-details__header-skill">
                             Front End & Back End Developer
-
                           </span>
                         </div>
                       </div>
