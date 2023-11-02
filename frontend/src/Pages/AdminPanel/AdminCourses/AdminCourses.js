@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "../../../Components/AdminPanel/DataTable/DataTable";
 import swal from "sweetalert";
+import Input from "../../../Components/Form/Input";
+import { useForm } from "../../../Hooks/useForm";
+import {
+  requiredValidator,
+  minValidator,
+  maxValidator,
+} from "../../../Validaitors/rules";
 
 import "./Courses.css";
 
@@ -8,6 +15,31 @@ export default function AdminCourses() {
   const [allCourses, setAllCourses] = useState([]);
   const [categories, setCategories] = useState([]);
   const [coursCategory, setCoursCategory] = useState("");
+  const [formState, onInputHandler] = useForm(
+    {
+      name: {
+        value: "",
+        isValid: false,
+      },
+      description: {
+        value: "",
+        isValid: false,
+      },
+      shortName: {
+        value: "",
+        isValid: false,
+      },
+      price: {
+        value: "",
+        isValid: false,
+      },
+      support: {
+        value: "",
+        isValid: false,
+      },
+    },
+    false
+  );
 
   useEffect(() => {
     getAllcourses();
@@ -72,49 +104,80 @@ export default function AdminCourses() {
       <div class="container-fluid" id="home-content">
         <div class="container">
           <div class="home-title">
-            <span>افزودن محصول جدید</span>
+            <span>افزودن دوره جدید</span>
           </div>
           <form class="form">
             <div class="col-6">
               <div class="name input">
-                <label class="input-title">نام محصول</label>
-                <input
+                <label class="input-title">نام دوره</label>
+                <Input
+                  id="name"
+                  element="input"
+                  onInputHandler={onInputHandler}
+                  validations={[minValidator(5)]}
                   type="text"
                   isValid="false"
-                  placeholder="لطفا نام محصول را وارد کنید..."
+                  placeholder="لطفا نام دوره را وارد کنید..."
                 />
                 <span class="error-message text-danger"></span>
               </div>
             </div>
             <div class="col-6">
               <div class="price input">
-                <label class="input-title">قیمت محصول</label>
-                <input
+                <label class="input-title">توضیحات دوره</label>
+                <Input
+                  id="description"
+                  element="input"
+                  onInputHandler={onInputHandler}
+                  validations={[minValidator(5)]}
                   type="text"
                   isValid="false"
-                  placeholder="لطفا قیمت محصول را وارد کنید..."
+                  placeholder="لطفا توضیحات دوره را وارد کنید..."
                 />
                 <span class="error-message text-danger"></span>
               </div>
             </div>
             <div class="col-6">
               <div class="number input">
-                <label class="input-title">تعداد محصول</label>
-                <input
+                <label class="input-title">تعداد دوره</label>
+                <Input
+                  id="shortName"
+                  element="input"
+                  onInputHandler={onInputHandler}
+                  validations={[minValidator(5)]}
                   type="text"
                   isValid="false"
-                  placeholder="لطفا تعداد محصول را وارد کنید..."
+                  placeholder="لطفا تعداد دوره را وارد کنید..."
                 />
                 <span class="error-message text-danger"></span>
               </div>
             </div>
             <div class="col-6">
               <div class="price input">
-                <label class="input-title">قیمت محصول</label>
-                <input
+                <label class="input-title">قیمت دوره</label>
+                <Input
+                  id="price"
+                  element="input"
+                  onInputHandler={onInputHandler}
+                  validations={[minValidator(5)]}
                   type="text"
                   isValid="false"
-                  placeholder="لطفا قیمت محصول را وارد کنید..."
+                  placeholder="لطفا قیمت دوره را وارد کنید..."
+                />
+                <span class="error-message text-danger"></span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="price input">
+                <label class="input-title">ساپورت  دوره</label>
+                <Input
+                  id="support"
+                  element="input"
+                  onInputHandler={onInputHandler}
+                  validations={[minValidator(5)]}
+                  type="text"
+                  isValid="false"
+                  placeholder="لطفا قیمت دوره را وارد کنید..."
                 />
                 <span class="error-message text-danger"></span>
               </div>
@@ -132,7 +195,7 @@ export default function AdminCourses() {
             </div>
             <div class="col-6">
               <div class="file">
-                <label class="input-title">عکس محصول</label>
+                <label class="input-title">عکس دوره</label>
                 <input type="file" id="file" />
               </div>
             </div>
@@ -187,7 +250,7 @@ export default function AdminCourses() {
                   <div class="presell-false">
                     <label>
                       <span>در حال برگزاری</span>
-                      <input type="radio" value="onperforming" name="presell" />
+                      <Input type="radio" value="onperforming" name="presell" />
                     </label>
                   </div>
                 </div>
