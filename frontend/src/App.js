@@ -36,7 +36,8 @@ export default function App() {
     }else{
       setIsLoggedIn(false)
     }
-  }, [login,logout]);
+  }, [login, logout]);
+  
 
   return (
     <AuthContext.Provider
