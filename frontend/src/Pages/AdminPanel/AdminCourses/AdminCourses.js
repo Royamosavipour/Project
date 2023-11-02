@@ -7,6 +7,7 @@ import "./Courses.css";
 export default function AdminCourses() {
   const [allCourses, setAllCourses] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [coursCategory, setCoursCategory] = useState("");
 
   useEffect(() => {
     getAllcourses();
@@ -62,7 +63,9 @@ export default function AdminCourses() {
     });
   };
 
-  const selectCategory = () => {};
+  const selectCategory = (e) => {
+    setCoursCategory(e.target.value);
+  };
 
   return (
     <>
