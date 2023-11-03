@@ -82,11 +82,7 @@ export default function Register() {
         // authContext.login(result.user, result.accessToken);
       });
 
-    // .then(res=>{if(res.ok){return res.json()}
-    // return res.text()})
-    // .then(res=>{console.log(res)})
-
-    // console.log("register is ok");
+    
   };
 
   return (
