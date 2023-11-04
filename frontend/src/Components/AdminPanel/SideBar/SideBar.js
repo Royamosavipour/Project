@@ -54,8 +54,7 @@ const navigate=useNavigate()
             </Link>
           </li>
           <li>
-            <Link to="courses
-            ">
+            <Link to="courses">
               <span>دوره ها</span>
             </Link>
           </li>
@@ -82,6 +81,11 @@ const navigate=useNavigate()
           <li>
             <Link to={'category'}>
               <span>دسته‌بندی‌ها</span>
+            </Link>
+          </li>
+          <li>
+            <Link to={'contacts'}>
+              <span> پیغام ها</span>
             </Link>
           </li>
           <li>

@@ -15,7 +15,7 @@ import "./Courses.css";
 export default function AdminCourses() {
   const [allCourses, setAllCourses] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [coursCategory, setCoursCategory] = useState("");
+  const [coursCategory, setCoursCategory] = useState("-1");
   const [coursStatus, setCourseStatus] = useState("start");
   const [courseCover, setCourseCover] = useState({});
 
@@ -102,19 +102,27 @@ export default function AdminCourses() {
     formData.append("status", coursStatus);
     formData.append("cover", courseCover);
 
-    fetch(`http://localhost:4000/v1/courses`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${localStorageData.token}` },
-      body: formData,
-    }).then((res) => {
-      if (res.ok) {
-        swal({
-          title: 'دوره ثبت گردید',
-          icon: 'success',
-          buttons:'اوکی'
-        }).then(()=>getAllcourses())
-      }
-    })
+    if (coursCategory === "-1") {
+      swal({
+        title: "دسته بندی را انتخاب کنید",
+        buttons: "تلاش مجدد",
+        icon: "error",
+      });
+    } else {
+      fetch(`http://localhost:4000/v1/courses`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${localStorageData.token}` },
+        body: formData,
+      }).then((res) => {
+        if (res.ok) {
+          swal({
+            title: "دوره ثبت گردید",
+            icon: "success",
+            buttons: "اوکی",
+          }).then(() => getAllcourses());
+        }
+      });
+    }
   };
 
   return (
@@ -166,7 +174,7 @@ export default function AdminCourses() {
                   type="text"
                   isValid="false"
                   onInputHandler={onInputHandler}
-                  placeholder= "لطفا Url دوره را وارد کنید"
+                  placeholder="لطفا Url دوره را وارد کنید"
                 />
                 <span class="error-message text-danger"></span>
               </div>
@@ -204,7 +212,9 @@ export default function AdminCourses() {
             <div class="col-6">
               <div class="number input">
                 <label class="input-title">دسته‌بندی دوره</label>
+
                 <select onChange={selectCategory}>
+                  <option value="-1">لطفا یک دسته بندی انتخاب کنید</option>
                   {categories.map((category) => (
                     <option value={category._id}>{category.title}</option>
                   ))}
@@ -238,7 +248,9 @@ export default function AdminCourses() {
                           type="radio"
                           value="presell"
                           name="condition"
-                          onInput={(event) => setCourseStatus(event.target.value)}
+                          onInput={(event) =>
+                            setCourseStatus(event.target.value)
+                          }
                         />
                       </label>
                     </div>
@@ -249,7 +261,9 @@ export default function AdminCourses() {
                           type="radio"
                           value="start"
                           name="condition"
-                          onInput={(event) => setCourseStatus(event.target.value)}
+                          onInput={(event) =>
+                            setCourseStatus(event.target.value)
+                          }
                           checked
                         />
                       </label>
