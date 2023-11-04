@@ -20,7 +20,8 @@ export default function CourseBox(props) {
         <div className="course-box">
           <Link to={`/course-info/${props.shortName}`}>
             <img
-              src="/images/courses/fareelancer.png"
+              src={`http://localhost:4000/courses/covers/${props.cover}`}
+              // src="/images/courses/fareelancer.png"
               alt="Course img"
               className="course-box__img"
               onLoad={onImageLoder}

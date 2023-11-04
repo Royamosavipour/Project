@@ -16,7 +16,7 @@ export default function AdminCourses() {
   const [allCourses, setAllCourses] = useState([]);
   const [categories, setCategories] = useState([]);
   const [coursCategory, setCoursCategory] = useState("");
-  const [coursState, setCoursState] = useForm("start");
+  const [coursStatus, setCourseStatus] = useState("start");
   const [courseCover, setCourseCover] = useState({});
 
   const [formState, onInputHandler] = useForm(
@@ -89,7 +89,32 @@ export default function AdminCourses() {
   };
 
   const addNewCours = (e) => {
+    const localStorageData = JSON.parse(localStorage.getItem("user"));
+
     e.preventDefault();
+    let formData = new FormData();
+    formData.append("name", formState.inputs.name.value);
+    formData.append("description", formState.inputs.description.value);
+    formData.append("shortName", formState.inputs.shortName.value);
+    formData.append("categoryID", coursCategory);
+    formData.append("price", formState.inputs.price.value);
+    formData.append("support", formState.inputs.support.value);
+    formData.append("status", coursStatus);
+    formData.append("cover", courseCover);
+
+    fetch(`http://localhost:4000/v1/courses`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${localStorageData.token}` },
+      body: formData,
+    }).then((res) => {
+      if (res.ok) {
+        swal({
+          title: 'دوره ثبت گردید',
+          icon: 'success',
+          buttons:'اوکی'
+        }).then(()=>getAllcourses())
+      }
+    })
   };
 
   return (
@@ -141,7 +166,7 @@ export default function AdminCourses() {
                   type="text"
                   isValid="false"
                   onInputHandler={onInputHandler}
-                  placeholder="لطفا تعداد دوره را وارد کنید..."
+                  placeholder= "لطفا Url دوره را وارد کنید"
                 />
                 <span class="error-message text-danger"></span>
               </div>
@@ -171,7 +196,7 @@ export default function AdminCourses() {
                   type="text"
                   isValid="false"
                   onInputHandler={onInputHandler}
-                  placeholder="لطفا قیمت دوره را وارد کنید..."
+                  placeholder="لطفا نحوه پشتیبانی دوره را وارد کنید"
                 />
                 <span class="error-message text-danger"></span>
               </div>
@@ -195,7 +220,7 @@ export default function AdminCourses() {
                   type="file"
                   id="file"
                   onChange={(e) => {
-                    setCourseCover(e.target.files)
+                    setCourseCover(e.target.files[0]);
                   }}
                 />
               </div>
@@ -213,7 +238,7 @@ export default function AdminCourses() {
                           type="radio"
                           value="presell"
                           name="condition"
-                          onInput={(e) => setCoursState(e.target.value)}
+                          onInput={(event) => setCourseStatus(event.target.value)}
                         />
                       </label>
                     </div>
@@ -224,7 +249,7 @@ export default function AdminCourses() {
                           type="radio"
                           value="start"
                           name="condition"
-                          onInput={(e) => setCoursState(e.target.value)}
+                          onInput={(event) => setCourseStatus(event.target.value)}
                           checked
                         />
                       </label>
