@@ -12,9 +12,9 @@ import {
   maxValidator,
   emailValidator,
 } from "../../Validaitors/rules";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import "./Contact.css";
-import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Contact() {
   const navigate = useNavigate();

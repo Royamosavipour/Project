@@ -6,13 +6,17 @@ export default function Contact() {
   const [allContacts, setAllContacts] = useState([]);
 
   useEffect(() => {
+    getallCantacts();
+  }, []);
+
+  function getallCantacts() {
     fetch(`http://localhost:4000/v1/contact`)
       .then((res) => res.json())
       .then((allCantact) => {
         console.log(allCantact);
         setAllContacts(allCantact);
       });
-  }, []);
+  }
 
   const showMessage = (body) => {
     swal({
@@ -39,13 +43,38 @@ export default function Contact() {
           Authorization: `Bearer ${localStorageData.token}`,
         },
         body: JSON.stringify(answerInfo),
-      })
-        .then((res) => {
+      }).then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      });
+    });
+  };
+
+  const removeContact = (contactId) => {
+    const localStorageData = JSON.parse(localStorage.getItem("user"));
+    swal({
+      title: "آیا از حذف مطمینی",
+      icon: "warning",
+      buttons: ["خیر", "بله"],
+    }).then((result) => {
+      console.log(result);
+      if (result) {
+        fetch(`http://localhost:4000/v1/contact/${contactId}`, {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${localStorageData.token}` },
+        }).then((res) => {
           if (res.ok) {
-            return res.json();
+            swal({
+              title: "پیام مورد نظر حذف گردید",
+              icon: "success",
+              buttons: "ok",
+            }).then(() => {
+              getallCantacts();
+            });
           }
-        })
-        .then((result) => console.log(result));
+        });
+      }
     });
   };
   return (
@@ -89,7 +118,11 @@ export default function Contact() {
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger delete-btn">
+                  <button
+                    type="button"
+                    class="btn btn-danger delete-btn"
+                    onClick={() => removeContact(contact._id)}
+                  >
                     حذف
                   </button>
                 </td>
