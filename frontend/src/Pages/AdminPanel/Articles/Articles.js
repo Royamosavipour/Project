@@ -1,12 +1,43 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "../../../Components/AdminPanel/DataTable/DataTable";
 import swal from "sweetalert";
+import Input from '../../../Components/Form/Input'
+import { minValidator } from '../../../Validaitors/rules'
+import {useForm} from '../../../Hooks/useForm'
 
 export default function Articles() {
   const [articles, setArticles] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [articleCategory, setArticleCategory] = useState("-1");
+  const [articleCover, setArticleCover] = useState({});
+
+  const [formState, onInputHandler] = useForm(
+    {
+      title: {
+        value: "",
+        isValid: false,
+      },
+      shortName: {
+        value: "",
+        isValid: false,
+      },
+      description: {
+        value: "",
+        isValid: false,
+      },
+    },
+    false
+  );
+
 
   useEffect(() => {
     getAllArticles();
+
+    fetch(`http://localhost:4000/v1/category`)
+      .then((res) => res.json())
+      .then((allCategories) => {
+        setCategories(allCategories);
+      });
   }, []);
 
   function getAllArticles() {
@@ -45,6 +76,100 @@ export default function Articles() {
 
   return (
     <>
+      <div class="container-fluid" id="home-content">
+        <div class="container">
+          <div class="home-title">
+            <span>افزودن مقاله جدید</span>
+          </div>
+          <form class="form">
+            <div class="col-6">
+              <div class="name input">
+                <label class="input-title" style={{ display: "block" }}>
+                  عنوان
+                </label>
+                <Input
+                  element="input"
+                  type="text"
+                  id="title"
+                  onInputHandler={onInputHandler}
+                  validations={[minValidator(8)]}
+                />
+                <span class="error-message text-danger"></span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="name input">
+                <label class="input-title" style={{ display: "block" }}>
+                  لینک
+                </label>
+                <Input
+                  element="input"
+                  type="text"
+                  id="shortName"
+                  onInputHandler={onInputHandler}
+                  validations={[minValidator(5)]}
+                />
+                <span class="error-message text-danger"></span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="name input">
+                <label class="input-title" style={{ display: "block" }}>
+                  چکیده
+                </label>
+                {/* <textarea style={{ width: "100%", height: "200px" }}></textarea> */}
+
+                <Input
+                  element="textarea"
+                  type="text"
+                  id="description"
+                  onInputHandler={onInputHandler}
+                  validations={[minValidator(5)]}
+                  className="article-textarea"
+                />
+                <span class="error-message text-danger"></span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="name input">
+                <label class="input-title" style={{ display: "block" }}>
+                  کاور
+                </label>
+                <input
+                  type="file"
+                  onChange={(event) => {
+                    setArticleCover(event.target.files[0]);
+                  }}
+                />
+                <span class="error-message text-danger"></span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="name input">
+                <label class="input-title" style={{ display: "block" }}>
+                  دسته بندی
+                </label>
+                <select
+                  onChange={(event) => setArticleCategory(event.target.value)}
+                >
+                  <option value="-1">دسته بندی مقاله را انتخاب کنید،</option>
+                  {categories.map((category) => (
+                    <option value={category._id}>{category.title}</option>
+                  ))}
+                </select>
+                <span class="error-message text-danger"></span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="bottom-form">
+                <div class="submit-btn">
+                  <input type="submit" value="افزودن" />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
       <DataTable title="مقالات" />
       <table class="table">
         <thead>
