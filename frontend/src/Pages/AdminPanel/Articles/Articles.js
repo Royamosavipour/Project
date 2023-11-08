@@ -6,13 +6,17 @@ export default function Articles() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
+    getAllArticles();
+  }, []);
+
+  function getAllArticles() {
     fetch(`http://localhost:4000/v1/articles`)
       .then((res) => res.json())
       .then((allArticles) => {
         console.log(allArticles);
         setArticles(allArticles);
       });
-  }, []);
+  }
 
   const removeArticle = (artclID) => {
     const localStorageData = JSON.parse(localStorage.getItem("user"));
@@ -21,12 +25,20 @@ export default function Articles() {
       icon: "warning",
       buttons: ["NO", "Yes"],
     }).then((result) => {
-      console.log(result)
+      console.log(result);
       if (result) {
         fetch(`http://localhost:4000/v1/articles/${artclID}`, {
           method: "DELETE",
           headers: { Authorization: `Bearer ${localStorageData.token}` },
-        }).then((res) => res.json());
+        }).then((res) => {
+          if (res.ok) {
+            swal({
+              title: "مقاله مورد نظر حذف گردید",
+              icon: "success",
+              buttons: "ممنونم",
+            }).then(() => getAllArticles());
+          }
+        });
       }
     });
   };
