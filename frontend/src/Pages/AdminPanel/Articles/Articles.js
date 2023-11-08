@@ -1,7 +1,52 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import DataTable from "../../../Components/AdminPanel/DataTable/DataTable";
 
 export default function Articles() {
+  const [articles, setArticles] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:4000/v1/articles`)
+      .then((res) => res.json())
+      .then((allArticles) => {
+        console.log(allArticles);
+        setArticles(allArticles);
+      });
+  }, []);
+
   return (
-    <div>Articles</div>
-  )
+    <>
+      <DataTable title="مقالات" />
+      <table class="table">
+          <thead>
+            <tr>
+              <th>شناسه</th>
+              <th> مقاله </th>
+              <th>ویرایش</th>
+              <th>حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+            {articles.map((article, index) => (
+              <tr>
+                <td>{index + 1} </td>
+                <td>{article.title} </td>
+                <td>{article.email} </td>
+                <td>
+                  <button type="button" class="btn btn-primary edit-btn">
+                    ویرایش
+                  </button>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-danger delete-btn"
+                  >
+                    حذف
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+    </>
+  );
 }

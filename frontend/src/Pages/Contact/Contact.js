@@ -13,7 +13,6 @@ import {
   emailValidator,
 } from "../../Validaitors/rules";
 import { Navigate, useNavigate } from "react-router-dom";
-
 import "./Contact.css";
 
 export default function Contact() {
