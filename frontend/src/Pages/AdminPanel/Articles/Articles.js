@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "../../../Components/AdminPanel/DataTable/DataTable";
 import swal from "sweetalert";
-import Input from '../../../Components/Form/Input'
-import { minValidator } from '../../../Validaitors/rules'
-import {useForm} from '../../../Hooks/useForm'
+import Input from "../../../Components/Form/Input";
+import { minValidator } from "../../../Validaitors/rules";
+import { useForm } from "../../../Hooks/useForm";
+import Editor from "../../../Components/Form/Editor";
 
 export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [categories, setCategories] = useState([]);
   const [articleCategory, setArticleCategory] = useState("-1");
   const [articleCover, setArticleCover] = useState({});
+  const [articleBody, setArticleBody] = useState("");
 
   const [formState, onInputHandler] = useForm(
     {
@@ -28,7 +30,6 @@ export default function Articles() {
     },
     false
   );
-
 
   useEffect(() => {
     getAllArticles();
@@ -158,6 +159,14 @@ export default function Articles() {
                   ))}
                 </select>
                 <span class="error-message text-danger"></span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="name input">
+                <label class="input-title" style={{ display: "block" }}>
+                  محتوای مقاله
+                </label>
+                <Editor value={articleBody} setValue={setArticleBody} />
               </div>
             </div>
             <div class="col-12">
