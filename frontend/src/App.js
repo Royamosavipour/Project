@@ -41,6 +41,7 @@ export default function App() {
 
   return (
     <AuthContext.Provider
+      
       value={{
         isLoggedIn, // isloggedIn:isloggedIn
         token,
