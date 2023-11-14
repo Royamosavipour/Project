@@ -75,6 +75,34 @@ export default function Articles() {
     });
   };
 
+  const createArticle = (e) => {
+    e.preventDefault();
+    const localStorageData = JSON.parse(localStorage.getItem("user"));
+    let formData = new FormData();
+    formData.append("title", formState.inputs.title.value);
+    formData.append("shortName", formState.inputs.shortName.value);
+    formData.append("description", formState.inputs.description.value);
+    formData.append("categoryID", articleCategory);
+    formData.append("cover", articleCover);
+    formData.append("body", articleBody);
+
+    fetch(`http://localhost:4000/v1/articles`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorageData.token}`,
+      },
+      body:formData
+    }).then(res => {
+      if (res.ok) {
+        swal({
+          title: 'مقاله جدید با موفقیت ثبت گردید',
+          icon: 'success',
+          buttons:'اوکی'
+        }).then(()=>getAllArticles())
+      }
+    })
+  };
+
   return (
     <>
       <div class="container-fluid" id="home-content">
@@ -172,7 +200,7 @@ export default function Articles() {
             <div class="col-12">
               <div class="bottom-form">
                 <div class="submit-btn">
-                  <input type="submit" value="افزودن" />
+                  <input type="submit" value="افزودن" onClick={createArticle} />
                 </div>
               </div>
             </div>
