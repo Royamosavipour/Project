@@ -15,6 +15,7 @@ import Menus from "./Pages/AdminPanel/Menus/Menus";
 import AdminArticles from "./Pages/AdminPanel/Articles/Articles";
 import AdminCategory from "./Components/AdminPanel/Category/Category";
 import AdminContact from "./Pages/AdminPanel/Contact/Contact";
+import AdminSessions from "./Pages/AdminPanel/Sessions/Sessions";
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -37,6 +38,7 @@ const routes = [
       { path: "articles", element: <AdminArticles /> },
       { path: "category", element: <AdminCategory /> },
       { path: "contacts", element: <AdminContact /> },
+      { path: "sessions", element: <AdminSessions /> },
     ],
   },
 ];

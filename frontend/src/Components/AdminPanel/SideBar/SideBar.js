@@ -3,35 +3,24 @@ import AuthContext from "../../../Context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
-
-import './Sidebar.css'
-
-
-
-
+import "./Sidebar.css";
 
 export default function Sidebar() {
-const authContext=useContext(AuthContext)
-const navigate=useNavigate()
+  const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const logOutAdmin=(event)=>{
-    event.preventDefault()
+  const logOutAdmin = (event) => {
+    event.preventDefault();
 
     swal({
-      title:'خروج با موفقیت انجام گردید',
-      icon:'success',
-      buttons:'اوکی',
-      
-    }).then(()=>{
-      authContext.logout()
-      navigate('/')
-    })
-  
-  }
-
-
-
-
+      title: "خروج با موفقیت انجام گردید",
+      icon: "success",
+      buttons: "اوکی",
+    }).then(() => {
+      authContext.logout();
+      navigate("/");
+    });
+  };
 
   return (
     <div id="sidebar" class="col-2">
@@ -49,13 +38,18 @@ const navigate=useNavigate()
       <div class="sidebar-menu">
         <ul>
           <li class="active-menu">
-            <Link to={'/p-admin'}>
+            <Link to={"/p-admin"}>
               <span>صفحه اصلی</span>
             </Link>
           </li>
           <li>
             <Link to="courses">
               <span>دوره ها</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="sessions">
+              <span> جلسات</span>
             </Link>
           </li>
           <li>
@@ -79,18 +73,18 @@ const navigate=useNavigate()
             </a>
           </li>
           <li>
-            <Link to={'category'}>
+            <Link to={"category"}>
               <span>دسته‌بندی‌ها</span>
             </Link>
           </li>
           <li>
-            <Link to={'contacts'}>
+            <Link to={"contacts"}>
               <span> پیغام ها</span>
             </Link>
           </li>
           <li>
             <a href="#">
-              <span onClick={logOutAdmin}> خروج   </span>
+              <span onClick={logOutAdmin}> خروج </span>
             </a>
           </li>
         </ul>
