@@ -3,7 +3,7 @@ import Input from "../../../Components/Form/Input";
 import { useForm } from "../../../Hooks/useForm";
 import { minValidator } from "../../../Validaitors/rules";
 import swal from "sweetalert";
-import DataTable from './../../../Components/AdminPanel/DataTable/DataTable'
+import DataTable from "./../../../Components/AdminPanel/DataTable/DataTable";
 
 export default function Sessions() {
   const [courses, setCourses] = useState([]);
@@ -146,6 +146,38 @@ export default function Sessions() {
           </form>
         </div>
       </div>
+          <DataTable title="جلسات" />
+          <table class="table">
+          <thead>
+            <tr>
+              <th>شناسه</th>
+              <th>عنوان</th>
+              <th>مدت زمان جلسه</th>
+              <th>دوره‌</th>
+              <th>حذف</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {setions.map((setion, index) => (
+              <tr>
+                <td>{index + 1} </td>
+                <td>{setion.title} </td>
+                <td>{setion.time} </td>
+                <td>{setion.course.name} </td>
+                
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-danger delete-btn"
+                  >
+                    حذف
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
     </>
   );
 }
