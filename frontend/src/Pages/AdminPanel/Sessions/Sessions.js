@@ -4,8 +4,9 @@ import { useForm } from "../../../Hooks/useForm";
 import { minValidator } from "../../../Validaitors/rules";
 
 export default function Sessions() {
-    const [courses, setCourses] = useState([]);
-    const [sessionCourse,setSessionCourse]=useState('-1')
+  const [courses, setCourses] = useState([]);
+  const [sessionCourse, setSessionCourse] = useState("-1");
+  const [sessionVideo, setSessionVideo] = useState({});
   const [formState, onInputHandler] = useForm(
     {
       title: {
@@ -48,6 +49,13 @@ export default function Sessions() {
                   validations={[minValidator(5)]}
                   placeholder="لطفا نام جلسه را وارد کنید..."
                 />
+                <span class="error-message text-danger"></span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="name input">
+                <label class="input-title">فایل جلسه</label>
+                <input type="file" onChange={e=>setSessionCourse(e.target.value)} />
                 <span class="error-message text-danger"></span>
               </div>
             </div>
