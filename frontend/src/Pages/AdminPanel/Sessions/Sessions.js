@@ -1,25 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../../Components/Form/Input";
 import { useForm } from "../../../Hooks/useForm";
 import { minValidator } from "../../../Validaitors/rules";
 
-
 export default function Sessions() {
-    const [formState, onInputHandler] = useForm({
-        title: {
-            value: '',
-            isValid:false
-        },
-        time: {
-            value: '',
-            isValid:false
-        }
-},false)
+    const [courses, setCourses] = useState([]);
+    const [sessionCourse,setSessionCourse]=useState('-1')
+  const [formState, onInputHandler] = useForm(
+    {
+      title: {
+        value: "",
+        isValid: false,
+      },
+      time: {
+        value: "",
+        isValid: false,
+      },
+    },
+    false
+  );
 
-
-
-
-
+  useEffect(() => {
+    fetch(`http://localhost:4000/v1/courses`)
+      .then((res) => res.json())
+      .then((allcourses) => {
+        console.log(allcourses);
+        setCourses(allcourses);
+      });
+  }, []);
 
   return (
     <>
