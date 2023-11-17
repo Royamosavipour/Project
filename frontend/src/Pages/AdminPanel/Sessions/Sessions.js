@@ -70,6 +70,30 @@ export default function Sessions() {
       });
   }
 
+  function removeSetion(setionID) {
+    const localStorageData = JSON.parse(localStorage.getItem("user"));
+
+    swal({
+      title: "آیا از حذف جلسه اطمینان دارید",
+      icon: "warning",
+      buttons: ["NO", "Yes"],
+    }).then((res) => {
+      if (res) {
+        fetch(`http://localhost:4000/v1/courses/sessions/${setionID}`, {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${localStorageData.token}` },
+        }).then((res) => {
+          if (res.ok) {
+            swal({
+              title: "حذف با موفقیت انجام شد",
+              icon: "success",
+              buttons: "OK",
+            }).then(() => getAllSesstion());
+          }
+        });
+      }
+    });
+  }
   return (
     <>
       <div class="container-fluid" id="home-content">
@@ -146,38 +170,40 @@ export default function Sessions() {
           </form>
         </div>
       </div>
-          <DataTable title="جلسات" />
-          <table class="table">
-          <thead>
+      <DataTable title="جلسات" />
+      <table class="table">
+        <thead>
+          <tr>
+            <th>شناسه</th>
+            <th>عنوان</th>
+            <th>مدت زمان جلسه</th>
+            <th>دوره‌</th>
+            <th>حذف</th>
+          </tr>
+        </thead>
+        <tbody>
+          {setions.map((setion, index) => (
             <tr>
-              <th>شناسه</th>
-              <th>عنوان</th>
-              <th>مدت زمان جلسه</th>
-              <th>دوره‌</th>
-              <th>حذف</th>
+              <td>{index + 1} </td>
+              <td>{setion.title} </td>
+              <td>{setion.time} </td>
+              <td>{setion.course.name} </td>
 
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-danger delete-btn"
+                  onClick={() => {
+                    removeSetion(setion._id);
+                  }}
+                >
+                  حذف
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {setions.map((setion, index) => (
-              <tr>
-                <td>{index + 1} </td>
-                <td>{setion.title} </td>
-                <td>{setion.time} </td>
-                <td>{setion.course.name} </td>
-                
-                <td>
-                  <button
-                    type="button"
-                    class="btn btn-danger delete-btn"
-                  >
-                    حذف
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }
