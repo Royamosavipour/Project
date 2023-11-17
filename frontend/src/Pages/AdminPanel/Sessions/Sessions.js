@@ -44,7 +44,7 @@ export default function Sessions() {
     formData.append("title", formState.inputs.title.value);
     formData.append("time", formState.inputs.time.value);
     formData.append("video", sessionVideo);
-    formData.append("free", sessionFree);
+    formData.append("free", 0);
 
     fetch(`http://localhost:4000/v1/courses/${sessionCourse}/sessions`, {
       method: "POST",
