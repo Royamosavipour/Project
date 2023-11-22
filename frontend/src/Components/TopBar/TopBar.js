@@ -3,8 +3,19 @@ import React, { useEffect, useState,memo } from "react";
 import "./TopBar.css";
 import { Link } from "react-router-dom";
 
-export default memo(function TopBar({info}) {
+export default memo(function TopBar() {
   const [allTopbarLinks, setAllTopbarLinks] = useState([]);
+  const [indexInfo, setIndexInfo] = useState({});
+
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/v1/infos/index`)
+      .then((res) => res.json())
+      .then((allInfo) => {
+        console.log(allInfo);
+        setIndexInfo(allInfo)
+      });
+  }, []);
 
   useEffect(() => {
     fetch(`http://localhost:4000/v1/menus/topbar`)
@@ -38,13 +49,13 @@ export default memo(function TopBar({info}) {
             <div className="top-bar__left">
               <div className="top-bar__email">
                 <a href="#" className="top-bar__email-text top-bar__link">
-                  {info.email}
+                  {indexInfo.email}
                 </a>
                 <i className="fas fa-envelope top-bar__email-icon"></i>
               </div>
               <div className="top-bar__phone">
                 <a href="#" className="top-bar__phone-text top-bar__link">
-                  {info.phone}
+                  {indexInfo.phone}
                 </a>
                 <i className="fas fa-phone top-bar__phone-icon"></i>
               </div>
