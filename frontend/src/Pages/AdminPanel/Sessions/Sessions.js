@@ -59,7 +59,8 @@ export default function Sessions() {
           buttons: "OK",
         }).then(() => console.log("get all sesstion"));
       }
-    });
+      return res.text()
+    }).then(res=>{console.log(res)})
   };
 
   function getAllSesstion() {
@@ -122,7 +123,7 @@ export default function Sessions() {
                 <label class="input-title">فایل جلسه</label>
                 <input
                   type="file"
-                  onChange={(e) => setSessionCourse(e.target.value)}
+                  onChange={(e) => setSessionVideo(e.target.files[0])}
                 />
                 <span class="error-message text-danger"></span>
               </div>
