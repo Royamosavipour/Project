@@ -9,8 +9,8 @@ export default function Sessions() {
   const [courses, setCourses] = useState([]);
   const [sessionCourse, setSessionCourse] = useState("-1");
   const [sessionVideo, setSessionVideo] = useState({});
-  const [sessionFree, setSessionFree] = useState("0");
   const [setions, setSetions] = useState([]);
+  const [isSessionFree, setIsSessionFree] = useState("1");
 
   const [formState, onInputHandler] = useForm(
     {
@@ -44,13 +44,14 @@ export default function Sessions() {
     formData.append("title", formState.inputs.title.value);
     formData.append("time", formState.inputs.time.value);
     formData.append("video", sessionVideo);
-    formData.append("free", 0);
+    formData.append("free", isSessionFree);
 
     fetch(`http://localhost:4000/v1/courses/${sessionCourse}/sessions`, {
       method: "POST",
       headers: { Authorization: `Bearer ${localStorageData.token}` },
       body: formData,
     }).then((res) => {
+      console.log(res);
       if (res.ok) {
         swal({
           title: "درخواست دوره ثیت گردید",
@@ -157,6 +158,38 @@ export default function Sessions() {
                   ))}
                 </select>
                 <span class="error-message text-danger"></span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="bottom-form">
+                <div class="condition">
+                  <label class="input-title">وضعیت دوره</label>
+                  <div class="radios">
+                    <div class="available">
+                      <label>
+                        <span>رایگان </span>
+                        <input
+                          type="radio"
+                          value="1"
+                          name="condition"
+                          onInput={(e) => setIsSessionFree(e.target.value)}
+                        />
+                      </label>
+                    </div>
+                    <div class="unavailable">
+                      <label>
+                        <span>غیررایگان  </span>
+                        <input
+                          type="radio"
+                          value="0"
+                          name="condition"
+                          onInput={(e) => setIsSessionFree(e.target.value)}
+                          checked
+                        />
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
