@@ -14,13 +14,14 @@ export default function Header() {
       .then((res) => res.json())
       .then((allInfo) => {
         console.log(allInfo);
+        setIndexInfo(allInfo)
       });
   }, []);
   return (
     <header className="header">
-      <TopBar />
+      <TopBar info={indexInfo} />
       <Navbar />
-      <Landing />
+      <Landing info={indexInfo} />
     </header>
   );
 }
