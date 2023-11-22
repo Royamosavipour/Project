@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Input from "../../../Components/Form/Input";
 import { useForm } from "../../../Hooks/useForm";
+import Input from "./../../../Components/Form/Input";
+import DataTable from "../../../Components/AdminPanel/DataTable/DataTable";
 import { minValidator } from "../../../Validaitors/rules";
 import swal from "sweetalert";
-import DataTable from "./../../../Components/AdminPanel/DataTable/DataTable";
 
 export default function Sessions() {
   const [courses, setCourses] = useState([]);
   const [sessionCourse, setSessionCourse] = useState("-1");
   const [sessionVideo, setSessionVideo] = useState({});
-  const [setions, setSetions] = useState([]);
+  const [sessions, setSessions] = useState([]);
   const [isSessionFree, setIsSessionFree] = useState("1");
 
   const [formState, onInputHandler] = useForm(
@@ -27,19 +27,27 @@ export default function Sessions() {
   );
 
   useEffect(() => {
-    getAllSesstion();
+    getAllSessions();
 
-    fetch(`http://localhost:4000/v1/courses`)
+    fetch("http://localhost:4000/v1/courses")
       .then((res) => res.json())
-      .then((allcourses) => {
-        console.log(allcourses);
-        setCourses(allcourses);
+      .then((allCourses) => {
+        console.log(allCourses);
+        setCourses(allCourses);
       });
   }, []);
 
-  const createSession = (e) => {
-    e.preventDefault();
+  function getAllSessions() {
+    fetch("http://localhost:4000/v1/courses/sessions")
+      .then((res) => res.json())
+      .then((allSessions) => setSessions(allSessions));
+  }
+
+  const createSession = (event) => {
+    event.preventDefault();
+
     const localStorageData = JSON.parse(localStorage.getItem("user"));
+
     let formData = new FormData();
     formData.append("title", formState.inputs.title.value);
     formData.append("time", formState.inputs.time.value);
@@ -48,54 +56,52 @@ export default function Sessions() {
 
     fetch(`http://localhost:4000/v1/courses/${sessionCourse}/sessions`, {
       method: "POST",
-      headers: { Authorization: `Bearer ${localStorageData.token}` },
+      headers: {
+        Authorization: `Bearer ${localStorageData.token}`,
+      },
       body: formData,
     }).then((res) => {
-      console.log(res);
       if (res.ok) {
         swal({
-          title: "درخواست دوره ثیت گردید",
+          title: "جلسه مورد نظر با موفقیت اضافه شد",
           icon: "success",
-          buttons: "OK",
-        }).then(() => console.log("get all sesstion"));
+          buttons: "اوکی",
+        }).then(() => {
+          getAllSessions();
+        });
       }
-      return res.text()
-    }).then(res=>{console.log(res)})
+    });
   };
 
-  function getAllSesstion() {
-    fetch(`http://localhost:4000/v1/courses/sessions`)
-      .then((res) => res.json())
-      .then((allsetions) => {
-        console.log(allsetions);
-        setSetions(allsetions);
-      });
-  }
-
-  function removeSetion(setionID) {
+  const removeSession = (sessionID) => {
     const localStorageData = JSON.parse(localStorage.getItem("user"));
 
     swal({
-      title: "آیا از حذف جلسه اطمینان دارید",
+      title: "آیا از حذف جلسه اطمینان داری؟",
       icon: "warning",
-      buttons: ["NO", "Yes"],
-    }).then((res) => {
-      if (res) {
-        fetch(`http://localhost:4000/v1/courses/sessions/${setionID}`, {
+      buttons: ["نه", "آره"],
+    }).then((result) => {
+      if (result) {
+        fetch(`http://localhost:4000/v1/courses/sessions/${sessionID}`, {
           method: "DELETE",
-          headers: { Authorization: `Bearer ${localStorageData.token}` },
+          headers: {
+            Authorization: `Bearer ${localStorageData.token}`,
+          },
         }).then((res) => {
           if (res.ok) {
             swal({
-              title: "حذف با موفقیت انجام شد",
+              title: "جلسه مورد نظر با موفقیت حذف شد",
               icon: "success",
-              buttons: "OK",
-            }).then(() => getAllSesstion());
+              buttons: "اوکی",
+            }).then((result) => {
+              getAllSessions();
+            });
           }
         });
       }
     });
-  }
+  };
+
   return (
     <>
       <div class="container-fluid" id="home-content">
@@ -114,16 +120,6 @@ export default function Sessions() {
                   id="title"
                   validations={[minValidator(5)]}
                   placeholder="لطفا نام جلسه را وارد کنید..."
-                />
-                <span class="error-message text-danger"></span>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title">فایل جلسه</label>
-                <input
-                  type="file"
-                  onChange={(e) => setSessionVideo(e.target.files[0])}
                 />
                 <span class="error-message text-danger"></span>
               </div>
@@ -161,6 +157,16 @@ export default function Sessions() {
                 <span class="error-message text-danger"></span>
               </div>
             </div>
+            <div class="col-6">
+              <div class="name input">
+                <label class="input-title">عنوان جلسه</label>
+                <input
+                  type="file"
+                  onChange={(event) => setSessionVideo(event.target.files[0])}
+                />
+                <span class="error-message text-danger"></span>
+              </div>
+            </div>
             <div class="col-12">
               <div class="bottom-form">
                 <div class="condition">
@@ -179,7 +185,7 @@ export default function Sessions() {
                     </div>
                     <div class="unavailable">
                       <label>
-                        <span>غیررایگان  </span>
+                        <span>غیررایگان </span>
                         <input
                           type="radio"
                           value="0"
@@ -193,7 +199,6 @@ export default function Sessions() {
                 </div>
               </div>
             </div>
-
             <div class="col-12">
               <div class="bottom-form">
                 <div class="submit-btn">
@@ -204,40 +209,39 @@ export default function Sessions() {
           </form>
         </div>
       </div>
-      <DataTable title="جلسات" />
-      <table class="table">
-        <thead>
-          <tr>
-            <th>شناسه</th>
-            <th>عنوان</th>
-            <th>مدت زمان جلسه</th>
-            <th>دوره‌</th>
-            <th>حذف</th>
-          </tr>
-        </thead>
-        <tbody>
-          {setions.map((setion, index) => (
-            <tr>
-              <td>{index + 1} </td>
-              <td>{setion.title} </td>
-              <td>{setion.time} </td>
-              <td>{setion.course.name} </td>
 
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-danger delete-btn"
-                  onClick={() => {
-                    removeSetion(setion._id);
-                  }}
-                >
-                  حذف
-                </button>
-              </td>
+      <DataTable title="جلسات">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>شناسه</th>
+              <th>عنوان</th>
+              <th>تایم</th>
+              <th>دوره</th>
+              <th>حذف</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sessions.map((session, index) => (
+              <tr key={session._id}>
+                <td>{index + 1}</td>
+                <td>{session.title}</td>
+                <td>{session.time}</td>
+                <td>{session.course.name}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-danger delete-btn"
+                    onClick={() => removeSession(session._id)}
+                  >
+                    حذف
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </DataTable>
     </>
   );
 }

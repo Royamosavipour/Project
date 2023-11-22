@@ -6,7 +6,7 @@ import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import CourseDetaileBox from "../../Components/CourseDetale/CourseDetaileBox";
 import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea";
 import Accordion from "react-bootstrap/Accordion";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import swal from "sweetalert";
 
 import "./CourseInfo.css";
@@ -21,7 +21,6 @@ export default function CourseInfo() {
   const [courseTeacher, setCourseTeacher] = useState({});
   const [courseCategory, setCourseCategory] = useState({});
 
-
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {})
       .then((res) => res.json())
@@ -33,8 +32,7 @@ export default function CourseInfo() {
         setUpdatedAt(courseInfo.updatedAt);
         setCreatedAt(courseInfo.createdAt);
         setCourseTeacher(courseInfo.creator);
-        setCourseCategory(courseInfo.categoryID)
-        
+        setCourseCategory(courseInfo.categoryID);
       });
   }, []);
 
@@ -60,7 +58,6 @@ export default function CourseInfo() {
         return res.text();
       })
       .then((data) => {
-        console.log(data);
         swal({
           title: "کامنت با موفقیت ثبت گردید",
           icon: "success",
@@ -254,24 +251,51 @@ export default function CourseInfo() {
                           <Accordion.Header>معرفی دوره</Accordion.Header>
 
                           {sessions.map((session, index) => (
-                            <Accordion.Body className="introduction__accordion-body">
-                              <div className="introduction__accordion-right">
-                                <span className="introduction__accordion-count">
-                                  {index + 1}
-                                </span>
-                                <i className="fab fa-youtube introduction__accordion-icon"></i>
-                                <a
-                                  href="#"
-                                  className="introduction__accordion-link"
-                                >
-                                  {session.title}
-                                </a>
-                              </div>
-                              <div className="introduction__accordion-left">
-                                <span className="introduction__accordion-time">
-                                  {session.time}
-                                </span>
-                              </div>
+                            <Accordion.Body
+                              key={session._id}
+                              className="introduction__accordion-body"
+                            >
+                              {session.free === 1 ||
+                              coursDetails.isUserRegisteredToThisCourse ? (
+                                <>
+                                  <div className="introduction__accordion-right">
+                                    <span className="introduction__accordion-count">
+                                      {index + 1}
+                                    </span>
+                                    <i className="fab fa-youtube introduction__accordion-icon"></i>
+                                    <Link
+                                      to='/'
+                                      className="introduction__accordion-link"
+                                    >
+                                      {session.title}
+                                    </Link>
+                                  </div>
+                                  <div className="introduction__accordion-left">
+                                    <span className="introduction__accordion-time">
+                                      {session.time}
+                                    </span>
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  <div className="introduction__accordion-right">
+                                    <span className="introduction__accordion-count">
+                                      {index + 1}
+                                    </span>
+                                    <i className="fab fa-youtube introduction__accordion-icon"></i>
+                                    <span
+                                      className="introduction__accordion-link"
+                                    >
+                                      {session.title}
+                                    </span>
+                                  </div>
+                                  <div className="introduction__accordion-left">
+                                    <span className="introduction__accordion-time">
+                                      {session.time}
+                                    </span>
+                                  </div>
+                                </>
+                              )}
                             </Accordion.Body>
                           ))}
                         </Accordion.Item>

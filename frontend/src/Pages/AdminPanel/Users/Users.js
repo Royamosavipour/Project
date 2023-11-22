@@ -266,7 +266,7 @@ export default function Users() {
           </thead>
           <tbody>
             {users.map((user, index) => (
-              <tr className="show">
+              <tr>
                 <td>{index + 1} </td>
                 <td>{user.name} </td>
                 <td>{user.email} </td>
