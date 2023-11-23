@@ -1,32 +1,34 @@
-import React, { useEffect, useState } from "react";
-import TopBar from "../../Components/TopBar/TopBar";
-import Navbar from "../../Components/Navbar/Navbar";
+import React, { useState, useEffect } from "react";
+import Topbar from "../../Components/TopBar/TopBar";
 import Footer from "../../Components/Footer/Footer";
+import Navbar from "../../Components/Navbar/Navbar";
 import { Link, useParams } from "react-router-dom";
 
 import './Session.css'
 
 export default function Session() {
   const { courseName, sessionID } = useParams();
-  const [sessions, setSessions] = useState([]);
-  const [session, setSession] = useState({});
+  const [session, setSession] = useState({})
+  const [sessions, setSessions] = useState([])
 
   useEffect(() => {
-    const localStorageData = JSON.parse(localStorage.getItem("user"));
     fetch(`http://localhost:4000/v1/courses/${courseName}/${sessionID}`, {
-      headers: { Authorization: `${localStorageData.token}` },
-    })
-      .then((res) => res.json())
-      .then((alldata) => {
-        console.log(alldata);
-        setSession(alldata.session)
-        setSessions(alldata.sessions)
-      });
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setSession(data.session)
+        setSessions(data.sessions)
+      })
   }, []);
 
   return (
     <>
-      <TopBar />
+      <Topbar />
       <Navbar />
 
       <section class="content">
@@ -41,23 +43,28 @@ export default function Session() {
             <div class="sidebar-topics">
               <div class="sidebar-topics__item">
                 <ul class="sidebar-topics__list">
-                  {sessions.map((session) => (
-                    <Link to={`/${courseName}/${session._id}`}>
-                      <li class="sidebar-topics__list-item">
-                        <div class="sidebar-topics__list-right">
-                          <i class="sidebar-topics__list-item-icon fa fa-play-circle"></i>
-                          <a class="sidebar-topics__list-item-link" href="#">
-                            {session.title}
-                          </a>
-                        </div>
-                        <div class="sidebar-topics__list-left">
-                          <span class="sidebar-topics__list-item-time">
-                            {session.time}
-                          </span>
-                        </div>
-                      </li>
-                    </Link>
-                  ))}
+                  {
+                    sessions.map(session => (
+                      <Link to={`/${courseName}/${session._id}`}>
+                        <li class="sidebar-topics__list-item">
+                    <div class="sidebar-topics__list-right">
+                      <i class="sidebar-topics__list-item-icon fa fa-play-circle"></i>
+                      <a class="sidebar-topics__list-item-link" href="#">
+                        {
+                          session.title
+                        }
+                      </a>
+                    </div>
+                    <div class="sidebar-topics__list-left">
+                      <span class="sidebar-topics__list-item-time">
+                        {session.time}
+                      </span>
+                    </div>
+                  </li>
+                      </Link>
+                    ))
+                  }
+                  
                 </ul>
               </div>
             </div>
@@ -70,10 +77,7 @@ export default function Session() {
                 <a class="episode-header__right-back-link" href="#">
                   <i class="episode-header__right-back-icon fa fa-angle-right"></i>
                   <div class="episode-header__right-home">
-                    <Link
-                      class="episode-header__right-home-link"
-                      to={`/course-info/${courseName}`}
-                    >
+                    <Link class="episode-header__right-home-link" to={`/course-info/${courseName}`}>
                       به دوره خانه بروید
                     </Link>
                     <i class="episode-header__right-home-icon fa fa-home"></i>
