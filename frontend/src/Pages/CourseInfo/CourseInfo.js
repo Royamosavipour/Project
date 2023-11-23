@@ -292,7 +292,8 @@ export default function CourseInfo() {
                                   <div className="introduction__accordion-left">
                                     <span className="introduction__accordion-time">
                                       {session.time}
-                                    </span>
+                                      </span>
+                                      <i className="fa fa-lock"></i>
                                   </div>
                                 </>
                               )}
