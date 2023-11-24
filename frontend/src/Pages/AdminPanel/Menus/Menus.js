@@ -1,19 +1,118 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "../../../Components/AdminPanel/DataTable/DataTable";
+import swal from "sweetalert";
+import Input from "../../../Components/Form/Input";
+import { useForm } from "../../../Hooks/useForm";
+import {minValidator} from './../../../Validaitors/rules'
 
 export default function Menus() {
   const [menus, setMenus] = useState([]);
 
   useEffect(() => {
+    getAllMenus();
+  }, []);
+
+  function getAllMenus() {
     fetch(`http://localhost:4000/v1/menus/all`)
       .then((res) => res.json())
       .then((allMenus) => {
         console.log(allMenus);
         setMenus(allMenus);
       });
-  }, []);
+  }
+
+  const removeMenu = (menuID) => {
+    const localStorageData = JSON.parse(localStorage.getItem("user"));
+    swal({
+      title: "آیا از حذف مطمینی",
+      icon: "warning",
+      buttons: ["No", "Yes"],
+    }).then((result) => {
+      if (result) {
+        fetch(`http://localhost:4000/v1/menus/${menuID}`, {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token}` },
+        }).then((res) => {
+          if (res.ok) {
+            swal({
+              title: "حذف با موفقیت انجام گردید",
+              icon: "seccess",
+              buttons: "OK",
+            });
+          }
+        });
+      }
+    });
+  };
+
+
+
   return (
     <>
+      <div class="container">
+        <div class="home-title">
+          <span>افزودن کاربر جدید</span>
+        </div>
+        <form class="form">
+          <div class="col-6">
+            <div class="name input">
+              <label class="input-title">عنوان</label>
+              <Input
+                element="input"
+                onInputHandler={onInputHandler}
+                id="title"
+                type="text"
+                isValid="false"
+                placeholder="لطفا عنوان را وارد کنید..."
+                validations={[minValidator(5)]}
+              />
+              <span class="error-message text-danger"></span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="name input">
+              <label class="input-title">عنوان</label>
+              <Input
+                element="input"
+                onInputHandler={onInputHandler}
+                id="href"
+                type="text"
+                isValid="false"
+                validations={[minValidator(5)]}
+                placeholder="لطفا عنوان را وارد کنید..."
+              />
+              <span class="error-message text-danger"></span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="name input">
+              <label class="input-title">عنوان</label>
+              <select
+                class="select"
+                onChange={(event) => setMenuParent(event.target.value)}
+              >
+                <option value="-1">منوی اصلی را انتخاب کنید</option>
+                {menus.map((menu) => (
+                  <>
+                    {!Boolean(menu.parent) && (
+                      <option value={menu._id}>{menu.title}</option>
+                    )}
+                  </>
+                ))}
+              </select>
+              <span class="error-message text-danger"></span>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="bottom-form">
+              <div class="submit-btn">
+                <input type="submit" value="افزودن" onClick={createMenu} />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
       <DataTable title={"منوها"}>
         <table class="table">
           <thead>
@@ -32,14 +131,24 @@ export default function Menus() {
                 <td>{index + 1} </td>
                 <td>{menu.title} </td>
                 <td>{menu.href} </td>
-                <td>{menu.parent ? menu.parent.title : "منوی اصلی"} </td>
+                <td>
+                  {menu.parent ? (
+                    menu.parent.title
+                  ) : (
+                    <i className="fa fa-check"></i>
+                  )}{" "}
+                </td>
                 <td>
                   <button type="button" class="btn btn-primary edit-btn">
                     ویرایش
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger delete-btn">
+                  <button
+                    type="button"
+                    class="btn btn-danger delete-btn"
+                    onClick={() => removeMenu(menu._id)}
+                  >
                     حذف
                   </button>
                 </td>
