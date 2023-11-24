@@ -749,3 +749,15 @@ text-align: center;
   height: 200px;
 }
 
+
+.no-answer-contact{
+  color: white;
+  background-color: red !important;
+}
+
+
+.answer-contact{
+  color: white;
+  background-color: var(--primary-color) !important;
+}
+

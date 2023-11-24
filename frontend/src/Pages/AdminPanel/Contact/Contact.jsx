@@ -45,6 +45,7 @@ export default function Contact() {
         body: JSON.stringify(answerInfo),
       }).then((res) => {
         if (res.ok) {
+          getallCantacts()
           return res.json();
         }
       });
@@ -95,7 +96,7 @@ export default function Contact() {
           <tbody>
             {allContacts.map((contact, index) => (
               <tr>
-                <td>{index + 1} </td>
+                <td className={contact.answer===1?'answer-contact':'no-answer-contact'}>{index + 1} </td>
                 <td>{contact.name} </td>
                 <td>{contact.email} </td>
                 <td>{contact.phone} </td>
