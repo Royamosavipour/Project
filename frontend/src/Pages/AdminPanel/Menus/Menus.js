@@ -3,10 +3,18 @@ import DataTable from "../../../Components/AdminPanel/DataTable/DataTable";
 import swal from "sweetalert";
 import Input from "../../../Components/Form/Input";
 import { useForm } from "../../../Hooks/useForm";
-import {minValidator} from './../../../Validaitors/rules'
+import { minValidator } from "./../../../Validaitors/rules";
 
 export default function Menus() {
   const [menus, setMenus] = useState([]);
+  const [menuParent, setMenuParent] = useState("-1");
+  const [formState, onInputHandler] = useForm(
+    {
+      title: { value: "", isValid: false },
+      href: { value: "", isValid: false },
+    },
+    false
+  );
 
   useEffect(() => {
     getAllMenus();
@@ -31,7 +39,11 @@ export default function Menus() {
       if (result) {
         fetch(`http://localhost:4000/v1/menus/${menuID}`, {
           method: "DELETE",
-          headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token}` },
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("user")).token
+            }`,
+          },
         }).then((res) => {
           if (res.ok) {
             swal({
@@ -44,8 +56,10 @@ export default function Menus() {
       }
     });
   };
-
-
+  const createMenu = (e) => {
+    e.preventDefault();
+    console.log("first");
+  };
 
   return (
     <>
