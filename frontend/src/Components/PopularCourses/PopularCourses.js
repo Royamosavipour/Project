@@ -9,6 +9,8 @@ import "./PopularCourses.css";
 
 export default function PopularCourses() {
   const [courses, setCourses] = useState([]);
+
+  
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/popular`)
       .then((res) => res.json())
