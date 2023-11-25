@@ -58,7 +58,33 @@ export default function Menus() {
   };
   const createMenu = (e) => {
     e.preventDefault();
-    console.log("first");
+    const newMenuInfo = {
+      title: formState.inputs.title.value,
+      href: formState.inputs.title.value,
+      parent: menuParent === "-1" ? undefined : menuParent,
+    };
+    console.log(newMenuInfo);
+
+    fetch(`http://localhost:4000/v1/menus`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
+      body: JSON.stringify(newMenuInfo),
+    }).then(res => {
+      if (res.ok) {
+        swal({
+          title: 'منوی جدید ثبت گردید',
+          icon: 'success',
+          buttons:'OK',
+        }).then((result) => {
+          getAllMenus()
+        })
+      }
+    })
   };
 
   return (
