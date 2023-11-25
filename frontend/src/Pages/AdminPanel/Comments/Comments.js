@@ -18,7 +18,7 @@ export default function Comments() {
       });
   }
 
-  // Ban Comment
+  // Delete Comment
   const removecoment = (commentID) => {
     swal({
       title: "آیا از حذف مطمینید؟",
@@ -49,6 +49,42 @@ export default function Comments() {
     });
   };
 
+  // get show comment
+  const showCommentBody = (commentBody) => {
+    swal({
+      title: commentBody,
+      buttons: "اوکی",
+    });
+  };
+
+  // Ban Id comment user
+  const banComment = (comentID) => {
+    swal({
+      title: "آیا از بن کردن مطمینی",
+      buttons: ["No", "Yes"],
+      icon: "warning",
+    }).then((result) => {
+      if (result) {
+        fetch(`http://localhost:4000/v1/users/ban/${comentID}`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("user")).token
+            }`,
+          },
+        }).then((res) => {
+          if (res.ok) {
+            swal({
+              title: "بن با موفقیت انحام شد",
+              icon: "success",
+              buttons: "اوکی",
+            }).then(() => getAllComments());
+          }
+        });
+      }
+    });
+  };
+
   return (
     <>
       <DataTable title={"کامنتها"}>
@@ -72,7 +108,11 @@ export default function Comments() {
                 <td>{coment.creator.name} </td>
                 <td>{coment.course} </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button
+                    type="button"
+                    class="btn btn-primary edit-btn"
+                    onClick={() => showCommentBody(coment.body)}
+                  >
                     مشاهده
                   </button>
                 </td>
@@ -96,7 +136,11 @@ export default function Comments() {
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger delete-btn">
+                  <button
+                    type="button"
+                    class="btn btn-danger delete-btn"
+                    onClick={() => banComment(coment.creator._id)}
+                  >
                     بن
                   </button>
                 </td>
