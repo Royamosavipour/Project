@@ -12,7 +12,6 @@ export default memo(function TopBar() {
     fetch(`http://localhost:4000/v1/infos/index`)
       .then((res) => res.json())
       .then((allInfo) => {
-        console.log(allInfo);
         setIndexInfo(allInfo)
       });
   }, []);
