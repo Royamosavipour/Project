@@ -85,6 +85,37 @@ export default function Comments() {
     });
   };
 
+  // answer To comment
+  const answerToComment = (commentID) => {
+    swal({
+      title: "پاسخ مورد نظر را وارد نمایید",
+      content: "input",
+      buttons: "ثبت پاسخ",
+    }).then((answer) => {
+      if (answer) {
+        const commentAnswer = { body: answer };
+        fetch(`http://localhost:4000/v1/comments/answer/${commentID}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("user")).token
+            }`,
+          },
+          body: JSON.stringify(commentAnswer),
+        }).then((res) => {
+          if (res.ok) {
+            swal({
+              title: "ارسال با موفقیت انحام شد",
+              buttons: "اوکی",
+              icon: "success",
+            }).then(() => getAllComments());
+          }
+        });
+      }
+    });
+  };
+
   return (
     <>
       <DataTable title={"کامنتها"}>
@@ -104,7 +135,13 @@ export default function Comments() {
           <tbody>
             {comments.map((coment, index) => (
               <tr>
-                <td>{index + 1} </td>
+                <td
+                  className={
+                    coment.answer === 1 ? "answer-comment" : "no-answer-comment"
+                  }
+                >
+                  {index + 1}{" "}
+                </td>
                 <td>{coment.creator.name} </td>
                 <td>{coment.course} </td>
                 <td>
@@ -117,7 +154,11 @@ export default function Comments() {
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button
+                    type="button"
+                    class="btn btn-primary edit-btn"
+                    onClick={() => answerToComment(coment._id)}
+                  >
                     پاسخ
                   </button>
                 </td>
