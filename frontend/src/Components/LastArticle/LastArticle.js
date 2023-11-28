@@ -9,7 +9,7 @@ export default function LastArticle() {
     fetch(`http://localhost:4000/v1/articles`)
       .then((res) => res.json())
       .then((allArticles) => {
-        console.log(allArticles)
+        console.log(allArticles);
         setArticels(allArticles);
       });
   }, []);
@@ -22,8 +22,7 @@ export default function LastArticle() {
             title={"آخرین مقالات"}
             desc={"آخرین مقالات برنامه نویسی"}
             btnTitle={"مشاهده مقالات"}
-            bthref={'articels/1'}
-
+            bthref={"articels/1"}
           />
 
           <div className="articles__content">
@@ -31,9 +30,12 @@ export default function LastArticle() {
               {articels.length ? console.log("") : ""}
 
               {articels.length
-                ? articels.slice(0,3).map((item , id) => {
-                    return <ArticleBox key={id} {...item} />
-                  })
+                ? articels
+                    .filter((article) => article.publish === 1)
+                    .slice(0, 3)
+                    .map((item, id) => {
+                      return <ArticleBox key={item._id} {...item} />;
+                    })
                 : ""}
             </div>
           </div>

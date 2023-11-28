@@ -91,16 +91,16 @@ export default function Articles() {
       headers: {
         Authorization: `Bearer ${localStorageData.token}`,
       },
-      body:formData
-    }).then(res => {
+      body: formData,
+    }).then((res) => {
       if (res.ok) {
         swal({
-          title: 'مقاله جدید با موفقیت پیش نویس گردید',
-          icon: 'success',
-          buttons:'اوکی'
-        }).then(()=>getAllArticles())
+          title: "مقاله جدید با موفقیت پیش نویس گردید",
+          icon: "success",
+          buttons: "اوکی",
+        }).then(() => getAllArticles());
       }
-    })
+    });
   };
   const createArticle = (e) => {
     e.preventDefault();
@@ -118,16 +118,16 @@ export default function Articles() {
       headers: {
         Authorization: `Bearer ${localStorageData.token}`,
       },
-      body:formData
-    }).then(res => {
+      body: formData,
+    }).then((res) => {
       if (res.ok) {
         swal({
-          title: 'مقاله جدید با موفقیت ثبت گردید',
-          icon: 'success',
-          buttons:'اوکی'
-        }).then(()=>getAllArticles())
+          title: "مقاله جدید با موفقیت ثبت گردید",
+          icon: "success",
+          buttons: "اوکی",
+        }).then(() => getAllArticles());
       }
-    })
+    });
   };
 
   return (
@@ -227,8 +227,18 @@ export default function Articles() {
             <div class="col-12">
               <div class="bottom-form">
                 <div class="submit-btn">
-                  <input type="submit" value="افزودن" className="m-1" onClick={createArticle} />
-                  <input type="submit" value="افزودن" className="m-1" onClick={saveArticleAsDraft} />
+                  <input
+                    type="submit"
+                    value="افزودن"
+                    className="m-1"
+                    onClick={createArticle}
+                  />
+                  <input
+                    type="submit"
+                    value="افزودن"
+                    className="m-1"
+                    onClick={saveArticleAsDraft}
+                  />
                 </div>
               </div>
             </div>
@@ -243,6 +253,7 @@ export default function Articles() {
             <th> مقاله </th>
             <th> لینک </th>
             <th> نویسنده </th>
+            <th> وضغیت </th>
             <th>ویرایش</th>
             <th>حذف</th>
           </tr>
@@ -254,6 +265,8 @@ export default function Articles() {
               <td>{article.title} </td>
               <td>{article.shortName} </td>
               <td>{article.creator.name} </td>
+              <td>{article.publish === 1 ? "منتشر شده" : "پیش نویس"} </td>
+
               <td>
                 <button type="button" class="btn btn-primary edit-btn">
                   ویرایش
