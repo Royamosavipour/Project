@@ -75,6 +75,33 @@ export default function Articles() {
     });
   };
 
+  const saveArticleAsDraft = (e) => {
+    e.preventDefault();
+    const localStorageData = JSON.parse(localStorage.getItem("user"));
+    let formData = new FormData();
+    formData.append("title", formState.inputs.title.value);
+    formData.append("shortName", formState.inputs.shortName.value);
+    formData.append("description", formState.inputs.description.value);
+    formData.append("categoryID", articleCategory);
+    formData.append("cover", articleCover);
+    formData.append("body", articleBody);
+
+    fetch(`http://localhost:4000/v1/articles/draft`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorageData.token}`,
+      },
+      body:formData
+    }).then(res => {
+      if (res.ok) {
+        swal({
+          title: 'مقاله جدید با موفقیت پیش نویس گردید',
+          icon: 'success',
+          buttons:'اوکی'
+        }).then(()=>getAllArticles())
+      }
+    })
+  };
   const createArticle = (e) => {
     e.preventDefault();
     const localStorageData = JSON.parse(localStorage.getItem("user"));
@@ -200,7 +227,8 @@ export default function Articles() {
             <div class="col-12">
               <div class="bottom-form">
                 <div class="submit-btn">
-                  <input type="submit" value="افزودن" onClick={createArticle} />
+                  <input type="submit" value="افزودن" className="m-1" onClick={createArticle} />
+                  <input type="submit" value="افزودن" className="m-1" onClick={saveArticleAsDraft} />
                 </div>
               </div>
             </div>

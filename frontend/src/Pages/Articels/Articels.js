@@ -20,7 +20,7 @@ export default function Articels() {
         console.log(allArticles);
         setArticles(allArticles);
       });
-  },[]);
+  }, []);
   return (
     <>
       <TopBar />
@@ -37,10 +37,11 @@ export default function Articels() {
           <div className="courses-content">
             <div className="container">
               <div className="row">
-                {shownArticles.map(article=>(
-                <ArticleBox {...article} />
-
-                ))}
+                {shownArticles
+                  .filter((articles) => articles.publish === 1)
+                  .map((article) => (
+                    <ArticleBox {...article} />
+                  ))}
               </div>
             </div>
           </div>
