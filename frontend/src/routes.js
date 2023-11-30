@@ -20,6 +20,7 @@ import Session from "./Pages/Session/Session";
 import Comments from "./Pages/AdminPanel/Comments/Comments";
 import Offs from "./Pages/AdminPanel/Offs";
 import Draft from "./Pages/Articels/Draft/Draft";
+import PAdminIndex from "./Pages/AdminPanel/Index/Index";
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -38,6 +39,7 @@ const routes = [
     path: "/p-admin/*",
     element: <AdminPanel />,
     children: [
+      { path: "", element: <PAdminIndex /> },
       { path: "users", element: <Users /> },
       { path: "courses", element: <AdminCourses /> },
       { path: "menus", element: <Menus /> },
