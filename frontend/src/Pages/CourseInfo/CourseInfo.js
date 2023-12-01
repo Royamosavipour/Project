@@ -22,6 +22,10 @@ export default function CourseInfo() {
   const [courseCategory, setCourseCategory] = useState({});
 
   useEffect(() => {
+    getAllCourse();
+  }, []);
+
+  function getAllCourse() {
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {})
       .then((res) => res.json())
       .then((courseInfo) => {
@@ -34,7 +38,7 @@ export default function CourseInfo() {
         setCourseTeacher(courseInfo.creator);
         setCourseCategory(courseInfo.categoryID);
       });
-  }, []);
+  }
 
   const submitcomment = (newCommentBody) => {
     const localStorgeData = JSON.parse(localStorage.getItem("user"));
@@ -64,6 +68,121 @@ export default function CourseInfo() {
           buttons: "تایید",
         });
       });
+  };
+
+  const regesterInCourse = (cours) => {
+    console.log(cours);
+    if (cours.price === 0) {
+      fetch(`http://localhost:4000/v1/courses/${cours._id}/register`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          price: cours.price,
+        }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            swal({
+              title: "ثبت نام با موفقیت انجام شد",
+              buttons: "اوکی",
+              icon: "success",
+            }).then(() => getAllCourse());
+          }
+          return res.text();
+        })
+        .then((result) => console.log(result));
+    } else {
+      swal({
+        title: "درصورت وجود تخغیف کد را وارد نمایید",
+        content: "input",
+        buttons: ["ثبت نام بدون کد تخفیف", "تایید کد تخفیف"],
+      }).then((code) => {
+        if (code === null) {
+          fetch(`http://localhost:4000/v1/courses/${cours._id}/register`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${
+                JSON.parse(localStorage.getItem("user")).token
+              }`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              price: cours.price,
+            }),
+          }).then((res) => {
+            if (res.ok) {
+              swal({
+                title: "ثبت نام با موفقیت انجام شد",
+                buttons: "اوکی",
+                icon: "success",
+              }).then(() => getAllCourse());
+            }
+          });
+        } else {
+          fetch(`http://localhost:4000/v1/offs/${code}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${
+                JSON.parse(localStorage.getItem("user")).token
+              }`,
+            },
+            body: JSON.stringify({
+              course: cours._id,
+            }),
+          })
+            .then((res) => {
+              console.log(res);
+              if (res.status === 404) {
+                swal({
+                  title: "کد تخقیف معتبر نیست",
+                  buttons: "ای بابا",
+                  icon: "warning",
+                });
+              } else if (res.status === 409) {
+                swal({
+                  title: "کد تخقیف استفاده شده ",
+                  buttons: "ای بابا",
+                  icon: "warning",
+                });
+              } else {
+                return res.json();
+              }
+            })
+            .then((code) => {
+              console.log(code);
+              fetch(`http://localhost:4000/v1/courses/${cours._id}/register`, {
+                method: "POST",
+                headers: {
+                  Authorization: `Bearer ${
+                    JSON.parse(localStorage.getItem("user")).token
+                  }`,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  price: cours.price - (cours.price * code.percent) / 100,
+                }),
+              })
+                .then((res) => {
+                  if (res.ok) {
+                    swal({
+                      title: "ثبت نام با موفقیت انجام شد",
+                      buttons: "اوکی",
+                      icon: "success",
+                    }).then(() => getAllCourse());
+                  }
+                  return res.text();
+                })
+                .then((result) => console.log(result));
+            });
+        }
+      });
+    }
   };
 
   return (
@@ -264,7 +383,7 @@ export default function CourseInfo() {
                                     </span>
                                     <i className="fab fa-youtube introduction__accordion-icon"></i>
                                     <Link
-                                        to={`/${courseName}/${session._id}`}
+                                      to={`/${courseName}/${session._id}`}
                                       className="introduction__accordion-link"
                                     >
                                       {session.title}
@@ -283,17 +402,15 @@ export default function CourseInfo() {
                                       {index + 1}
                                     </span>
                                     <i className="fab fa-youtube introduction__accordion-icon"></i>
-                                    <span
-                                      className="introduction__accordion-link"
-                                    >
+                                    <span className="introduction__accordion-link">
                                       {session.title}
                                     </span>
                                   </div>
                                   <div className="introduction__accordion-left">
                                     <span className="introduction__accordion-time">
                                       {session.time}
-                                      </span>
-                                      <i className="fa fa-lock"></i>
+                                    </span>
+                                    <i className="fa fa-lock"></i>
                                   </div>
                                 </>
                               )}
@@ -356,7 +473,10 @@ export default function CourseInfo() {
                         دانشجوی دوره هستید
                       </span>
                     ) : (
-                      <span className="course-info__register-title">
+                      <span
+                        className="course-info__register-title"
+                        onClick={() => regesterInCourse(coursDetails)}
+                      >
                         ثبت نام در دوره
                       </span>
                     )}
