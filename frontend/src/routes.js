@@ -23,8 +23,8 @@ import Offs from "./Pages/AdminPanel/Offs";
 import Draft from "./Pages/Articels/Draft/Draft";
 import PAdminIndex from "./Pages/AdminPanel/Index/Index";
 
-
 import UserPanel from "./Pages/UserPanel/Index";
+import UserPanelIndex from './Pages/UserPanel/UserPanelIndex/UserPanelIndex'
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -57,8 +57,10 @@ const routes = [
     ],
   },
   {
-    path:'/my-accunt/*',element:<UserPanel/>,children:[]
-  }
+    path: "/my-accunt/*",
+    element: <UserPanel />,
+    children: [{ path: "", element: <UserPanelIndex /> }],
+  },
 ];
 
 export default routes;
