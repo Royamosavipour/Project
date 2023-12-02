@@ -167,11 +167,11 @@ export default function CommentsTextArea({ comments, submitcomment }) {
                   <option value="-1" className="form-control">
                     امتیاز خود را انتخاب کنید
                   </option>
-                  <option value="1">عالی</option>
-                  <option value="2">خیلی خوب</option>
+                  <option value="5">عالی</option>
+                  <option value="4">خیلی خوب</option>
                   <option value="3">خوب</option>
-                  <option value="4">ضعیف</option>
-                  <option value="5">بد</option>
+                  <option value="2">ضعیف</option>
+                  <option value="1">بد</option>
                 </select>
               </div>
             </div>
