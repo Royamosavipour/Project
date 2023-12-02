@@ -119,52 +119,58 @@ export default function Comments() {
   // accept comment
   const acceptToComment = (commentID) => {
     swal({
-      title: 'آیا از ثبت اطمینان دارید؟',
-      icon: 'warning',
-      buttons:['NO','YES']
-    }).then(result => {
+      title: "آیا از ثبت اطمینان دارید؟",
+      icon: "warning",
+      buttons: ["NO", "YES"],
+    }).then((result) => {
       if (result) {
         fetch(`http://localhost:4000/v1/comments/accept/${commentID}`, {
-          method: 'PUT',
-          headers:{'Authorization':`Bearer ${JSON.parse(localStorage.getItem('user')).token}`}
-        }).then(res => {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("user")).token
+            }`,
+          },
+        }).then((res) => {
           if (res.ok) {
             swal({
-              title: 'ثبت با موفقیت انجام شد',
-              icon: 'success',
-              buttons:'OK'
-            }).then(()=>getAllComments())
+              title: "ثبت با موفقیت انجام شد",
+              icon: "success",
+              buttons: "OK",
+            }).then(() => getAllComments());
           }
-        })
+        });
       }
-    })
-    
-  }
+    });
+  };
 
   // Reject comment
   const rejectToComment = (commentID) => {
     swal({
-      title: 'آیا از رد اطمینان دارید؟',
-      icon: 'warning',
-      buttons:['NO','YES']
-    }).then(result => {
+      title: "آیا از رد اطمینان دارید؟",
+      icon: "warning",
+      buttons: ["NO", "YES"],
+    }).then((result) => {
       if (result) {
         fetch(`http://localhost:4000/v1/comments/reject/${commentID}`, {
-          method: 'PUT',
-          headers:{'Authorization':`Bearer ${JSON.parse(localStorage.getItem('user')).token}`}
-        }).then(res => {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("user")).token
+            }`,
+          },
+        }).then((res) => {
           if (res.ok) {
             swal({
-              title: 'رد با موفقیت انجام شد',
-              icon: 'success',
-              buttons:'OK'
-            }).then(()=>getAllComments())
+              title: "رد با موفقیت انجام شد",
+              icon: "success",
+              buttons: "OK",
+            }).then(() => getAllComments());
           }
-        })
+        });
       }
-    })
-    
-  }
+    });
+  };
 
   return (
     <>
@@ -175,6 +181,7 @@ export default function Comments() {
               <th>شناسه</th>
               <th> کاربر </th>
               <th> دوره </th>
+              <th> امتیاز </th>
               <th> مشاهده کامنت </th>
               <th>پاسخ</th>
               <th>تایید</th>
@@ -191,10 +198,22 @@ export default function Comments() {
                     coment.answer === 1 ? "answer-comment" : "no-answer-comment"
                   }
                 >
-                  {index + 1}{" "}
+                  {index + 1}
                 </td>
                 <td>{coment.creator.name} </td>
                 <td>{coment.course} </td>
+                <td>
+                  {Array(5 - coment.score)
+                    .fill(0)
+                    .map((item) => (
+                      <img src="/images/svgs/star.svg"></img>
+                    ))}
+                  {Array(coment.score)
+                    .fill(0)
+                    .map((item) => (
+                      <img src="/images/svgs/star_fill.svg"></img>
+                    ))}
+                </td>
                 <td>
                   <button
                     type="button"
@@ -215,27 +234,27 @@ export default function Comments() {
                 </td>
 
                 {coment.answer === 1 ? (
-                <td>
-                <button
-                  type="button"
-                  class="btn btn-primary edit-btn"
-                  onClick={() => rejectToComment(coment._id)}
-                >
-                  رد
-                </button>
-              </td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-primary edit-btn"
+                      onClick={() => rejectToComment(coment._id)}
+                    >
+                      رد
+                    </button>
+                  </td>
                 ) : (
                   <td>
-                  <button
-                    type="button"
-                    class="btn btn-primary edit-btn"
-                    onClick={() => acceptToComment(coment._id)}
-                  >
-                    تایید
-                  </button>
-                </td>
+                    <button
+                      type="button"
+                      class="btn btn-primary edit-btn"
+                      onClick={() => acceptToComment(coment._id)}
+                    >
+                      تایید
+                    </button>
+                  </td>
                 )}
-                
+
                 <td>
                   <button type="button" class="btn btn-primary edit-btn">
                     ویرایش
