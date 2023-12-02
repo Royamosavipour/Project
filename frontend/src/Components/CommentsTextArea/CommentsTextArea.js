@@ -7,6 +7,10 @@ import "./CommentsTextArea.css";
 export default function CommentsTextArea({ comments, submitcomment }) {
   const authContext = useContext(AuthContext);
   const [newCommentBody, setNewCommentBody] = useState("");
+  const [scorComment,setScorComment]=useState('-1')
+
+
+
   const onchangeHandeler = (event) => {
     setNewCommentBody(event.target.value);
   };
@@ -57,36 +61,40 @@ export default function CommentsTextArea({ comments, submitcomment }) {
                       </p>
                     </div>
 
-                    {comment.answerContent && (<div class="comments__item">
-                  <div class="comments__question">
-                    <div class="comments__question-header">
-                      <div class="comments__question-header-right">
-                        <span class="comments__question-name comment-name">
-                          {comment.answerContent.creator.name}
-                        </span>
-                        <span class="comments__question-status comment-status">
-                          {comment.answerContent.creator.role === "ADMIN" ? "مدیر" : "کاربر"}
-                        </span>
-                        <span class="comments__question-date comment-date">
-                          {comment.answerContent.createdAt.slice(0, 10)}
-                        </span>
+                    {comment.answerContent && (
+                      <div class="comments__item">
+                        <div class="comments__question">
+                          <div class="comments__question-header">
+                            <div class="comments__question-header-right">
+                              <span class="comments__question-name comment-name">
+                                {comment.answerContent.creator.name}
+                              </span>
+                              <span class="comments__question-status comment-status">
+                                {comment.answerContent.creator.role === "ADMIN"
+                                  ? "مدیر"
+                                  : "کاربر"}
+                              </span>
+                              <span class="comments__question-date comment-date">
+                                {comment.answerContent.createdAt.slice(0, 10)}
+                              </span>
+                            </div>
+                            <div class="comments__question-header-left">
+                              <a
+                                class="comments__question-header-link comment-link"
+                                href="#"
+                              >
+                                پاسخ
+                              </a>
+                            </div>
+                          </div>
+                          <div class="comments__question-text">
+                            <p class="comments__question-paragraph comment-paragraph">
+                              {comment.answerContent.body}
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                      <div class="comments__question-header-left">
-                        <a
-                          class="comments__question-header-link comment-link"
-                          href="#"
-                        >
-                          پاسخ
-                        </a>
-                      </div>
-                    </div>
-                    <div class="comments__question-text">
-                      <p class="comments__question-paragraph comment-paragraph">
-                        {comment.answerContent.body}
-                      </p>
-                    </div>
-                  </div>
-                </div>)}
+                    )}
                   </div>
                 </div>
               </>
@@ -147,11 +155,24 @@ export default function CommentsTextArea({ comments, submitcomment }) {
           <div class="comments__respond">
             <div class="comments__score">
               <span class="comments__score-title">امتیاز شما</span>
-              <div class="comments__score-input">
+              {/* <div class="comments__score-input">
                 <span class="comments__score-input-text">
                   امتیاز خود را انتخاب کنید
                 </span>
                 <i class="fas fa-angle-down	 comments__input-icon"></i>
+              </div> */}
+
+              <div className="col-12">
+                <select className="form-select form-control font-bold" onChange={event=>setScorComment(event.target.value)}>
+                  <option value="-1" className="form-control">
+                    امتیاز خود را انتخاب کنید
+                  </option>
+                  <option value="1">عالی</option>
+                  <option value="2">خیلی خوب</option>
+                  <option value="3">خوب</option>
+                  <option value="4">ضعیف</option>
+                  <option value="5">بد</option>
+                </select>
               </div>
             </div>
             <div class="comments__respond-content">
@@ -166,7 +187,7 @@ export default function CommentsTextArea({ comments, submitcomment }) {
             <button
               type="submit"
               class="comments__respond-btn"
-              onClick={() => submitcomment(newCommentBody)} 
+              onClick={() => submitcomment(newCommentBody,scorComment)}
             >
               ارسال
             </button>
