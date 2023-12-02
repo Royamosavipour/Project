@@ -68,7 +68,7 @@ export default function Navbar() {
             </a>
 
             {authContext.isLoggedIn ? (
-              <Link href="#" className="main-header__profile">
+              <Link to={'/my-accunt'} className="main-header__profile">
                 <span className="main-header__profile-text">
                   {authContext.userInfos.name}
                 </span>

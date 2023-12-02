@@ -20,8 +20,15 @@ export default function CourseInfo() {
   const [updatedAt, setUpdatedAt] = useState("");
   const [courseTeacher, setCourseTeacher] = useState({});
   const [courseCategory, setCourseCategory] = useState({});
+  const [relatetCourse, setRelatetCourse] = useState([]);
 
   useEffect(() => {
+    fetch(`http://localhost:4000/v1/courses/related/${courseName}`)
+      .then((res) => res.json())
+      .then((allRelated) => {
+        console.log(allRelated);
+        setRelatetCourse(allRelated);
+      });
     getAllCourse();
   }, []);
 
@@ -40,7 +47,7 @@ export default function CourseInfo() {
       });
   }
 
-  const submitcomment = (newCommentBody,comentScor) => {
+  const submitcomment = (newCommentBody, comentScor) => {
     const localStorgeData = JSON.parse(localStorage.getItem("user"));
 
     fetch(`http://localhost:4000/v1/comments`, {
@@ -539,54 +546,24 @@ export default function CourseInfo() {
                     دوره های مرتبط
                   </span>
                   <ul className="course-info__courses-list">
-                    <li className="course-info__courses-list-item">
-                      <a href="#" className="course-info__courses-link">
-                        <img
-                          src="/images/courses/js_project.png"
-                          alt="Course Cover"
-                          className="course-info__courses-img"
-                        />
-                        <span className="course-info__courses-text">
-                          پروژه های تخصصی با جاوا اسکریپت
-                        </span>
-                      </a>
-                    </li>
-                    <li className="course-info__courses-list-item">
-                      <a href="#" className="course-info__courses-link">
-                        <img
-                          src="/images/courses/fareelancer.png"
-                          alt="Course Cover"
-                          className="course-info__courses-img"
-                        />
-                        <span className="course-info__courses-text">
-                          تعیین قیمت پروژه های فریلنسری
-                        </span>
-                      </a>
-                    </li>
-                    <li className="course-info__courses-list-item">
-                      <a href="#" className="course-info__courses-link">
-                        <img
-                          src="/images/courses/nodejs.png"
-                          alt="Course Cover"
-                          className="course-info__courses-img"
-                        />
-                        <span className="course-info__courses-text">
-                          دوره Api نویسی
-                        </span>
-                      </a>
-                    </li>
-                    <li className="course-info__courses-list-item">
-                      <a href="#" className="course-info__courses-link">
-                        <img
-                          src="/images/courses/jango.png"
-                          alt="Course Cover"
-                          className="course-info__courses-img"
-                        />
-                        <span className="course-info__courses-text">
-                          متخصص جنگو
-                        </span>
-                      </a>
-                    </li>
+                    {relatetCourse.length !== 0 &&
+                      relatetCourse.map((relate) => (
+                        <li className="course-info__courses-list-item">
+                          <Link
+                            to={`/course-info/${relate.shortName}`}
+                            className="course-info__courses-link"
+                          >
+                            <img
+                              src={`http://localhost:4000/courses/covers/${relate.cover}`}
+                              alt="Course Cover"
+                              className="course-info__courses-img"
+                            />
+                            <span className="course-info__courses-text">
+                              {relate.name}
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
                   </ul>
                 </div>
               </div>
