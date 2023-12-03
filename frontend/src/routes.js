@@ -26,6 +26,7 @@ import PAdminIndex from "./Pages/AdminPanel/Index/Index";
 import UserPanel from "./Pages/UserPanel/Index";
 import UserPanelIndex from "./Pages/UserPanel/UserPanelIndex/UserPanelIndex";
 import Order from "./Pages/UserPanel/Order/Order";
+import CoursesUserPanel from "./Pages/UserPanel/Courses/Courses";
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -63,6 +64,7 @@ const routes = [
     children: [
       { path: "", element: <UserPanelIndex /> },
       { path: "orders", element: <Order /> },
+      { path: "buyed", element: <CoursesUserPanel /> },
     ],
   },
 ];
