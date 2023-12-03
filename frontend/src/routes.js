@@ -24,7 +24,8 @@ import Draft from "./Pages/Articels/Draft/Draft";
 import PAdminIndex from "./Pages/AdminPanel/Index/Index";
 
 import UserPanel from "./Pages/UserPanel/Index";
-import UserPanelIndex from './Pages/UserPanel/UserPanelIndex/UserPanelIndex'
+import UserPanelIndex from "./Pages/UserPanel/UserPanelIndex/UserPanelIndex";
+import Order from "./Pages/UserPanel/Order/Order";
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -59,7 +60,10 @@ const routes = [
   {
     path: "/my-accunt/*",
     element: <UserPanel />,
-    children: [{ path: "", element: <UserPanelIndex /> }],
+    children: [
+      { path: "", element: <UserPanelIndex /> },
+      { path: "orders", element: <Order /> },
+    ],
   },
 ];
 
