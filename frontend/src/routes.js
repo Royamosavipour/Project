@@ -27,6 +27,7 @@ import UserPanel from "./Pages/UserPanel/Index";
 import UserPanelIndex from "./Pages/UserPanel/UserPanelIndex/UserPanelIndex";
 import Order from "./Pages/UserPanel/Order/Order";
 import CoursesUserPanel from "./Pages/UserPanel/Courses/Courses";
+import TiketsUserPanel from './Pages/UserPanel/Tickets/Tikets'
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -65,6 +66,7 @@ const routes = [
       { path: "", element: <UserPanelIndex /> },
       { path: "orders", element: <Order /> },
       { path: "buyed", element: <CoursesUserPanel /> },
+      { path: "send-ticket", element: <TiketsUserPanel /> },
     ],
   },
 ];

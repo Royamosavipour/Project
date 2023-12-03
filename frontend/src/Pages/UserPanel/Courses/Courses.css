@@ -987,4 +987,12 @@ body {
     border-radius: 10px;
 }
 
+.green-hover{
+
+    background-color: #2bce56;
+    padding: 6px;
+    color: white !important;
+    border-radius: 5px;
+}
+
 /* ============================== Slider Style ============================== */
