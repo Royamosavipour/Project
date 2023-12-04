@@ -141,7 +141,7 @@ export default function SendTicket() {
                 <option value="1">بالا</option>
               </select>
             </div>
-            {ticketTypeID === "637753247b52cb74cad00e27" && (
+            {ticketTypeID === "63b688c5516a30a651e98156" && (
               <div class="col-6">
                 <label class="ticket-form__label">دوره را انتخاب کنید:</label>
                 <select
