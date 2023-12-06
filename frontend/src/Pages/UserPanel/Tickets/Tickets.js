@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, json } from "react-router-dom";
 
 import "./Tikets.css";
+import Ticket from "../../../Components/UserPanel/SideBar/Ticket/Ticket";
 
 export default function Tickets() {
   const [tickets, settickets] = useState([]);
@@ -123,6 +124,9 @@ export default function Tickets() {
           </div>
           <div class="ticket-content">
             <span class="ticket-content__title">نمایش 1 تیکت</span>
+            {tickets.map((ticket) => (
+              <Ticket {...ticket} />
+            ))}
           </div>
         </div>
       </div>
