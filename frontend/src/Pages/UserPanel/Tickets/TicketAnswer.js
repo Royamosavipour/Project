@@ -18,6 +18,7 @@ export default function TicketAnswer() {
       .then((res) => res.json())
       .then((data) => {
         setTicketInfo(data);
+        console.log(data);
       });
   }, []);
 

@@ -70,7 +70,7 @@ const routes = [
       { path: "buyed", element: <CoursesUserPanel /> },
       { path: "tickets", element: <UsrtPanelTickets /> },
       { path: "send-ticket", element: <UserPanelSendTicket /> },
-      { path: "tickets/answer", element: <TickrtAnswer /> },
+      { path: "tickets/answer/:id", element: <TickrtAnswer /> },
     ],
   },
 ];
