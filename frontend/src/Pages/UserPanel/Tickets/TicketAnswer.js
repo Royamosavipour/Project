@@ -27,7 +27,7 @@ export default function TicketAnswer() {
       <div class="ticket">
         <div class="ticket-header">
           <span class="ticket-header__title">همه تیکت ها</span>
-          <Link class="ticket-header__link" to="/my-account/send-ticket">
+          <Link class="ticket-header__link" to="/my-accunt/send-ticket">
             ارسال تیکت جدید
           </Link>
         </div>
