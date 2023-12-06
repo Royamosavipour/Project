@@ -27,8 +27,9 @@ import UserPanel from "./Pages/UserPanel/Index";
 import UserPanelIndex from "./Pages/UserPanel/UserPanelIndex/UserPanelIndex";
 import Order from "./Pages/UserPanel/Order/Order";
 import CoursesUserPanel from "./Pages/UserPanel/Courses/Courses";
-import UserPanelSendTicket from './Pages/UserPanel/Tickets/SendTicket'
+import UserPanelSendTicket from "./Pages/UserPanel/Tickets/SendTicket";
 import UsrtPanelTickets from "./Pages/UserPanel/Tickets/Tickets";
+import TickrtAnswer from "./Pages/UserPanel/Tickets/TicketAnswer";
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -69,6 +70,7 @@ const routes = [
       { path: "buyed", element: <CoursesUserPanel /> },
       { path: "tickets", element: <UsrtPanelTickets /> },
       { path: "send-ticket", element: <UserPanelSendTicket /> },
+      { path: "tickets/answer", element: <TickrtAnswer /> },
     ],
   },
 ];

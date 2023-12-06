@@ -21,11 +21,9 @@ export default function Ticket(props) {
       <div class="ticket-content__left">
         <div class="ticket-content__left-right">
           <div
-            class={
-              props.answer === 0
-                ? " ticket-content__condition_answer"
-                : "ticket-content__condition"
-            }
+            className={`ticket-content__condition ${
+              props.answer === 0 ? "noanswer" : "answer"
+            }`}
           >
             <span class="ticket-content__condition-text">
               {props.answer === 0 ? "پاسخ داده نشده" : "پاسخ داده شده"}

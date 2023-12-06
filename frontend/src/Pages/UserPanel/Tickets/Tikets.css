@@ -225,24 +225,21 @@
     margin: auto;
     width: 1rem;
     height: 1rem;
-    background-color: rgb(46, 204, 113);
+    /* background-color: rgb(46, 204, 113); */
     border-radius: 50%;
 }
 
 
 
-.ticket-content__condition_answer::before {
-    content: "";
-    position: absolute;
-    right: 1.4rem;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    width: 1rem;
-    height: 1rem;
-    background-color: rgb(251, 9, 9) !important;
-    border-radius: 50%;
+.answer::before{
+    background-color: rgb(46, 204, 113); ;
 }
+
+.noanswer::before{
+    background-color: rgb(255, 0, 0); ;
+
+}
+
 
 .ticket-content__condition-text {
     font-size: 1.3rem;
