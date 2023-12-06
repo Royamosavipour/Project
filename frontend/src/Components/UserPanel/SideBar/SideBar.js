@@ -60,7 +60,7 @@ export default function Sidebar() {
             </Link>
           </li>
           <li class="sidebar__item">
-            <Link class="sidebar__link" to="send-ticket">
+            <Link class="sidebar__link" to="tickets">
               تیکت های پشتیبانی
             </Link>
           </li>
