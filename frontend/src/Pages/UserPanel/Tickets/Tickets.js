@@ -1,9 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, json } from "react-router-dom";
 
 import "./Tikets.css";
 
 export default function Tickets() {
+  const [tickets, settickets] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:4000/v1/tickets/user`, {
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        settickets(data);
+      });
+  }, []);
+
   return (
     <>
       <div class="col-9">
