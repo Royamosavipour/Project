@@ -69,7 +69,7 @@ export default function SendTicket() {
           icon: "success",
           buttons: "خیلی هم عالی",
         }).then(() => {
-          navigate("/my-account/tickets");
+          navigate("/my-accunt/tickets");
         });
       }
     });

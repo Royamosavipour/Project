@@ -30,6 +30,7 @@ import CoursesUserPanel from "./Pages/UserPanel/Courses/Courses";
 import UserPanelSendTicket from "./Pages/UserPanel/Tickets/SendTicket";
 import UsrtPanelTickets from "./Pages/UserPanel/Tickets/Tickets";
 import TickrtAnswer from "./Pages/UserPanel/Tickets/TicketAnswer";
+import EditAccunt from "./Pages/UserPanel/EditAccunt/EditAccunt";
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -71,6 +72,7 @@ const routes = [
       { path: "tickets", element: <UsrtPanelTickets /> },
       { path: "send-ticket", element: <UserPanelSendTicket /> },
       { path: "tickets/answer/:id", element: <TickrtAnswer /> },
+      { path: "edit-account", element: <EditAccunt /> },
     ],
   },
 ];

@@ -35,7 +35,7 @@ export default function Sidebar() {
         <span class="sidebar__name">محمدامین سعیدی راد</span>
         <ul class="sidebar__list">
           <li class="sidebar__item">
-            <Link class="sidebar__link" to="/my-account">
+            <Link class="sidebar__link" to="/my-accunt">
               پیشخوان
             </Link>
           </li>
