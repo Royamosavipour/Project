@@ -7,13 +7,11 @@ import "./LastCourses.css";
 export default function LastCourses() {
   const [courses, setCourses] = useState([]);
 
-  
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses`)
       .then((res) => res.json())
       .then((allCourses) => {
-        console.log(allCourses);
-        setCourses(allCourses)
+        setCourses(allCourses);
       });
   }, []);
 
@@ -30,7 +28,7 @@ export default function LastCourses() {
           <div className="courses-content">
             <div className="container">
               <div className="row">
-                {courses.splice(0,6).map((cours) => (
+                {courses.splice(0, 6).map((cours) => (
                   <CourseBox {...cours} />
                 ))}
               </div>

@@ -10,13 +10,11 @@ import "./PopularCourses.css";
 export default function PopularCourses() {
   const [courses, setCourses] = useState([]);
 
-  
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/popular`)
       .then((res) => res.json())
       .then((popularCourses) => {
-        console.log(popularCourses);
-        setCourses(popularCourses)
+        setCourses(popularCourses);
       });
   }, []);
 
@@ -30,7 +28,7 @@ export default function PopularCourses() {
             <div className="container">
               <div className="row">
                 <Swiper
-                loop={true}
+                  loop={true}
                   slidesPerView={4}
                   spaceBetween={30}
                   pagination={{
@@ -38,11 +36,10 @@ export default function PopularCourses() {
                   }}
                   className="mySwiper"
                 >
-                  {courses.map(cours=>(
-                  <SwiperSlide>
-                    <CourseBox {...cours} isSlider={true} />
-                  </SwiperSlide>
-
+                  {courses.map((cours) => (
+                    <SwiperSlide>
+                      <CourseBox {...cours} isSlider={true} />
+                    </SwiperSlide>
                   ))}
                 </Swiper>
               </div>

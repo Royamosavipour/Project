@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, json } from "react-router-dom";
+import { Link, json, useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import TopBar from "../../Components/TopBar/TopBar";
 import Footer from "../../Components/Footer/Footer";
@@ -16,9 +16,12 @@ import AuthContext from "../../Context/authContext";
 
 import "./Register.css";
 import swal from "sweetalert";
+import { Navigate } from "react-router-dom";
 
 export default function Register() {
   const authContext = useContext(AuthContext);
+
+  const navigaite = useNavigate();
   const [formState, onInputHandler] = useForm(
     {
       name: {
@@ -69,20 +72,18 @@ export default function Register() {
         } else {
           if (res.status === 403) {
             swal({
-              title:'شماره مسدود می باشد',
-              icon:'error',
-              buttons:'ای بابا'
-              
+              title: "شماره مسدود می باشد",
+              icon: "error",
+              buttons: "ای بابا",
             });
           }
         }
       })
       .then((result) => {
         console.log(result);
-        // authContext.login(result.user, result.accessToken);
+        authContext.login(result.user, result.accessToken);
+        navigaite('/')
       });
-
-    
   };
 
   return (

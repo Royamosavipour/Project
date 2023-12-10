@@ -9,6 +9,7 @@ export default function Navbar() {
   const [allMenus, setAllMenus] = useState([]);
 
   useEffect(() => {
+    console.log(authContext);
     fetch(`http://localhost:4000/v1/menus`)
       .then((res) => res.json())
       .then((data) => {
@@ -34,28 +35,31 @@ export default function Navbar() {
                 </a>
               </li>
 
-              {allMenus.map((menu) => (
-                <li className="main-header__item">
+              {allMenus.map((menu, index) => (
+                <li className="main-header__item" key={index}>
                   <Link to={`${menu.href}/1`} className="main-header__link">
                     {menu.title}
-                    {menu.submenus.length!==0 && (<>
-                      <i className="fas fa-angle-down main-header__link-icon"></i>
-                    <ul className="main-header__dropdown">
-                    {menu.submenus.map(submenu=>(
-                      <li className="main-header__dropdown-item">
-                      {/* /course-info/${submenu.href} */}
-                        <Link to={submenu.href} className="main-header__dropdown-link"> 
-                          {submenu.title}
-                        </Link>
-                      </li>
-                    ))}
-                    </ul>
-                    </>)}
-                    
+                    {menu.submenus.length !== 0 && (
+                      <>
+                        <i className="fas fa-angle-down main-header__link-icon"></i>
+                        <ul className="main-header__dropdown">
+                          {menu.submenus.map((submenu) => (
+                            <li className="main-header__dropdown-item">
+                              {/* /course-info/${submenu.href} */}
+                              <Link
+                                to={submenu.href}
+                                className="main-header__dropdown-link"
+                              >
+                                {submenu.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
                   </Link>
                 </li>
               ))}
-              
             </ul>
           </div>
 
@@ -68,7 +72,7 @@ export default function Navbar() {
             </a>
 
             {authContext.isLoggedIn ? (
-              <Link to={'/my-accunt'} className="main-header__profile">
+              <Link to={"/my-accunt"} className="main-header__profile">
                 <span className="main-header__profile-text">
                   {authContext.userInfos.name}
                 </span>

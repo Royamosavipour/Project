@@ -9,7 +9,6 @@ export default function LastArticle() {
     fetch(`http://localhost:4000/v1/articles`)
       .then((res) => res.json())
       .then((allArticles) => {
-        console.log(allArticles);
         setArticels(allArticles);
       });
   }, []);

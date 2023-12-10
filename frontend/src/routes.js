@@ -9,6 +9,8 @@ import Articels from "./Pages/Articels/Articels";
 import Contact from "./Pages/Contact/Contact";
 import Search from "./Pages/Search/Search";
 
+import PadminPrivet from "./Pages/PadminPrivet/PadminPrivet";
+
 import AdminPanel from "./Pages/AdminPanel/index";
 import Users from "./Pages/AdminPanel/Users/Users";
 import AdminCourses from "./Pages/AdminPanel/AdminCourses/AdminCourses";
@@ -22,6 +24,7 @@ import Comments from "./Pages/AdminPanel/Comments/Comments";
 import Offs from "./Pages/AdminPanel/Offs";
 import Draft from "./Pages/Articels/Draft/Draft";
 import PAdminIndex from "./Pages/AdminPanel/Index/Index";
+import Tickets from './Pages/AdminPanel/Tickets/Tickets'
 
 import UserPanel from "./Pages/UserPanel/Index";
 import UserPanelIndex from "./Pages/UserPanel/UserPanelIndex/UserPanelIndex";
@@ -47,7 +50,12 @@ const routes = [
 
   {
     path: "/p-admin/*",
-    element: <AdminPanel />,
+    element: (
+      <PadminPrivet>
+        <AdminPanel />
+      </PadminPrivet>
+    ),
+
     children: [
       { path: "", element: <PAdminIndex /> },
       { path: "users", element: <Users /> },
@@ -60,6 +68,7 @@ const routes = [
       { path: "sessions", element: <AdminSessions /> },
       { path: "comments", element: <Comments /> },
       { path: "offs", element: <Offs /> },
+      { path: "tickets", element: <Tickets /> },
     ],
   },
   {
