@@ -57,9 +57,11 @@
 .course-box__status {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+justify-content:space-around;
+gap: 2rem;
   padding: 1rem 0;
 }
+
 
 .course-box__users-icon {
   color: #6c757d;
@@ -96,4 +98,29 @@
 .course-box__footer-icon {
   margin-right: 0.5rem;
   font-size: 1.9rem;
+}
+
+.courses-box__discount {
+  position: absolute;
+  left: -.7rem;
+  top: -.7rem;
+  background-color: #2bce56;
+  padding: .3rem 1.3rem;
+  font-size: 1.4rem;
+  color: var(--white-color);
+  border-radius: .5rem;
+  transform: rotate(-10deg);
+  transition: all 400ms ease;
+  z-index: 9999999;
+}
+
+.courses-box__discount:hover {
+  transform: rotate(0deg);
+
+
+
+}
+
+.showDiscount{
+  text-decoration:line-through !important;
 }

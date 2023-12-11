@@ -771,3 +771,13 @@ text-align: center;
   background-color: var(--primary-color) !important;
 }
 
+
+.answer{
+  background-color: rgb(143, 255, 143) !important;
+  color: #000 !important;
+  border: none !important;
+
+}
+
+
+

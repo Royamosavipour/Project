@@ -5,7 +5,6 @@ import "./CourseBox.css";
 import { Link } from "react-router-dom";
 
 export default function CourseBox(props) {
-
   const [isImageShow, setIsImageShow] = useState(false);
   const onImageLoder = () => setIsImageShow(true);
   const onImageError = () => {
@@ -74,7 +73,19 @@ export default function CourseBox(props) {
                   {props.registers}
                 </span>
               </div>
-              <span className="course-box__price">
+              <span
+                className="course-box__price"
+                style={{ fontWeight:'bolder', color: "black", margin: "0" }}
+              > 
+                {props.price !== 0 &&
+                  props.discount && `قیمت تخفیف ${((props.price * props.discount) / 100).toLocaleString()}`
+                  }
+              </span>
+              <span
+                className={`course-box__price ${
+                  props.price !== 0 && props.discount ? "showDiscount" : ""
+                }`}
+              >
                 {props.price === 0 ? "رایگان" : props.price.toLocaleString()}
               </span>
             </div>
@@ -89,6 +100,9 @@ export default function CourseBox(props) {
               <i className="fas fa-arrow-left course-box__footer-icon"></i>
             </Link>
           </div>
+          {props.discount && props.price !== 0 && (
+            <span class="courses-box__discount">%{props.discount}</span>
+          )}
         </div>
       </div>
     </>

@@ -25,6 +25,7 @@ import Offs from "./Pages/AdminPanel/Offs";
 import Draft from "./Pages/Articels/Draft/Draft";
 import PAdminIndex from "./Pages/AdminPanel/Index/Index";
 import Tickets from './Pages/AdminPanel/Tickets/Tickets'
+import Discounts from "./Pages/AdminPanel/Discounts/Discounts";
 
 import UserPanel from "./Pages/UserPanel/Index";
 import UserPanelIndex from "./Pages/UserPanel/UserPanelIndex/UserPanelIndex";
@@ -68,6 +69,7 @@ const routes = [
       { path: "sessions", element: <AdminSessions /> },
       { path: "comments", element: <Comments /> },
       { path: "offs", element: <Offs /> },
+      { path: "discounts", element: <Discounts /> },
       { path: "tickets", element: <Tickets /> },
     ],
   },
