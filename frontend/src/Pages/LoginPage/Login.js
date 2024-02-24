@@ -78,7 +78,6 @@ export default function Login() {
   };
 
   const onChangeHandeler = () => {
-    console.log("first");
     setIsGoogleRecaptchaVerify(true)
   };
 
